@@ -1,0 +1,102 @@
+//
+//  DeliveredNotificationTracker.swift
+//  SendsaySDK
+//
+//  Created by Panaxeo on 09/03/2020.
+//  Copyright © 2020 Sendsay. All rights reserved.
+//
+
+import Foundation
+import UserNotifications
+#if canImport(SendsaySDKShared)
+import SendsaySDKShared
+#endif
+
+final class DeliveredNotificationTracker {
+    let events: [EventTrackingObject]
+    private let repository: ServerRepository
+
+    init(appGroup: String, notificationData: NotificationData) throws {
+        guard let configuration = Configuration.loadFromUserDefaults(appGroup: appGroup) else {
+            throw DeliveredNotificationTrackerError.configurationNotFound
+        }
+        guard let customerIds = EventTrackingObject.loadCustomerIdsFromUserDefaults(appGroup: appGroup) else {
+            throw DeliveredNotificationTrackerError.customerIdsNotFound
+        }
+        repository = ServerRepository(configuration: configuration)
+        events = DeliveredNotificationTracker.generateTrackingObjects(
+            configuration: configuration,
+            customerIds: customerIds,
+            notification: notificationData
+        )
+    }
+
+    func track(onSuccess: @escaping () -> Void, onFailure: @escaping () -> Void) {
+        guard events.count > 0 else {
+            onSuccess()
+            return
+        }
+        var remainingRequests = events.count
+        var failedRequests = 0
+        events.forEach { event in
+            repository.trackObject(event) { result in
+                if case .failure(let error) = result {
+                    Sendsay.logger.log(.error, message: "Failed to upload push delivered event \(error)")
+                    failedRequests += 1
+                }
+                remainingRequests -= 1
+                if remainingRequests == 0 {
+                    if failedRequests == 0 {
+                        onSuccess()
+                    } else {
+                        onFailure()
+                    }
+                }
+            }
+        }
+    }
+
+    static func generateTrackingObjects(
+        configuration: Configuration,
+        customerIds: [String: String],
+        notification: NotificationData
+    ) -> [EventTrackingObject] {
+        if notification.considerConsent && !notification.hasTrackingConsent {
+            Sendsay.logger.log(.verbose, message: "Event for delivered notification is not tracked because consent is not given")
+            return []
+        }
+        var properties = configuration.defaultProperties?.mapValues { $0.jsonValue } ?? [:]
+        properties = properties.merging(notification.properties, uniquingKeysWith: { (_, new) in new })
+        properties["status"] = .string("delivered")
+        properties["state"] = .string("shown")
+        if notification.consentCategoryTracking != nil {
+            properties["consent_category_tracking"] = .string(notification.consentCategoryTracking!)
+        }
+
+        let eventType = notification.eventType != nil ? EventType.customEvent : EventType.pushDelivered
+        let projects = configuration.projects(for: eventType)
+        return projects.map { project in
+            return EventTrackingObject(
+                sendsayProject: project,
+                customerIds: customerIds,
+                eventType: notification.eventType ?? Constants.EventTypes.pushDelivered,
+                timestamp: notification.timestamp,
+                dataTypes: [.properties(properties)]
+            )
+        }
+    }
+}
+
+enum DeliveredNotificationTrackerError: LocalizedError {
+    case unableToGetUserInfo
+    case configurationNotFound
+    case customerIdsNotFound
+
+    public var errorDescription: String? {
+        switch self {
+        case .unableToGetUserInfo: return "Unable to get user info object from notification."
+        case .configurationNotFound: return "Cannot get configuration object from UserDefaults."
+        case .customerIdsNotFound: return "Cannot get customer ids object from UserDefaults."
+        }
+    }
+}

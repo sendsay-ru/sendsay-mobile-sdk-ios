@@ -1,0 +1,14 @@
+//
+//  InAppMessagesResponse.swift
+//  SendsaySDK
+//
+//  Created by Panaxeo on 28/11/2019.
+//  Copyright © 2019 Sendsay. All rights reserved.
+//
+
+import Foundation
+
+struct InAppMessagesResponse: Decodable {
+    public let success: Bool
+    public let data: [InAppMessage]?
+}

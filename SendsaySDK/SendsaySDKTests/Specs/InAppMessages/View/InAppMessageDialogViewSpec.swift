@@ -1,0 +1,41 @@
+//
+//  InAppMessageDialogViewSpec.swift
+//  SendsaySDKTests
+//
+//  Created by Panaxeo on 05/12/2019.
+//  Copyright © 2019 Sendsay. All rights reserved.
+//
+
+import Nimble
+import Quick
+
+@testable import SendsaySDK
+
+final class InAppMessageDialogViewSpec: QuickSpec {
+    override func spec() {
+        let payload = SampleInAppMessage.getSampleInAppMessage().oldPayload
+        var image: UIImage!
+
+        beforeEach {
+            IntegrationManager.shared.isStopped = false
+            let bundle = Bundle(for: InAppMessageDialogViewSpec.self)
+            image = UIImage(contentsOfFile: bundle.path(forResource: "lena", ofType: "jpeg")!)
+        }
+
+        let fullscreenSettings = [true, false]
+        fullscreenSettings.forEach { fullscreen in
+            it("should setup \(fullscreen ? "fullscreen" : "modal") dialog with payload") {
+                let dialog: InAppMessageDialogView = InAppMessageDialogView(
+                    payload: payload!,
+                    image: image,
+                    actionCallback: { _ in },
+                    dismissCallback: { _, _ in },
+                    fullscreen: fullscreen
+                )
+                dialog.beginAppearanceTransition(true, animated: false)
+                expect(dialog.bodyTextView.text).to(equal(payload?.bodyText))
+                expect(dialog.titleTextView.text).to(equal(payload?.title))
+            }
+        }
+    }
+}

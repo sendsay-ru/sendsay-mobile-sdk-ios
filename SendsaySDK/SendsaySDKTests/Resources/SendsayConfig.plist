@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>projectToken</key>
+	<string>x-17496430561032892</string>
+	<key>authorization</key>
+	<string>Token 192P7IBe8VbXlTlZlb5gP_agFwuMfpUOpkE9KxnKmCsCJ1tj-lbaB5tLgC62s-JXTsxkz</string>
+	<key>baseUrl</key>
+	<string>https://mobi.sendsay.ru/xnpe/v100</string>
+</dict>
+</plist>

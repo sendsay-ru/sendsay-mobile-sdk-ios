@@ -1,0 +1,31 @@
+//
+//  QueueData.swift
+//  SendsaySDK
+//
+//  Created by Ankmara on 10.07.2023.
+//  Copyright © 2023 Sendsay. All rights reserved.
+//
+
+import Foundation
+
+struct QueueData {
+    let inAppContentBlocks: InAppContentBlockResponse
+    let newValue: UsedInAppContentBlocks
+}
+
+struct QueueLoadData {
+    let placeholder: String
+    let indexPath: IndexPath
+    let expired: [InAppContentBlockResponse]
+}
+
+extension QueueData {
+    func describeDetailed() -> String {
+        return """
+        {
+            inAppContentBlocks: \(inAppContentBlocks.describe()),
+            newValue: \(newValue.describeDetailed())
+        }
+        """
+    }
+}

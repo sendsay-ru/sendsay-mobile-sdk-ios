@@ -1,0 +1,8 @@
+"sendsay.inbox.button" = "Inbox";
+"sendsay.inbox.title" = "Example AppInbox";
+"sendsay.inbox.emptyTitle" = "Empty Inbox";
+"sendsay.inbox.emptyMessage" = "You have no messages yet.";
+"sendsay.inbox.errorTitle" = "Something went wrong :(";
+"sendsay.inbox.errorMessage" = "We could not retrieve your messages.";
+"sendsay.inbox.defaultTitle" = "Message";
+"sendsay.inbox.mainActionTitle" = "See more";
