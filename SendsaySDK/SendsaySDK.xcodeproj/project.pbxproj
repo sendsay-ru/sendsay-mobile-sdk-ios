@@ -360,6 +360,8 @@
 		B1CBD2BC2E09A5F1006C1DD1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1CBD2BB2E09A5F1006C1DD1 /* GoogleService-Info.plist */; };
 		B1E361052E12AE02001293C8 /* SwiftSoup.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B72A7E229C068BC00E1A1F9 /* SwiftSoup.xcframework */; };
 		B1E361062E12AE02001293C8 /* SwiftSoup.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B72A7E229C068BC00E1A1F9 /* SwiftSoup.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B1F971C82E1BFF4000947ABA /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F971C72E1BFF4000947ABA /* AnimatedButton.swift */; };
+		B1F971CA2E1C07BF00947ABA /* AnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1F971C72E1BFF4000947ABA /* AnimatedButton.swift */; };
 		B42DA68922B03F7700BBA225 /* Consent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42DA68822B03F7700BBA225 /* Consent.swift */; };
 		B42DA68C22B03FBF00BBA225 /* ConsentSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42DA68B22B03FBF00BBA225 /* ConsentSources.swift */; };
 		B42DA68E22B0556100BBA225 /* ConsentsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42DA68D22B0556100BBA225 /* ConsentsResponse.swift */; };
@@ -928,6 +930,7 @@
 		A64D92FEFD20D8844C3C3BF9 /* Pods_SendsaySDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SendsaySDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1BE5AAD2E0C385700B425CA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B1CBD2BB2E09A5F1006C1DD1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		B1F971C72E1BFF4000947ABA /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
 		B40E9F5C22FAD25A0085B8A1 /* TokenTrackFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenTrackFrequency.swift; sourceTree = "<group>"; };
 		B40E9F5E22FAD58E0085B8A1 /* DatabaseModel v4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DatabaseModel v4.xcdatamodel"; sourceTree = "<group>"; };
 		B42DA68822B03F7700BBA225 /* Consent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Consent.swift; sourceTree = "<group>"; };
@@ -2033,6 +2036,7 @@
 				31C7B4232A822848001BA5E2 /* Coordinator.swift */,
 				31C7B4252A822FE7001BA5E2 /* SendsayTabBarController.swift */,
 				55D0543D2B29BE2200BC773A /* ExtensionUtils.swift */,
+				B1F971C72E1BFF4000947ABA /* AnimatedButton.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -3012,6 +3016,7 @@
 				55F6A41A29891F710029D628 /* CustomerTokenStorage.swift in Sources */,
 				31C7B4242A822848001BA5E2 /* Coordinator.swift in Sources */,
 				55F6A41829891F130029D628 /* ExampleAuthProvider.swift in Sources */,
+				B1F971C82E1BFF4000947ABA /* AnimatedButton.swift in Sources */,
 				C0F6C4E52098A1AB00834E21 /* AuthenticationViewController.swift in Sources */,
 				C0F2407020BD98EB00CAF7CE /* MemoryLogger.swift in Sources */,
 				558DFADB2B2B350F00177800 /* ExtensionUtils.swift in Sources */,
@@ -3093,6 +3098,7 @@
 				05F3EFCF237E926B006E83F4 /* CrashManager.swift in Sources */,
 				55734B022A5E9B9400F24427 /* RegExpExtensions.swift in Sources */,
 				05C289332428A1480021220C /* SessionManagerType.swift in Sources */,
+				B1F971CA2E1C07BF00947ABA /* AnimatedButton.swift in Sources */,
 				556887562A176B0200498B40 /* NSDictionary+getSafely.swift in Sources */,
 				5567C090290808F600318E68 /* MessageItemContent.swift in Sources */,
 				3175368A2BD29F6E0062A5E5 /* EmptyDTO.swift in Sources */,
