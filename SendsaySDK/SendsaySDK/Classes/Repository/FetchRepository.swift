@@ -29,6 +29,10 @@ protocol FetchRepository {
     ///                         which has either the returned data or error.
     func fetchConsents(completion: @escaping (Result<ConsentsResponse>) -> Void)
 
+    func fetchInitConfig(
+        completion: @escaping (Result<InitConfigResponse>) -> Void
+    )
+
     func fetchInAppMessages(
         for customerIds: [String: String],
         completion: @escaping (Result<InAppMessagesResponse>) -> Void

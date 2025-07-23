@@ -59,6 +59,9 @@ public class SendsayInternal: SendsayType {
         return trackingManager?.customerCookie
     }
 
+    /// The manager responsible for initialize and handling SDK configuration (ConfigItem fields).
+    internal var initConfigManager: InitConfigManagerType?
+
     /// The manager responsible for tracking data and sessions.
     internal var trackingManager: TrackingManagerType?
 
@@ -98,6 +101,7 @@ public class SendsayInternal: SendsayType {
 
     fileprivate func clearAllDependencies() {
         repository = nil
+        initConfigManager = nil
         trackingManager = nil
         flushingManager = nil
         trackingConsentManager = nil
@@ -294,6 +298,9 @@ public class SendsayInternal: SendsayType {
 
                 let repository = ServerRepository(configuration: configuration)
                 self.repository = repository
+                
+                let initConfigManager = InitConfigManager(repository: repository)
+                self.initConfigManager = initConfigManager
 
                 let flushingManager = try FlushingManager(
                     database: database,
@@ -405,6 +412,7 @@ internal extension SendsayInternal {
     struct Dependencies {
         let configuration: Configuration
         let repository: RepositoryType
+        let initConfigManager: InitConfigManagerType
         let trackingManager: TrackingManagerType
         let flushingManager: FlushingManagerType
         let trackingConsentManager: TrackingConsentManagerType
@@ -425,6 +433,7 @@ internal extension SendsayInternal {
     func getDependenciesIfConfigured(_ logLevel: LogLevel = .error) throws -> Dependencies {
         guard let configuration = configuration,
             let repository = repository,
+            let initConfigManager = initConfigManager,
             let trackingManager = trackingManager,
             let flushingManager = flushingManager,
             let trackingConsentManager = trackingConsentManager,
@@ -439,6 +448,7 @@ internal extension SendsayInternal {
         return Dependencies(
             configuration: configuration,
             repository: repository,
+            initConfigManager: initConfigManager,
             trackingManager: trackingManager,
             flushingManager: flushingManager,
             trackingConsentManager: trackingConsentManager,

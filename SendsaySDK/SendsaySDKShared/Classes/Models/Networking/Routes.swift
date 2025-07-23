@@ -10,6 +10,7 @@ import Foundation
 
 /// Identification of endpoints for Sendsay API
 public enum Routes {
+    case initConfig
     case identifyCustomer
     case customEvent
     case customerAttributes
@@ -26,7 +27,7 @@ public enum Routes {
 
     public var method: HTTPMethod {
         switch self {
-        case .consents, .inAppContentBlocks, .segmentation: return .get
+        case .initConfig, .consents, .inAppContentBlocks, .segmentation: return .get
         default: return .post
         }
     }

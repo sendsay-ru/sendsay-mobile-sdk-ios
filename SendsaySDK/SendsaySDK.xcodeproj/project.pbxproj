@@ -356,6 +356,11 @@
 		B18474B32E1291BF002FEDEF /* objc_tryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05114E68234747BC00201EE6 /* objc_tryCatch.m */; };
 		B18474B42E1291F5002FEDEF /* objc_tryCatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 05114E6A234747DE00201EE6 /* objc_tryCatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B18474BC2E129851002FEDEF /* SendsaySDKObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 0563750E25AF030A00AB68DA /* SendsaySDKObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B1AB19E12E2FF6AE00554B39 /* InitConfigResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19E02E2FF6A500554B39 /* InitConfigResponse.swift */; };
+		B1AB19E52E2FF7DD00554B39 /* ConfigItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19E42E2FF7D600554B39 /* ConfigItem.swift */; };
+		B1AB19F52E31190800554B39 /* InitConfigCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19F32E31080000554B39 /* InitConfigCache.swift */; };
+		B1AB19F62E31190B00554B39 /* InitConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19EF2E30DB8500554B39 /* InitConfigManager.swift */; };
+		B1AB19F72E31191000554B39 /* InitConfigManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19F02E30DB8500554B39 /* InitConfigManagerType.swift */; };
 		B1BE5AAE2E0C385700B425CA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1BE5AAD2E0C385700B425CA /* Colors.xcassets */; };
 		B1CBD2BC2E09A5F1006C1DD1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1CBD2BB2E09A5F1006C1DD1 /* GoogleService-Info.plist */; };
 		B1E361052E12AE02001293C8 /* SwiftSoup.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B72A7E229C068BC00E1A1F9 /* SwiftSoup.xcframework */; };
@@ -928,6 +933,11 @@
 		7F417E0EA9B478FEF72999D9 /* HtmlNormalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlNormalizer.swift; sourceTree = "<group>"; };
 		7F417FBE26AB2DD5FE31707E /* HtmlNormalizerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlNormalizerSpec.swift; sourceTree = "<group>"; };
 		A64D92FEFD20D8844C3C3BF9 /* Pods_SendsaySDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SendsaySDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1AB19E02E2FF6A500554B39 /* InitConfigResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigResponse.swift; sourceTree = "<group>"; };
+		B1AB19E42E2FF7D600554B39 /* ConfigItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigItem.swift; sourceTree = "<group>"; };
+		B1AB19EF2E30DB8500554B39 /* InitConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigManager.swift; sourceTree = "<group>"; };
+		B1AB19F02E30DB8500554B39 /* InitConfigManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigManagerType.swift; sourceTree = "<group>"; };
+		B1AB19F32E31080000554B39 /* InitConfigCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigCache.swift; sourceTree = "<group>"; };
 		B1BE5AAD2E0C385700B425CA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B1CBD2BB2E09A5F1006C1DD1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B1F971C72E1BFF4000947ABA /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
@@ -1927,6 +1937,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B1AB19F12E30DB8500554B39 /* InitConfig */ = {
+			isa = PBXGroup;
+			children = (
+				B1AB19F32E31080000554B39 /* InitConfigCache.swift */,
+				B1AB19EF2E30DB8500554B39 /* InitConfigManager.swift */,
+				B1AB19F02E30DB8500554B39 /* InitConfigManagerType.swift */,
+			);
+			path = InitConfig;
+			sourceTree = "<group>";
+		};
 		B42DA68A22B03FAC00BBA225 /* Consents */ = {
 			isa = PBXGroup;
 			children = (
@@ -2112,6 +2132,7 @@
 		C0EB5DA120BB57FB00F1031F /* Responses */ = {
 			isa = PBXGroup;
 			children = (
+				B1AB19E02E2FF6A500554B39 /* InitConfigResponse.swift */,
 				5567C0932909196C00318E68 /* AppInboxResponse.swift */,
 				B42DA68D22B0556100BBA225 /* ConsentsResponse.swift */,
 				CCB87B7D2816A6A6005DFB8E /* GitHubReleaseResponse.swift */,
@@ -2358,6 +2379,7 @@
 				F0CA58F5207F612200C89A7F /* DeviceProperties.swift */,
 				C0F2407320BDA42600CAF7CE /* ExportFormat.swift */,
 				01EC2DC0207F63970031BFEB /* FlushingMode.swift */,
+				B1AB19E42E2FF7D600554B39 /* ConfigItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -2425,6 +2447,7 @@
 		F0E757EC207D023A00FE8C21 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B1AB19F12E30DB8500554B39 /* InitConfig */,
 				31A1D2192C6F8A5A00606633 /* Helpers */,
 				31CC0B722BD2518500608057 /* Segmentation */,
 				C0EB5D9E20BB530000F1031F /* SendsayType.swift */,
@@ -3081,6 +3104,7 @@
 				5567C09629091B8E00318E68 /* AppInboxRequest.swift in Sources */,
 				318EFF462D8989EA004C5E1F /* SlideInAppImageComponent.swift in Sources */,
 				05F3EFF12382C757006E83F4 /* VSAppCenterAPIModel.swift in Sources */,
+				B1AB19E52E2FF7DD00554B39 /* ConfigItem.swift in Sources */,
 				23E725E4214AA7A900B552B8 /* Reachability.swift in Sources */,
 				31EBB85A2A6AC3020003AAA5 /* UsedInAppContentBlocks.swift in Sources */,
 				05F3EFE42382BAB6006E83F4 /* TelemetryUtility.swift in Sources */,
@@ -3098,6 +3122,7 @@
 				05F3EFCF237E926B006E83F4 /* CrashManager.swift in Sources */,
 				55734B022A5E9B9400F24427 /* RegExpExtensions.swift in Sources */,
 				05C289332428A1480021220C /* SessionManagerType.swift in Sources */,
+				B1AB19F72E31191000554B39 /* InitConfigManagerType.swift in Sources */,
 				B1F971CA2E1C07BF00947ABA /* AnimatedButton.swift in Sources */,
 				556887562A176B0200498B40 /* NSDictionary+getSafely.swift in Sources */,
 				5567C090290808F600318E68 /* MessageItemContent.swift in Sources */,
@@ -3236,6 +3261,7 @@
 				311268DB2CD10E9C00C38394 /* InAppButtonContainer.swift in Sources */,
 				C030AF4A216F4910004413F0 /* PushNotificationManager+UIResponder.swift in Sources */,
 				F0CA58F6207F612200C89A7F /* DeviceProperties.swift in Sources */,
+				B1AB19E12E2FF6AE00554B39 /* InitConfigResponse.swift in Sources */,
 				C0F2407420BDA42600CAF7CE /* ExportFormat.swift in Sources */,
 				318EFF4E2D898A97004C5E1F /* UIFont+styles.swift in Sources */,
 				556887402A17564800498B40 /* AppInboxStyle.swift in Sources */,
@@ -3248,6 +3274,7 @@
 				311557BF2CE9DEBD0027B481 /* InAppLabel.swift in Sources */,
 				31E9CBA22AE9494B00A333C8 /* URL+Init.swift in Sources */,
 				31EBB8552A6AC3020003AAA5 /* StaticInAppContentBlockView.swift in Sources */,
+				B1AB19F52E31190800554B39 /* InitConfigCache.swift in Sources */,
 				C0753E9720A5808C00A779FF /* NSPersistentContainer+Bundle.swift in Sources */,
 				C030AF48216F4335004413F0 /* PushNotificationReceiver.swift in Sources */,
 				33FC6CCC29A9195B001F113F /* Typealiases.swift in Sources */,
@@ -3262,6 +3289,7 @@
 				318EFF522D898B30004C5E1F /* InAppButtonLayoutType.swift in Sources */,
 				55EFD79F29224FFF002569FB /* AppInboxProvider.swift in Sources */,
 				05D2D39A23DEE60200E3E79A /* InAppMessageView.swift in Sources */,
+				B1AB19F62E31190B00554B39 /* InitConfigManager.swift in Sources */,
 				C0EB5D9020B7F8A900F1031F /* DispatchQueue+OnceTracker.swift in Sources */,
 				7F41777390316561CE4482DB /* InAppMessageWebView.swift in Sources */,
 				7F417221332DEC81DB050230 /* HtmlNormalizer.swift in Sources */,

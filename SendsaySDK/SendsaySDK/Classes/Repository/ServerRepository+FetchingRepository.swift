@@ -50,6 +50,14 @@ extension ServerRepository: FetchRepository {
             .dataTask(with: request, completionHandler: router.handler(with: completion))
             .resume()
     }
+    
+    func fetchInitConfig(completion: @escaping (Result<InitConfigResponse>) -> Void) {
+        let router = RequestFactory(sendsayProject: configuration.mainProject, route: .initConfig)
+        let request = router.prepareRequest()
+        session
+            .dataTask(with: request, completionHandler: router.handler(with:completion))
+            .resume()
+    }
 
     func fetchInAppMessages(
         for customerIds: [String: String],

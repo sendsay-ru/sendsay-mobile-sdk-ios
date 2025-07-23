@@ -23,6 +23,8 @@ public struct RequestFactory {
         String(sendsayProject.baseUrl.dropLast()) : sendsayProject.baseUrl
         let projectToken = sendsayProject.projectToken
         switch self.route {
+        case .initConfig: return baseUrl + "/ss/cfg/\(projectToken)"
+            
         case .identifyCustomer: return baseUrl + "/track/v2/projects/\(projectToken)/customers"
         case .customEvent: return baseUrl + "/track/v2/projects/\(projectToken)/customers/events"
         case .customerAttributes: return baseUrl + "/data/v2/projects/\(projectToken)/customers/attributes"
