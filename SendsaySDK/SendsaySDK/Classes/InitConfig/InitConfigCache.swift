@@ -47,22 +47,22 @@ final class InitConfigCache {
         }
     }
     
-    func getConfig() -> ConfigItem {
+    func getConfig() -> ConfigItem? {
         if let directory = getCacheDirectoryURL(),
            let data = try? Data(contentsOf: directory.appendingPathComponent(InitConfigCache.initConfigFileName)) {
             do {
-                return try JSONDecoder().decode([ConfigItem].self, from: data)
+                return try JSONDecoder().decode(ConfigItem.self, from: data)
             } catch {
-                return []
+                return nil
             }
         }
-        return []
+        return nil
     }
 
     func getInitConfigTimestamp() -> TimeInterval {
         guard let directory = getCacheDirectoryURL(),
               let attributes = try? fileManager.attributesOfItem(
-                atPath: directory.appendingPathComponent(InitConfigCache.inAppMessagesFileName).path
+                atPath: directory.appendingPathComponent(InAppMessagesCache.inAppMessagesFileName).path
               ),
               let modificationDate = attributes[FileAttributeKey.modificationDate] as? Date
         else {

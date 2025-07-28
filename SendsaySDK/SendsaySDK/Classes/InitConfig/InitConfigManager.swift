@@ -87,7 +87,7 @@ final class InitConfigManager: InitConfigManagerType, @unchecked Sendable {
             )
             return
         }
-        repository.fetchInitConfig { result in
+        repository.fetchInitConfig { [weak self] result in
             guard !IntegrationManager.shared.isStopped else {
                 Sendsay.logger.log(
                     .error,
@@ -106,7 +106,7 @@ final class InitConfigManager: InitConfigManagerType, @unchecked Sendable {
             }
             Sendsay.logger.log(
                 .verbose,
-                message: "[InitConfig] Fetch completed \(response.results.description ?? "Empty Result")"
+                message: "[InitConfig] Fetch completed \(response.results.description)"
             )
             self.cache.saveConfig(config: response.results)
         }
