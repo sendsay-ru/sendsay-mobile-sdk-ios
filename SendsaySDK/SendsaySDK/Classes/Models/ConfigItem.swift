@@ -12,7 +12,7 @@ public struct ConfigItem: Codable, Equatable, CustomStringConvertible {
 
     public let isInAppMessagesEnabled: Bool
     public let isInAppCBEnabled: Bool
-    public var isAppInboxEnabled: Bool
+    public let isAppInboxEnabled: Bool
 
     enum CodingKeys: String, CodingKey {
         case isInAppMessagesEnabled = "isInAppMessagesEnabled"

@@ -8,6 +8,12 @@
 
 final class InitConfigCache {
     
+    lazy var config: ConfigItem = {
+            return getConfig() ?? ConfigItem(isInAppMessagesEnabled: false,
+                                             isInAppCBEnabled: false,
+                                             isAppInboxEnabled: false)
+        }()
+    
     static let initConfigFolder = "sendsaysdk_init_config"
     static let initConfigFileName = "init_config.json"
     // we should use our own instance of filemanager, host app can implement delegate on default one
@@ -69,6 +75,14 @@ final class InitConfigCache {
             return 0
         }
         return modificationDate.timeIntervalSince1970
+    }
+    
+    func clear() {
+        var resetConf = ConfigItem(isInAppMessagesEnabled: false,
+                                         isInAppCBEnabled: false,
+                                         isAppInboxEnabled: false)
+        saveConfig(config: resetConf)
+        self.config = resetConf
     }
     
 }

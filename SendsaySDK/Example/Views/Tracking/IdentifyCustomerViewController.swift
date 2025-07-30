@@ -27,7 +27,7 @@ class IdentifyCustomerViewController: UIViewController {
         super.viewDidLoad()
 
         idKeyField.placeholder = "registered"
-        idValueField.placeholder = "fx. email@address.com"
+        idValueField.placeholder = "ex. email@address.com"
 
         keyField1.placeholder = "custom_key_1"
         keyField2.placeholder = "custom_key_2"

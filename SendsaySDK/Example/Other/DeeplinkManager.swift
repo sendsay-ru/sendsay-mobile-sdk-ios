@@ -7,26 +7,26 @@
 //
 
 public enum DeeplinkType {
-    case fetch
+//    case fetch
     case track
     case flush
     case anonymize
-    case inappcb
+//    case inappcb
     case stopAndContinue
     case stopAndRestart
 
     init?(input: String) {
         switch true {
-        case input.contains("fetch"):
-            self = .fetch
+//        case input.contains("fetch"):
+//            self = .fetch
         case input.contains("track"):
             self = .track
         case input.contains("flush"):
             self = .flush
         case input.contains("anonymize"):
             self = .anonymize
-        case input.contains("inappcb"):
-            self = .inappcb
+//        case input.contains("inappcb"):
+//            self = .inappcb
         case input.contains("stopAndContinue"):
             self = .stopAndContinue
         case input.contains("stopAndRestart"):

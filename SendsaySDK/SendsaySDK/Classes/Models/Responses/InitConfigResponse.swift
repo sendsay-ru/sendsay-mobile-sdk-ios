@@ -15,7 +15,7 @@ public struct InitConfigResponse: Codable {
     public let success: Bool
 }
 
-private extension ConsentsResponse {
+private extension InitConfigResponse {
     enum CodingKeys: String, CodingKey {
         case results = "results"
         case success

@@ -332,11 +332,11 @@ public class SendsayInternal: SendsayType {
                             trackingManager: trackingManager
                         )
                         self.trackingConsentManager = trackingConsentManager
-                        let inAppMessagesManager = InAppMessagesManager(
+                        let inAppMessagesManager = (self.initConfigManager?.cache.config.isInAppMessagesEnabled)! ? InAppMessagesManager(
                            repository: repository,
                            displayStatusStore: InAppMessageDisplayStatusStore(userDefaults: userDefaults),
                            trackingConsentManager: trackingConsentManager
-                        )
+                        ) : nil
                         self.inAppMessagesManager = inAppMessagesManager
                         let notificationsManager = PushNotificationManager(
                             trackingConsentManager: trackingConsentManager,
@@ -364,15 +364,15 @@ public class SendsayInternal: SendsayType {
 
                 self.trackingManager = trackingManager
 
-                self.appInboxManager = AppInboxManager(
+                self.appInboxManager = (self.initConfigManager?.cache.config.isAppInboxEnabled)! ? AppInboxManager(
                     repository: repository,
                     trackingManager: trackingManager,
                     database: database
-                )
+                ) : nil
 
                 configuration.saveToUserDefaults()
 
-                self.inAppContentBlocksManager = InAppContentBlocksManager.manager
+                self.inAppContentBlocksManager = (self.initConfigManager?.cache.config.isInAppCBEnabled)! ? InAppContentBlocksManager.manager : nil
                 self.inAppContentBlocksManager?.initBlocker()
                 self.inAppContentBlocksManager?.loadInAppContentBlockMessages { [weak self] in
                     self?.inAppContentBlocksManager?.prefetchPlaceholdersWithIds(ids: configuration.inAppContentBlocksPlaceholders ?? [])

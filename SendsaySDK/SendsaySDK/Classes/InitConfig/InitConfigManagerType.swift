@@ -9,6 +9,8 @@
 import Foundation
 
 protocol InitConfigManagerType {
+    
+    var cache: InitConfigCache { get set }
 
     var inRefetchCallback: Void? { get set }
 
@@ -16,10 +18,10 @@ protocol InitConfigManagerType {
 }
 
 /// Result of fetch operation
-public enum InitConfigResult {
-    case success(ConfigItem)
-    // Unable to fetch, we're not connected to internet
-    case noInternetConnection
-    // Unexpected error occured during fetching
-    case error(Error)
-}
+//public enum InitConfigResult {
+//    case success(ConfigItem)
+//    // Unable to fetch, we're not connected to internet
+//    case noInternetConnection
+//    // Unexpected error occured during fetching
+//    case error(Error)
+//}

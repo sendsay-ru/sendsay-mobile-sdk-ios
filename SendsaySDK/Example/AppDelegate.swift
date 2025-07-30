@@ -62,6 +62,10 @@ class AppDelegate: SendsayAppDelegate {
         UINavigationBar.appearance().titleTextAttributes = [
             NSAttributedString.Key.foregroundColor: UIColor.colorPrimaryDark
         ]
+        UINavigationBar.appearance().inputViewController?.tabBarController?.moreNavigationController
+            .navigationBar.topItem?.rightBarButtonItem?.title = ""
+        UINavigationBar.appearance().inputViewController?.tabBarController?.moreNavigationController
+            .navigationBar.topItem?.rightBarButtonItem?.isEnabled = false
 
         application.applicationIconBadgeNumber = 0
 

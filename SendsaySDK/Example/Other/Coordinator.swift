@@ -10,26 +10,26 @@ import UIKit
 import SendsaySDK
 
 enum CoordinatorType {
-    case fetch
+//    case fetch
     case track
     case flush
     case anonymize
-    case inappcb
+//    case inappcb
     case stopAndContinue
     case stopAndRestart
 
     init(deeplinkType: DeeplinkType) {
         switch deeplinkType {
-        case .fetch:
-            self = .fetch
+//        case .fetch:
+//            self = .fetch
         case .track:
             self = .track
         case .flush:
             self = .flush
         case .anonymize:
             self = .anonymize
-        case .inappcb:
-            self = .inappcb
+//        case .inappcb:
+//            self = .inappcb
         case .stopAndContinue:
             self = .stopAndContinue
         case .stopAndRestart:
@@ -73,12 +73,12 @@ final class Coordinator {
             tabbar.selectedIndex = TabbarItem.flush.index
         case .anonymize:
             tabbar.selectedIndex = TabbarItem.anonymize.index
-        case .fetch:
-            tabbar.selectedIndex = TabbarItem.fetch.index
+//        case .fetch:
+//            tabbar.selectedIndex = TabbarItem.fetch.index
         case .track:
             tabbar.selectedIndex = TabbarItem.tracking.index
-        case .inappcb:
-            tabbar.selectedIndex = TabbarItem.contentBlocks.index
+//        case .inappcb:
+//            tabbar.selectedIndex = TabbarItem.contentBlocks.index
         case .stopAndContinue:
             Sendsay.shared.stopIntegration()
         case .stopAndRestart:

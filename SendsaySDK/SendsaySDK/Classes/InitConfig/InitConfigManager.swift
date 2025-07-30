@@ -11,10 +11,11 @@ import UIKit
 final class InitConfigManager: InitConfigManagerType, @unchecked Sendable {
 
     private let repository: RepositoryType
-    private let cache: InitConfigCache
-
+    
+    internal var cache: InitConfigCache
     internal var inRefetchCallback: Void?
     internal var sessionStartDate: Date = Date()
+    
     private static let refetchConfigAfter: TimeInterval = 60 // fetch new config if sessionStart is older than sessionStart + this
     private lazy var identifyFlowQueue: OperationQueue = {
         let queue = OperationQueue()
@@ -31,9 +32,11 @@ final class InitConfigManager: InitConfigManagerType, @unchecked Sendable {
 
         IntegrationManager.shared.onIntegrationStoppedCallbacks.append { [weak self] in
             guard let self else { return }
-//            self.cache.clear()
+            self.cache.clear()
         }
     }
+    
+    
 
     // MARK: - Methods
     private func shouldRefetch(timestamp: TimeInterval) -> Bool {
