@@ -52,7 +52,7 @@ extension SendsayInternal {
                 }
                 throw SendsayError.authorizationInsufficient
             }
-            $0.appInboxManager.fetchAppInbox(completion: $1)
+            $0.appInboxManager?.fetchAppInbox(completion: $1)
             self.telemetryManager?.report(eventWithType: .fetchAppInbox, properties: [:])
         }, completion: completion)
     }
@@ -65,7 +65,7 @@ extension SendsayInternal {
                 }
                 throw SendsayError.authorizationInsufficient
             }
-            $0.appInboxManager.fetchAppInboxItem(messageId, completion: $1)
+            $0.appInboxManager?.fetchAppInboxItem(messageId, completion: $1)
         }, completion: completion)
     }
 }

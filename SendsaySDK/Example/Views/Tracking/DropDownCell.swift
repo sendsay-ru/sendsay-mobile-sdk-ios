@@ -18,7 +18,7 @@ class MyCell: DropDownCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         myImageView.contentMode = .scaleAspectFit
-        label.tintColor = .colorAccent
+//        label.tintColor = .colorAccent
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -10,7 +10,7 @@ import UIKit
 import SendsaySDK
 import DropDown
 
-class TrackEventViewController: UIViewController {
+class TrackEventViewController: UIViewController, UITextFieldDelegate {
 
     private let DEFAULT_EVENT_TYPE = "event_name"
     private let DEFAULT_PROP_KEY = "property"
@@ -36,28 +36,16 @@ class TrackEventViewController: UIViewController {
     var menu2 = DropDown()
     var menu3 = DropDown()
     
-    let actions = [
-        "set",
-        "update",
-        "insert",
-        "merge",
-        "merge_update",
-        "merge_insert",
-        "push",
-        "unshift",
-        "delete"
-    ]
-    
-    let images = [
-        "plus.app",
-        "square.and.pencil",
-        "square.and.arrow.down.on.square.fill",
-        "arrow.merge",
-        "long.text.page.and.pencil",
-        "pencil.and.list.clipboard",
-        "square.and.arrow.up",
-        "list.bullet.indent",
-        "eraser"
+    let actionsToImages = [
+        "set" : "plus.app",
+        "update" : "square.and.pencil",
+        "insert" : "square.and.arrow.down.on.square.fill",
+        "merge" : "arrow.merge",
+        "merge_update" : "long.text.page.and.pencil",
+        "merge_insert" : "pencil.and.list.clipboard",
+        "push" : "square.and.arrow.up",
+        "unshift" : "list.bullet.indent",
+        "delete" : "eraser"
     ]
 
     override func viewDidLoad() {
@@ -71,16 +59,13 @@ class TrackEventViewController: UIViewController {
         menu2.anchorView = ddButton2
         menu3.anchorView = ddButton3
 
-        menu1.setupCornerRadius(40.0)
-        menu1.layer.masksToBounds = true
-        menu3.layer.cornerRadius = 60
-        menu3.layer.masksToBounds = true
-
         menu1.textColor = .white
+        menu2.textColor = .white
+        menu3.textColor = .white
 
-        menu1.dataSource = actions
-        menu2.dataSource = actions
-        menu3.dataSource = actions
+        menu1.dataSource = Array(actionsToImages.keys)
+        menu2.dataSource = Array(actionsToImages.keys)
+        menu3.dataSource = Array(actionsToImages.keys)
         menu1.cellNib = UINib(nibName: "DropDownCell", bundle: nil)
         menu2.cellNib = UINib(nibName: "DropDownCell", bundle: nil)
         menu3.cellNib = UINib(nibName: "DropDownCell", bundle: nil)
@@ -89,19 +74,19 @@ class TrackEventViewController: UIViewController {
             guard let cell = cell as? MyCell else {
                 return
             }
-            cell.myImageView.image = UIImage(systemName: self.images[index])
+            cell.myImageView.image = UIImage(systemName: self.actionsToImages[title] ?? self.actionsToImages.first!.value)
         }
         menu2.customCellConfiguration = { index, title, cell in
             guard let cell = cell as? MyCell else {
                 return
             }
-            cell.myImageView.image = UIImage(systemName: self.images[index])
+            cell.myImageView.image = UIImage(systemName: self.actionsToImages[title] ?? self.actionsToImages.first!.value)
         }
         menu3.customCellConfiguration = { index, title, cell in
             guard let cell = cell as? MyCell else {
                 return
             }
-            cell.myImageView.image = UIImage(systemName: self.images[index])
+            cell.myImageView.image = UIImage(systemName: self.actionsToImages[title] ?? self.actionsToImages.first!.value)
         }
         /// Fixes overlapping by modal window
         if let window = UIApplication.shared.windows.first {
@@ -111,6 +96,7 @@ class TrackEventViewController: UIViewController {
         }
 
         menu1.selectionAction = { index, title in
+            print("Title!")
             self.ddButton1.setTitle(title, for: .normal)
         }
         menu2.selectionAction = { index, title in
@@ -136,6 +122,7 @@ class TrackEventViewController: UIViewController {
     }
 
     @IBAction func showDropDown1(_ sender: Any) {
+        print("Tapped!")
         menu1.show()
     }
     @IBAction func showDropDown2(_ sender: Any) {
@@ -147,6 +134,7 @@ class TrackEventViewController: UIViewController {
 
 
     @IBAction func hideKeyboard() {
+        print("Tapped!")
         view.endEditing(true)
     }
 
@@ -182,11 +170,11 @@ class TrackEventViewController: UIViewController {
             properties[key3] = valueField3.text ?? ""
         }
 
-        memberSet["datakey"] = jsonToString(json: datakey)
-        properties["member_set"] = jsonToString(json: memberSet)
+//        memberSet["datakey"] = jsonToString(json: datakey)
+//        properties["member_set"] = jsonToString(json: memberSet.jsonValue)
         
         
-        print("props_member.set: \(jsonToString(json: properties.jsonValue))")
+//        print("props_member.set: \(jsonToString(json: properties.jsonValue))")
 
 
 //        properties["testdictionary"] = ["key1": "value1", "key2": 2, "key3": true]

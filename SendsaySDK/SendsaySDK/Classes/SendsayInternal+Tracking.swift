@@ -368,9 +368,9 @@ extension SendsayInternal {
             if dependencies.configuration.automaticSessionTracking {
                 try dependencies.trackingManager.track(.sessionEnd, with: [.timestamp(Date().timeIntervalSince1970)])
             }
-            dependencies.inAppMessagesManager.anonymize()
-            dependencies.appInboxManager.clear()
-            dependencies.inAppContentBlocksManager.anonymize()
+            dependencies.inAppMessagesManager?.anonymize()
+            dependencies.appInboxManager?.clear()
+            dependencies.inAppContentBlocksManager?.anonymize()
             SegmentationManager.shared.anonymize()
             dependencies.campaignRepository.clear()
             FileCache.shared.clear()
@@ -485,7 +485,7 @@ extension SendsayInternal {
             guard dependencies.configuration.authorization != Authorization.none else {
                 throw SendsayError.authorizationInsufficient
             }
-            dependencies.appInboxManager.markMessageAsRead(message, nil, completition)
+            dependencies.appInboxManager?.markMessageAsRead(message, nil, completition)
         }
     }
 

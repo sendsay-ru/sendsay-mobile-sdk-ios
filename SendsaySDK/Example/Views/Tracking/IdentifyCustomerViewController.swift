@@ -16,17 +16,17 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var idValueField: UITextField!
 
     @IBOutlet var keyField1: UITextField!
-    @IBOutlet var valueField1: UITextField!
+    @IBOutlet var valueField1: UITextView!
     @IBOutlet var ddButton1: UIButton!
     @IBOutlet var copySwitch1: UISwitch!
 
     @IBOutlet var keyField2: UITextField!
-    @IBOutlet var valueField2: UITextField!
+    @IBOutlet var valueField2: UITextView!
     @IBOutlet var ddButton2: UIButton!
     @IBOutlet var copySwitch2: UISwitch!
 
     @IBOutlet var keyField3: UITextField!
-    @IBOutlet var valueField3: UITextField!
+    @IBOutlet var valueField3: UITextView!
     @IBOutlet var ddButton3: UIButton!
     @IBOutlet var copySwitch3: UISwitch!
     
@@ -77,7 +77,7 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
         menu3.layer.masksToBounds = true
         
         menu1.textColor = .white
-//        menu2.textColor = .white
+        menu2.textColor = .white
         menu3.textColor = .white
 
         menu1.dataSource = actions
@@ -161,7 +161,6 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func hideKeyboard() {
-        print("Tapped!")
         view.endEditing(true)
     }
 
@@ -180,7 +179,7 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
 
         var properties: [String: JSONConvertible] = [:]
         var memberSet: [String: JSONConvertible] = [:]
-        var datakey: [[String]] = []
+        var datakey: [JSONConvertible] = []
 
         if let key1 = keyField1.text, !key1.isEmpty {
             var mode = ddButton1.title(for: .normal) ?? ""
@@ -209,26 +208,25 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
             datakey.append([key3, mode, valueField3.text ?? "",])
         }
 
-        memberSet["datakey"] = jsonToString(json: datakey)
-        properties["member_set"] = jsonToString(json: memberSet)
+        memberSet["datakey"] = datakey
+        properties["member_set"] = memberSet
 
-        print("props_member.set: \(jsonToString(json: properties.jsonValue))")
+        print("props_member.set: \(jsonPretty(json: properties))")
 
-//        CustomerTokenStorage.shared.configure(customerIds: ids)
-//        Sendsay.shared.identifyCustomer(customerIds: ids, properties: properties, timestamp: nil)
+        CustomerTokenStorage.shared.configure(customerIds: ids)
+        Sendsay.shared.identifyCustomer(customerIds: ids, properties: properties, timestamp: nil)
         dismiss(animated: true, completion: nil)
-
     }
 }
 
-func jsonToString(json: Any) -> String{
+func jsonPretty(json: Any) -> JSONConvertible{
     do {
-        let data1 = try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
-        let convertedString = String(data: data1, encoding: String.Encoding.utf8) as NSString? ?? ""
+        let jsonData = try JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions.prettyPrinted)
+        let convertedString = String(data: jsonData, encoding: .utf8) as NSString? ?? ""
         debugPrint(convertedString)
-        return convertedString as String
+        return convertedString
     } catch let myJSONError {
-        debugPrint(myJSONError)
+        print("Error encoding JSON: \(myJSONError)")
         return ""
     }
 }

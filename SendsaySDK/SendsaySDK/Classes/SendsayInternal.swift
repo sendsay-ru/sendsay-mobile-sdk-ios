@@ -416,9 +416,9 @@ internal extension SendsayInternal {
         let trackingManager: TrackingManagerType
         let flushingManager: FlushingManagerType
         let trackingConsentManager: TrackingConsentManagerType
-        let inAppMessagesManager: InAppMessagesManagerType
-        let appInboxManager: AppInboxManagerType
-        let inAppContentBlocksManager: InAppContentBlocksManagerType
+        let inAppMessagesManager: InAppMessagesManagerType?
+        let appInboxManager: AppInboxManagerType?
+        let inAppContentBlocksManager: InAppContentBlocksManagerType?
         let notificationsManager: PushNotificationManagerType
         let campaignRepository: CampaignRepositoryType
     }
@@ -437,9 +437,9 @@ internal extension SendsayInternal {
             let trackingManager = trackingManager,
             let flushingManager = flushingManager,
             let trackingConsentManager = trackingConsentManager,
-            let inAppMessagesManager = inAppMessagesManager,
-            let inAppContentBlocksManager = inAppContentBlocksManager,
-            let appInboxManager = appInboxManager,
+//            let inAppMessagesManager = inAppMessagesManager,
+//            let inAppContentBlocksManager = inAppContentBlocksManager,
+//            let appInboxManager = appInboxManager,
             let notificationsManager = notificationsManager,
             let campaignRepository = campaignRepository else {
                 Sendsay.logger.log(logLevel, message: "Some dependencies are not configured")
