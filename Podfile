@@ -23,7 +23,10 @@ target 'Example' do
     inherit! :search_paths
 
     inhibit_all_warnings!
-
+    
+    # Pods for UI
+    pod 'DropDown'
+    pod 'IQKeyboardManagerSwift'
 
     # Pods for Firebase
     pod 'Firebase/AnalyticsWithoutAdIdSupport'

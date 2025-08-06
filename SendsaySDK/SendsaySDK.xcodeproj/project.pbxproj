@@ -361,6 +361,9 @@
 		B1AB19F52E31190800554B39 /* InitConfigCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19F32E31080000554B39 /* InitConfigCache.swift */; };
 		B1AB19F62E31190B00554B39 /* InitConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19EF2E30DB8500554B39 /* InitConfigManager.swift */; };
 		B1AB19F72E31191000554B39 /* InitConfigManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19F02E30DB8500554B39 /* InitConfigManagerType.swift */; };
+		B1B7C24A2E3A6C4100ABC6F1 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1B7C2492E3A6C4100ABC6F1 /* DropDownCell.xib */; };
+		B1B7C24B2E3A6C4100ABC6F1 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1B7C2492E3A6C4100ABC6F1 /* DropDownCell.xib */; };
+		B1B7C24D2E3A827700ABC6F1 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B7C24C2E3A827000ABC6F1 /* DropDownCell.swift */; };
 		B1BE5AAE2E0C385700B425CA /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1BE5AAD2E0C385700B425CA /* Colors.xcassets */; };
 		B1CBD2BC2E09A5F1006C1DD1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B1CBD2BB2E09A5F1006C1DD1 /* GoogleService-Info.plist */; };
 		B1E361052E12AE02001293C8 /* SwiftSoup.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B72A7E229C068BC00E1A1F9 /* SwiftSoup.xcframework */; };
@@ -938,6 +941,8 @@
 		B1AB19EF2E30DB8500554B39 /* InitConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigManager.swift; sourceTree = "<group>"; };
 		B1AB19F02E30DB8500554B39 /* InitConfigManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigManagerType.swift; sourceTree = "<group>"; };
 		B1AB19F32E31080000554B39 /* InitConfigCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigCache.swift; sourceTree = "<group>"; };
+		B1B7C2492E3A6C4100ABC6F1 /* DropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DropDownCell.xib; path = "/Users/stasprosky/StudioProjects/sendsay-ios-sdk-main/SendsaySDK/Example/Views/Tracking/DropDownCell.xib"; sourceTree = "<absolute>"; };
+		B1B7C24C2E3A827000ABC6F1 /* DropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		B1BE5AAD2E0C385700B425CA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		B1CBD2BB2E09A5F1006C1DD1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B1F971C72E1BFF4000947ABA /* AnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedButton.swift; sourceTree = "<group>"; };
@@ -2064,9 +2069,11 @@
 		C0EA5FD020CE961F00660802 /* Tracking */ = {
 			isa = PBXGroup;
 			children = (
+				B1B7C24C2E3A827000ABC6F1 /* DropDownCell.swift */,
 				C07E41FE20C930E400920809 /* IdentifyCustomerViewController.swift */,
 				C07E41FC20C930C400920809 /* TrackEventViewController.swift */,
 				C0EB5D9C20B8193A00F1031F /* TrackingViewController.swift */,
+				B1B7C2492E3A6C4100ABC6F1 /* DropDownCell.xib */,
 			);
 			path = Tracking;
 			sourceTree = "<group>";
@@ -2821,6 +2828,7 @@
 				C03B23D421AAF34000360EE6 /* beep.wav in Resources */,
 				C0F6C4EA2098A1AC00834E21 /* Assets.xcassets in Resources */,
 				C0F6C4E82098A1AB00834E21 /* Main.storyboard in Resources */,
+				B1B7C24A2E3A6C4100ABC6F1 /* DropDownCell.xib in Resources */,
 				B1CBD2BC2E09A5F1006C1DD1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2829,6 +2837,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1B7C24B2E3A6C4100ABC6F1 /* DropDownCell.xib in Resources */,
 				05E1A3812359B3A500E5EDDE /* .swiftlint.yml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3050,6 +3059,7 @@
 				31C7B4262A822FE7001BA5E2 /* SendsayTabBarController.swift in Sources */,
 				313E30682C22B21200375D4B /* InAppContentBlockCarouselViewController.swift in Sources */,
 				55EFD7A329225207002569FB /* ExampleAppInboxProvider.swift in Sources */,
+				B1B7C24D2E3A827700ABC6F1 /* DropDownCell.swift in Sources */,
 				C0EB5D9B20B8193200F1031F /* FlushingViewController.swift in Sources */,
 				C0F2407220BD9A5500CAF7CE /* LogViewController.swift in Sources */,
 				C0EB5D9720B8190500F1031F /* FetchViewController.swift in Sources */,

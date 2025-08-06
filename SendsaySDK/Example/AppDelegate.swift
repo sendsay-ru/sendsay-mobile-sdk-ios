@@ -9,6 +9,7 @@
 import UIKit
 import SendsaySDK
 import UserNotifications
+import IQKeyboardManagerSwift
 import Firebase
 import FirebaseMessaging
 
@@ -52,6 +53,12 @@ class AppDelegate: SendsayAppDelegate {
         SegmentationManager.shared.addCallback(callbackData: discoverySegmentsCallback)
         SegmentationManager.shared.addCallback(callbackData: contentSegmentsCallback)
         SegmentationManager.shared.addCallback(callbackData: merchandisingSegmentsCallback)
+        
+        DispatchQueue.main.async {
+            IQKeyboardManager.shared.isEnabled = true
+            IQKeyboardManager.shared.resignOnTouchOutside = true
+            //        IQKeyboardManager.shared.layoutIfNeededOnUpdate = true
+        }
 
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
