@@ -211,7 +211,7 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
         memberSet["datakey"] = datakey
         properties["member_set"] = memberSet
 
-        print("props_member.set: \(jsonPretty(json: properties))")
+//        print("props_member.set: \(jsonPretty(json: properties))")
 
         CustomerTokenStorage.shared.configure(customerIds: ids)
         Sendsay.shared.identifyCustomer(customerIds: ids, properties: properties, timestamp: nil)

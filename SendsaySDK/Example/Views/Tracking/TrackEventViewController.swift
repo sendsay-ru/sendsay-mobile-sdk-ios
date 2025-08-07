@@ -36,16 +36,40 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
     var menu2 = DropDown()
     var menu3 = DropDown()
     
-    let actionsToImages = [
-        "set" : "plus.app",
-        "update" : "square.and.pencil",
-        "insert" : "square.and.arrow.down.on.square.fill",
-        "merge" : "arrow.merge",
-        "merge_update" : "long.text.page.and.pencil",
-        "merge_insert" : "pencil.and.list.clipboard",
-        "push" : "square.and.arrow.up",
-        "unshift" : "list.bullet.indent",
-        "delete" : "eraser"
+//    let actionsToImages = [
+//        "set" : "plus.app",
+//        "update" : "square.and.pencil",
+//        "insert" : "square.and.arrow.down.on.square.fill",
+//        "merge" : "arrow.merge",
+//        "merge_update" : "long.text.page.and.pencil",
+//        "merge_insert" : "pencil.and.list.clipboard",
+//        "push" : "square.and.arrow.up",
+//        "unshift" : "list.bullet.indent",
+//        "delete" : "eraser"
+//    ]
+    
+    let actions = [
+        "set",
+        "update",
+        "insert",
+        "merge",
+        "merge_update",
+        "merge_insert",
+        "push",
+        "unshift",
+        "delete"
+    ]
+    
+    let images = [
+        "plus.app",
+        "square.and.pencil",
+        "square.and.arrow.down.on.square.fill",
+        "arrow.merge",
+        "long.text.page.and.pencil",
+        "pencil.and.list.clipboard",
+        "square.and.arrow.up",
+        "list.bullet.indent",
+        "eraser"
     ]
 
     override func viewDidLoad() {
@@ -63,9 +87,10 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
         menu2.textColor = .white
         menu3.textColor = .white
 
-        menu1.dataSource = Array(actionsToImages.keys)
-        menu2.dataSource = Array(actionsToImages.keys)
-        menu3.dataSource = Array(actionsToImages.keys)
+//        menu1.dataSource = Array(actionsToImages.keys)
+        menu1.dataSource = actions
+        menu2.dataSource = actions
+        menu3.dataSource = actions
         menu1.cellNib = UINib(nibName: "DropDownCell", bundle: nil)
         menu2.cellNib = UINib(nibName: "DropDownCell", bundle: nil)
         menu3.cellNib = UINib(nibName: "DropDownCell", bundle: nil)
@@ -74,19 +99,19 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
             guard let cell = cell as? MyCell else {
                 return
             }
-            cell.myImageView.image = UIImage(systemName: self.actionsToImages[title] ?? self.actionsToImages.first!.value)
+            cell.myImageView.image = UIImage(systemName: self.images[index])
         }
         menu2.customCellConfiguration = { index, title, cell in
             guard let cell = cell as? MyCell else {
                 return
             }
-            cell.myImageView.image = UIImage(systemName: self.actionsToImages[title] ?? self.actionsToImages.first!.value)
+            cell.myImageView.image = UIImage(systemName: self.images[index])
         }
         menu3.customCellConfiguration = { index, title, cell in
             guard let cell = cell as? MyCell else {
                 return
             }
-            cell.myImageView.image = UIImage(systemName: self.actionsToImages[title] ?? self.actionsToImages.first!.value)
+            cell.myImageView.image = UIImage(systemName: self.images[index])
         }
         /// Fixes overlapping by modal window
         if let window = UIApplication.shared.windows.first {
@@ -111,6 +136,10 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
         keyField1.placeholder = "default = \"\(DEFAULT_PROP_KEY)\""
         keyField2.placeholder = "custom_key_2"
         keyField3.placeholder = "custom_key_3"
+        
+        ddButton1.setTitle(actions[0], for: .normal)
+        ddButton2.setTitle(actions[0], for: .normal)
+        ddButton3.setTitle(actions[0], for: .normal)
 
         SegmentationManager.shared.addCallback(
             callbackData: .init(
@@ -122,7 +151,7 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func showDropDown1(_ sender: Any) {
-        print("Tapped!")
+//        print("Tapped!")
         menu1.show()
     }
     @IBAction func showDropDown2(_ sender: Any) {
@@ -134,7 +163,7 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
 
 
     @IBAction func hideKeyboard() {
-        print("Tapped!")
+//        print("Tapped!")
         view.endEditing(true)
     }
 
@@ -152,35 +181,50 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
 
         var properties: [String: JSONConvertible] = [:]
         var memberSet: [String: JSONConvertible] = [:]
-        var datakey: [[String]] = []
+        var datakey: [JSONConvertible] = []
 
         if let value1 = valueField1.text, !value1.isEmpty {
             var key1 = keyField1.text ?? DEFAULT_PROP_KEY
             if key1.isEmpty {
                 key1 = DEFAULT_PROP_KEY
             }
-            properties[key1] = value1
+            
+            var mode = ddButton1.title(for: .normal) ?? ""
+            if(copySwitch1.isOn && !mode.isEmpty) {
+                mode += ".copy"
+            }
+
+            datakey.append([key1, mode, value1,])
         }
 
         if let key2 = keyField2.text, !key2.isEmpty {
-            properties[key2] = valueField2.text ?? ""
+            var mode = ddButton2.title(for: .normal) ?? ""
+            if(copySwitch2.isOn && !mode.isEmpty) {
+                mode += ".copy"
+            }
+
+            datakey.append([key2, mode, valueField2.text ?? ""])
         }
 
         if let key3 = keyField3.text, !key3.isEmpty {
-            properties[key3] = valueField3.text ?? ""
+            var mode = ddButton3.title(for: .normal) ?? ""
+            if(copySwitch3.isOn && !mode.isEmpty) {
+                mode += ".copy"
+            }
+
+            datakey.append([key3, mode, valueField3.text ?? ""])
         }
 
-//        memberSet["datakey"] = jsonToString(json: datakey)
-//        properties["member_set"] = jsonToString(json: memberSet.jsonValue)
-        
-        
-//        print("props_member.set: \(jsonToString(json: properties.jsonValue))")
+        memberSet["datakey"] = datakey
+        properties["member_set"] = memberSet
+
+        print("props_member.set: \(jsonPretty(json: properties))")
 
 
 //        properties["testdictionary"] = ["key1": "value1", "key2": 2, "key3": true]
 //        properties["testarray"] = [123, "test", false]
 
-//        Sendsay.shared.trackEvent(properties: properties, timestamp: nil, eventType: eventType)
+        Sendsay.shared.trackEvent(properties: properties, timestamp: nil, eventType: eventType)
         dismiss(animated: true, completion: nil)
     }
 }

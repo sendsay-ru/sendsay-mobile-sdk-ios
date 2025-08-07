@@ -1284,7 +1284,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="trackPressed:" destination="e8o-xo-BzZ" eventType="touchUpInside" id="9Ec-eh-FTk"/>
+                                    <action selector="trackPressed:" destination="e8o-xo-BzZ" eventType="touchUpInside" id="azC-Vu-MKS"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cNT-9Y-qYe">
@@ -1330,8 +1330,8 @@
                                                     <color key="baseBackgroundColor" red="0.8862745098" green="0.38431372549999998" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </buttonConfiguration>
                                                 <connections>
-                                                    <action selector="showDropDown1:" destination="e8o-xo-BzZ" eventType="touchUpOutside" id="XiG-ym-7zc"/>
                                                     <action selector="showDropDown1:" destination="3dx-bP-Rug" eventType="touchUpInside" id="a2u-JP-Erm"/>
+                                                    <action selector="showDropDown1:" destination="e8o-xo-BzZ" eventType="touchUpInside" id="rwe-ow-yGA"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IF-Qm-cZK">
@@ -1354,7 +1354,7 @@
                                                 </buttonConfiguration>
                                                 <connections>
                                                     <action selector="showDropDown1:" destination="3dx-bP-Rug" eventType="touchUpInside" id="kjH-x8-OO1"/>
-                                                    <action selector="showDropDown2:" destination="e8o-xo-BzZ" eventType="touchUpOutside" id="baL-tB-wnw"/>
+                                                    <action selector="showDropDown2:" destination="e8o-xo-BzZ" eventType="touchUpInside" id="KXZ-Vl-eck"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Key 3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owc-oX-leD">
@@ -1377,7 +1377,7 @@
                                                 </buttonConfiguration>
                                                 <connections>
                                                     <action selector="showDropDown1:" destination="3dx-bP-Rug" eventType="touchUpInside" id="Xwf-fM-nZ1"/>
-                                                    <action selector="showDropDown3:" destination="e8o-xo-BzZ" eventType="touchUpOutside" id="Ofs-NH-PYR"/>
+                                                    <action selector="showDropDown3:" destination="e8o-xo-BzZ" eventType="touchUpInside" id="sHc-t5-Hd6"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1612,7 +1612,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -113,10 +113,10 @@ class AuthenticationViewController: UIViewController {
                 appGroup: "group.com.sendsay.SendsaySDK-Example2",
                 delegate: UIApplication.shared.delegate as? AppDelegate
             ),
-            defaultProperties: [
-                "Property01": "String value",
-                "Property02": 123
-            ],
+//            defaultProperties: [
+//                "Property01": "String value",
+//                "Property02": 123
+//            ],
             advancedAuthEnabled: advancedAuthPubKey?.isEmpty == false
         )
         sendsay.inAppMessagesDelegate = TestDefaultInAppDelegate()
