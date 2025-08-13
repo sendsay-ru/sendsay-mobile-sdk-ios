@@ -223,6 +223,7 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
 
 //        properties["testdictionary"] = ["key1": "value1", "key2": 2, "key3": true]
 //        properties["testarray"] = [123, "test", false]
+        properties["cce"] = "test-iOs"
 
         Sendsay.shared.trackEvent(properties: properties, timestamp: nil, eventType: eventType)
         dismiss(animated: true, completion: nil)
