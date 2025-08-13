@@ -3656,7 +3656,7 @@
 				MARKETING_VERSION = 2.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example2.ExampleNotificationContent";
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationContent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -3682,7 +3682,7 @@
 				);
 				MARKETING_VERSION = 2.2.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example2.ExampleNotificationContent";
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationContent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -3710,7 +3710,7 @@
 				MARKETING_VERSION = 2.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example2.ExampleNotificationService";
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
@@ -3737,7 +3737,7 @@
 				);
 				MARKETING_VERSION = 2.2.0;
 				MTL_FAST_MATH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example2.ExampleNotificationService";
+				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;

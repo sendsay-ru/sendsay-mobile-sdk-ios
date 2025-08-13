@@ -18,17 +18,17 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var eventTypeField: UITextField!
 
     @IBOutlet var keyField1: UITextField!
-    @IBOutlet var valueField1: UITextField!
+    @IBOutlet var valueField1: UITextView!
     @IBOutlet var ddButton1: UIButton!
     @IBOutlet var copySwitch1: UISwitch!
 
     @IBOutlet var keyField2: UITextField!
-    @IBOutlet var valueField2: UITextField!
+    @IBOutlet var valueField2: UITextView!
     @IBOutlet var ddButton2: UIButton!
     @IBOutlet var copySwitch2: UISwitch!
 
     @IBOutlet var keyField3: UITextField!
-    @IBOutlet var valueField3: UITextField!
+    @IBOutlet var valueField3: UITextView!
     @IBOutlet var ddButton3: UIButton!
     @IBOutlet var copySwitch3: UISwitch!
     

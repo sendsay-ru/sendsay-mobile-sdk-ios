@@ -120,9 +120,39 @@ public class SendsayNotificationService {
                 let attachment = saveImage("image.png", data: data, options: nil) {
                 bestAttemptContent?.attachments = [attachment]
             }
+            
+//            guard let imagePath = content.userInfo["image"] as? String,
+//            let url = URL(string: imagePath)
+//            else {
+//                contentCreated = true
+//                return
+//            }
+//            download(url: url) { fileURL in
+//                if let fileURL = fileURL,
+//                   let attachment = try? UNNotificationAttachment(identifier: "image", url: fileURL, options: nil) {
+//                    self.bestAttemptContent?.attachments = [attachment]
+//                }
+//            }
         }
         contentCreated = true
     }
+    
+    private func download(url: URL, completion: @escaping (URL?) -> Void) {
+            let task = URLSession.shared.downloadTask(with: url) { tempURL, _, _ in
+                guard let tempURL = tempURL else { return completion(nil) }
+                let fileExt = url.pathExtension.isEmpty ? "jpg" : url.pathExtension
+                let targetURL = URL(fileURLWithPath: NSTemporaryDirectory())
+                    .appendingPathComponent(UUID().uuidString)
+                    .appendingPathExtension(fileExt)
+                do {
+                    try FileManager.default.moveItem(at: tempURL, to: targetURL)
+                    completion(targetURL)
+                } catch {
+                    completion(nil)
+                }
+            }
+            task.resume()
+        }
 
     func trackDeliveredNotification(appGroup: String, notificationData: NotificationData) {
         do {

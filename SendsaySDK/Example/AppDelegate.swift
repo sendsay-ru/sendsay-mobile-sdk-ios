@@ -11,7 +11,7 @@ import SendsaySDK
 import UserNotifications
 import IQKeyboardManagerSwift
 import Firebase
-import FirebaseMessaging
+//import FirebaseMessaging
 
 // This protocol is used queried using reflection by native iOS SDK to see if SDK is used by our example app
 @objc(IsSendsayExampleApp)
@@ -61,7 +61,7 @@ class AppDelegate: SendsayAppDelegate {
         }
 
         FirebaseApp.configure()
-        Messaging.messaging().delegate = self
+//        Messaging.messaging().delegate = self
 
         UITabBar.appearance().tintColor = .darkText
         UINavigationBar.appearance().backgroundColor = UIColor.colorAccent
@@ -204,23 +204,23 @@ extension AppDelegate: PushNotificationManagerDelegate {
     }
 }
 
-extension AppDelegate: MessagingDelegate {
-  // [START refresh_token]
-  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-    print("Firebase registration token: \(String(describing: fcmToken))")
-
-    let dataDict: [String: String] = ["token": fcmToken ?? ""]
-    NotificationCenter.default.post(
-      name: Notification.Name("FCMToken"),
-      object: nil,
-      userInfo: dataDict
-    )
-    // TODO: If necessary send token to application server.
-    // Note: This callback is fired at each app startup and whenever a new token is generated.
-  }
-
-  // [END refresh_token]
-}
+//extension AppDelegate: MessagingDelegate {
+//  // [START refresh_token]
+//  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+//    print("Firebase registration token: \(String(describing: fcmToken))")
+//
+//    let dataDict: [String: String] = ["token": fcmToken ?? ""]
+//    NotificationCenter.default.post(
+//      name: Notification.Name("FCMToken"),
+//      object: nil,
+//      userInfo: dataDict
+//    )
+//    // TODO: If necessary send token to application server.
+//    // Note: This callback is fired at each app startup and whenever a new token is generated.
+//  }
+//
+//  // [END refresh_token]
+//}
 
 class InAppDelegate: InAppMessageActionDelegate {
     let overrideDefaultBehavior: Bool
