@@ -676,4 +676,16 @@ extension SendsayInternal {
             )
         }
     }
+    
+    public func trackSSEC(
+        placeholderId: String,
+        messsage: MessageItem
+    ) {
+        executeSafelyWithDependencies { dependencies in
+            guard dependencies.configuration.authorization != Authorization.none else {
+                throw SendsayError.authorizationInsufficient
+            }
+            dependencies.trackingConsentManager.trackSSEC(message: messsage, mode: .CONSIDER_CONSENT)
+        }
+    }
 }

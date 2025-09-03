@@ -293,6 +293,7 @@ class TrackingViewController: UIViewController {
         ]
 
         // Отправка события
+        Sendsay.shared.trackSSEC(placeholderId: <#T##String#>, messsage: <#T##MessageItem#>)
         Sendsay.shared.trackEvent(
             properties: productBasket,
             timestamp: nil,
