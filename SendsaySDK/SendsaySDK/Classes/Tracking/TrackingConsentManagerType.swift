@@ -32,7 +32,7 @@ protocol TrackingConsentManagerType {
         errorMessage: String,
         mode: MODE
     )
-    func trackSSEC(message: MessageItem, mode: MODE)
+//    func trackSSEC(message: MessageItem, mode: MODE)
 }
 
 enum MODE {
@@ -40,7 +40,7 @@ enum MODE {
     case IGNORE_CONSENT
 }
 
-enum TrackingSSECType: String, CaseIterable {
+public enum TrackingSSECType: String, CaseIterable {
     case viewProduct = "ssec_product_view"
     case order = "ssec_order"
     case viewCategory = "ssec_category_view"

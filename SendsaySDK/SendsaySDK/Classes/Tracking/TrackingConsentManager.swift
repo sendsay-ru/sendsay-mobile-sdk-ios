@@ -265,40 +265,40 @@ class TrackingConsentManager: TrackingConsentManagerType {
         )
     }
     
-    func trackSSEC(
-        message: MessageItem,
-        mode: MODE
-    ) {
-        guard !message.customerIds.isEmpty, let _ = message.customerIds["cookie"] else {
-            Sendsay.logger.log(.error, message: "SSEC message has no customerId")
-            return
-        }
-        var trackingAllowed = true
-        if mode == .CONSIDER_CONSENT {
-            Sendsay.logger.log(.error, message: "Event for trackSSEC is not tracked because consent is not given")
-            trackingAllowed = false
-        }
-        var eventData = message.content?.trackingData ?? [:]
-        eventData.merge([
-//            "action_type": .string("app inbox"),
-//            "status": .string("clicked"),
-//            "url": .string(buttonLink ?? ""),
-//            "cta": .string(buttonText ?? ""),
-            "action_type" : .string(EventType),
-            "platform": .string(Constants.DeviceInfo.osName)
-        ]) { _, new in new }
-        do {
-            try self.trackingManager.processTrack(
-                .appInbox,
-                with: [
-                    .properties(eventData),
-                    .timestamp(Date().timeIntervalSince1970),
-                    .customerIds(message.customerIds)
-                ],
-                trackingAllowed: trackingAllowed
-            )
-        } catch {
-            Sendsay.logger.log(.error, message: "Error tracking AppInbox clicked: \(error.localizedDescription)")
-        }
-    }
+//    func trackSSEC(
+//        message: MessageItem,
+//        mode: MODE
+//    ) {
+//        guard !message.customerIds.isEmpty, let _ = message.customerIds["cookie"] else {
+//            Sendsay.logger.log(.error, message: "SSEC message has no customerId")
+//            return
+//        }
+//        var trackingAllowed = true
+//        if mode == .CONSIDER_CONSENT {
+//            Sendsay.logger.log(.error, message: "Event for trackSSEC is not tracked because consent is not given")
+//            trackingAllowed = false
+//        }
+//        var eventData = message.content?.trackingData ?? [:]
+//        eventData.merge([
+////            "action_type": .string("app inbox"),
+////            "status": .string("clicked"),
+////            "url": .string(buttonLink ?? ""),
+////            "cta": .string(buttonText ?? ""),
+//            "action_type" : .string(EventType.customEvent.rawValue),
+//            "platform": .string(Constants.DeviceInfo.osName)
+//        ]) { _, new in new }
+//        do {
+//            try self.trackingManager.processTrack(
+//                .customEvent,
+//                with: [
+//                    .properties(eventData),
+//                    .timestamp(Date().timeIntervalSince1970),
+//                    .customerIds(message.customerIds)
+//                ],
+//                trackingAllowed: trackingAllowed
+//            )
+//        } catch {
+//            Sendsay.logger.log(.error, message: "Error trackSSEC: \(error.localizedDescription)")
+//        }
+//    }
 }

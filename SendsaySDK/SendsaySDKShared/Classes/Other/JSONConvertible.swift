@@ -12,6 +12,10 @@ public protocol JSONConvertible {
     var jsonValue: JSONValue { get }
 }
 
+extension JSONValue: JSONConvertible {
+    public var jsonValue: JSONValue { self }
+}
+
 extension NSString: JSONConvertible {
     public var jsonValue: JSONValue {
         return .string(self as String)
@@ -45,15 +49,47 @@ extension NSNull: JSONConvertible {
     }
 }
 
-extension Dictionary: JSONConvertible where Key == String, Value == JSONConvertible {
+extension Dictionary: JSONConvertible where Key == String, Value == JSONValue {
     public var jsonValue: JSONValue {
-        return .dictionary(self.mapValues({ $0.jsonValue }))
+        return .dictionary(self)
     }
 }
 
-extension Array: JSONConvertible where Element == JSONConvertible {
+extension Array: JSONConvertible where Element == JSONValue {
     public var jsonValue: JSONValue {
-        return .array(self.map({ $0.jsonValue }))
+        return .array(self)
+    }
+}
+
+public extension JSONValue {
+    init?(bridging any: Any) {
+        switch any {
+        case let s as String:
+            self = .string(s)
+        case let n as NSNumber:
+            if CFGetTypeID(n) == CFBooleanGetTypeID() {
+                self = .bool(n.boolValue)
+            } else {
+                // Попробуем сначала Int
+                let intVal = n.intValue
+                if NSNumber(value: intVal) == n {
+                    self = .int(intVal)
+                } else {
+                    // Иначе кастим в Double
+                    self = .double(n.doubleValue)
+                }
+            }
+        case _ as NSNull:
+            self = .null("null")
+        case let a as [Any]:
+            self = .array(a.compactMap { JSONValue(bridging: $0) })
+        case let d as [String: Any]:
+            var out: [String: JSONValue] = [:]
+            for (k, v) in d { if let jv = JSONValue(bridging: v) { out[k] = jv } }
+            self = .dictionary(out)
+        default:
+            return nil
+        }
     }
 }
 
@@ -107,6 +143,40 @@ public indirect enum JSONValue: Sendable {
     }
 }
 
+// MARK: - JSONValue literal initializers for ergonomic manual JSON
+extension JSONValue: ExpressibleByStringLiteral {
+    public init(stringLiteral value: String) { self = .string(value) }
+}
+
+extension JSONValue: ExpressibleByIntegerLiteral {
+    public init(integerLiteral value: Int) { self = .int(value) }
+}
+
+extension JSONValue: ExpressibleByFloatLiteral {
+    public init(floatLiteral value: Double) { self = .double(value) }
+}
+
+extension JSONValue: ExpressibleByBooleanLiteral {
+    public init(booleanLiteral value: Bool) { self = .bool(value) }
+}
+
+extension JSONValue: ExpressibleByArrayLiteral {
+    public init(arrayLiteral elements: JSONValue...) { self = .array(elements) }
+}
+
+extension JSONValue: ExpressibleByDictionaryLiteral {
+    public init(dictionaryLiteral elements: (String, JSONValue)...) {
+        self = .dictionary(Dictionary(uniqueKeysWithValues: elements))
+    }
+}
+
+extension JSONValue: ExpressibleByNilLiteral {
+    public init(nilLiteral: ()) { self = .null("") }
+}
+
+/// Helper to upcast concrete `JSONValue` to existential `any JSONConvertible`
+@inlinable public func JC(_ v: JSONValue) -> any JSONConvertible { v }
+
 public extension JSONValue {
     var rawValue: Any {
         switch self {
@@ -126,8 +196,8 @@ public extension JSONValue {
         case .bool(let bool): return bool
         case .int(let int): return int
         case .double(let double): return double
-        case .dictionary(let dictionary): return dictionary.mapValues { $0.jsonConvertible }
-        case .array(let array): return array.map { $0.jsonConvertible }
+        case .dictionary(let dictionary): return dictionary
+        case .array(let array): return array
         case .null(_): return NSNull()
         }
     }

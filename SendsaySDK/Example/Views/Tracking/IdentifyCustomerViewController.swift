@@ -177,42 +177,66 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
             ids = nil
         }
 
-        var properties: [String: JSONConvertible] = [:]
-        var memberSet: [String: JSONConvertible] = [:]
-        var datakey: [JSONConvertible] = []
+        var properties: [String: JSONValue] = [:]
+        var memberSet: [String: JSONValue] = [:]
+        var datakey: [JSONValue] = []
 
+//        if let key1 = keyField1.text, !key1.isEmpty {
+//            var mode = ddButton1.title(for: .normal) ?? ""
+//            if(copySwitch1.isOn && !mode.isEmpty) {
+//                mode += ".copy"
+//            }
+//
+//            datakey.append([key1, mode, valueField1.text ?? "",])
+//        }
         if let key1 = keyField1.text, !key1.isEmpty {
-            var mode = ddButton1.title(for: .normal) ?? ""
-            if(copySwitch1.isOn && !mode.isEmpty) {
-                mode += ".copy"
+            var mode1 = ddButton1.title(for: .normal) ?? ""
+            if copySwitch1.isOn, !mode1.isEmpty { mode1 += ".copy" }
+            
+            if let v1 = valueField1.text, !v1.isEmpty {
+                datakey.append(.array([ .string(key1), .string(mode1), .string(v1) ]))
             }
-
-            datakey.append([key1, mode, valueField1.text ?? "",])
         }
 
+//        if let key2 = keyField2.text, !key2.isEmpty {
+//            var mode = ddButton2.title(for: .normal) ?? ""
+//            if(copySwitch2.isOn && !mode.isEmpty) {
+//                mode += ".copy"
+//            }
+//
+//            datakey.append([key2, mode, valueField2.text ?? "",])
+//        }
         if let key2 = keyField2.text, !key2.isEmpty {
-            var mode = ddButton2.title(for: .normal) ?? ""
-            if(copySwitch2.isOn && !mode.isEmpty) {
-                mode += ".copy"
+            var mode2 = ddButton2.title(for: .normal) ?? ""
+            if copySwitch2.isOn, !mode2.isEmpty { mode2 += ".copy" }
+            
+            if let v2 = valueField2.text, !v2.isEmpty {
+                datakey.append(.array([ .string(key2), .string(mode2), .string(v2) ]))
             }
-
-            datakey.append([key2, mode, valueField2.text ?? "",])
         }
 
+//        if let key3 = keyField3.text, !key3.isEmpty {
+//            var mode = ddButton3.title(for: .normal) ?? ""
+//            if(copySwitch3.isOn && !mode.isEmpty) {
+//                mode += ".copy"
+//            }
+//
+//            datakey.append([key3, mode, valueField3.text ?? "",])
+//        }
         if let key3 = keyField3.text, !key3.isEmpty {
-            var mode = ddButton3.title(for: .normal) ?? ""
-            if(copySwitch3.isOn && !mode.isEmpty) {
-                mode += ".copy"
+            var mode3 = ddButton3.title(for: .normal) ?? ""
+            if copySwitch3.isOn, !mode3.isEmpty { mode3 += ".copy" }
+            
+            if let v3 = valueField3.text, !v3.isEmpty {
+                datakey.append(.array([ .string(key3), .string(mode3), .string(v3) ]))
             }
-
-            datakey.append([key3, mode, valueField3.text ?? "",])
         }
 
-        memberSet["datakey"] = datakey
-        properties["member_set"] = memberSet
+        memberSet["datakey"] = .array(datakey)
+        properties["member_set"] = .dictionary(memberSet)
 
 //        print("props_member.set: \(jsonPretty(json: properties))")
-        properties["cce"] = "test-iOs"
+        properties["cce"] = .string("test-iOs")
 
         CustomerTokenStorage.shared.configure(customerIds: ids)
         Sendsay.shared.identifyCustomer(customerIds: ids, properties: properties, timestamp: nil)

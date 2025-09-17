@@ -179,51 +179,72 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
             return DEFAULT_EVENT_TYPE
         }()
 
-        var properties: [String: JSONConvertible] = [:]
-        var memberSet: [String: JSONConvertible] = [:]
-        var datakey: [JSONConvertible] = []
+        var properties: [String: JSONValue] = [:]
+        var memberSet: [String: JSONValue] = [:]
+        var datakey: [JSONValue] = []
 
-        if let value1 = valueField1.text, !value1.isEmpty {
-            var key1 = keyField1.text ?? DEFAULT_PROP_KEY
-            if key1.isEmpty {
-                key1 = DEFAULT_PROP_KEY
-            }
-            
-            var mode = ddButton1.title(for: .normal) ?? ""
-            if(copySwitch1.isOn && !mode.isEmpty) {
-                mode += ".copy"
-            }
+//        if let value1 = valueField1.text, !value1.isEmpty {
+//            var key1 = keyField1.text ?? DEFAULT_PROP_KEY
+//            if key1.isEmpty {
+//                key1 = DEFAULT_PROP_KEY
+//            }
+//            
+//            var mode = ddButton1.title(for: .normal) ?? ""
+//            if(copySwitch1.isOn && !mode.isEmpty) {
+//                mode += ".copy"
+//            }
+//
+//            datakey.append([key1, mode, value1,])
+//        }
+        let key1  = (keyField1.text?.isEmpty == false ? keyField1.text! : DEFAULT_PROP_KEY)
+        var mode1 = ddButton1.title(for: .normal) ?? ""
+        if copySwitch1.isOn, !mode1.isEmpty { mode1 += ".copy" }
 
-            datakey.append([key1, mode, value1,])
+        if let v1 = valueField1.text, !v1.isEmpty {
+            datakey.append(.array([ .string(key1), .string(mode1), .string(v1) ]))
         }
 
+//        if let key2 = keyField2.text, !key2.isEmpty {
+//            var mode = ddButton2.title(for: .normal) ?? ""
+//            if(copySwitch2.isOn && !mode.isEmpty) {
+//                mode += ".copy"
+//            }
+//
+//            datakey.append([key2, mode, valueField2.text ?? ""])
+//        }
+        
         if let key2 = keyField2.text, !key2.isEmpty {
-            var mode = ddButton2.title(for: .normal) ?? ""
-            if(copySwitch2.isOn && !mode.isEmpty) {
-                mode += ".copy"
+            var mode2 = ddButton2.title(for: .normal) ?? ""
+            if copySwitch2.isOn, !mode2.isEmpty { mode2 += ".copy" }
+            
+            if let v2 = valueField2.text, !v2.isEmpty {
+                datakey.append(.array([ .string(key2), .string(mode2), .string(v2) ]))
             }
-
-            datakey.append([key2, mode, valueField2.text ?? ""])
         }
 
+//        if let key3 = keyField3.text, !key3.isEmpty {
+//            var mode = ddButton3.title(for: .normal) ?? ""
+//            if(copySwitch3.isOn && !mode.isEmpty) {
+//                mode += ".copy"
+//            }
+//
+//            datakey.append(.array([key3, mode, valueField3.text ?? ""]))
+//        }
         if let key3 = keyField3.text, !key3.isEmpty {
-            var mode = ddButton3.title(for: .normal) ?? ""
-            if(copySwitch3.isOn && !mode.isEmpty) {
-                mode += ".copy"
+            var mode3 = ddButton3.title(for: .normal) ?? ""
+            if copySwitch3.isOn, !mode3.isEmpty { mode3 += ".copy" }
+            
+            if let v3 = valueField3.text, !v3.isEmpty {
+                datakey.append(.array([ .string(key3), .string(mode3), .string(v3) ]))
             }
-
-            datakey.append([key3, mode, valueField3.text ?? ""])
         }
 
-        memberSet["datakey"] = datakey
-        properties["member_set"] = memberSet
+        memberSet["datakey"] = .array(datakey)
+        properties["member_set"] = .dictionary(memberSet)
 
         print("props_member.set: \(jsonPretty(json: properties))")
 
-
-//        properties["testdictionary"] = ["key1": "value1", "key2": 2, "key3": true]
-//        properties["testarray"] = [123, "test", false]
-        properties["cce"] = "test-iOs"
+        properties["cce"] = .string("test-iOs")
 
         Sendsay.shared.trackEvent(properties: properties, timestamp: nil, eventType: eventType)
         dismiss(animated: true, completion: nil)

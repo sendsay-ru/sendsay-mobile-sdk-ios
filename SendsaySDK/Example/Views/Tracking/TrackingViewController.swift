@@ -173,131 +173,216 @@ class TrackingViewController: UIViewController {
     @IBAction func trackClearBasket() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let currentDateTime = dateFormatter.string(from: Date())
+        let currentDateTime = Date()
+        
+        let clearBasketInfo: TrackSSECData?
+        
+        do {
+            clearBasketInfo = try TrackSSECDataBuilder(type: .basketClear)
+                .setTransaction(dt: dateFormatter.string(from: currentDateTime))
+                .setItems([
+                    OrderItem(id: "-1")
+                ])
+                .build()
+            
+//            let clearBasketInfoJSON: [String: Any] = [
+//                "dt": currentDateTime,
+//                "items": [
+//                    ["id": -1]
+//                ]
+//            ]
+//            clearBasketInfo = try TrackSSECData.fromJSON(clearBasketInfoJSON)
 
-        let clearBasketInfo: [String: JSONConvertible] = [
-            "ssec": [
-                "dt": currentDateTime,
-                "items": [
-                    ["id": -1]
-                ]
-            ]
-        ]
-
-        // Отправка события
-        Sendsay.shared.trackEvent(
-            properties: clearBasketInfo,
-            timestamp: nil,
-            eventType: "ssec_basket_clear"
-        )
+            // Отправка события
+            Sendsay.shared.trackEvent(
+                properties: clearBasketInfo!.toSsecProps(),
+                timestamp: nil,
+                eventType: TrackingSSECType.basketClear.rawValue
+            )
+        } catch {
+            Sendsay.logger.log(.error, message: "trackClearBasket parse error: \(error)")
+        }
     }
 
     @IBAction func trackProductView(_ sender: UIButton) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let currentDateTime = dateFormatter.string(from: Date())
+        let currentDateTime = Date()
+        
+        let productViewInfo: TrackSSECData?
 
-        let productViewInfo: [String: JSONConvertible] = [
-            "ssec": [
-                "dt": currentDateTime,
-                "id": "product1",
-                "available": 1,
-                "name": "name",
-                "price": 7.88,
-                "old_price": 5.99,
-                "picture": [],
-                "url": "url",
-                "model": "model",
-                "vendor": "vendor",
-                "category_id": 777,
-                "category": "category name"
-            ]
-        ]
+        do {
+            productViewInfo = try TrackSSECDataBuilder(type: .viewProduct)
+                .setProduct(id: "product1",
+                            name: "name",
+                            dateTime: dateFormatter.string(from: currentDateTime),
+                            picture: [],
+                            url: "url",
+                            available: 1,
+                            categoryId: 777,
+                            category: "category name",
+                            vendor: "vendor",
+                            model: "model",
+                            price: 7.88,
+                            oldPrice: 5.99)
+                .build()
+            
+//            let productViewInfoJSON: [String: Any] = [
+//                "dt": currentDateTime,
+//                "id": "product1",
+//                "available": 1,
+//                "name": "name",
+//                "price": 7.88,
+//                "old_price": 5.99,
+//                "picture": [],
+//                "url": "url",
+//                "model": "model",
+//                "vendor": "vendor",
+//                "category_id": 777,
+//                "category": "category name"
+//            ]
+//            productViewInfo = try TrackSSECData.fromJSON(productViewInfoJSON)
 
-        // Отправка события
-        Sendsay.shared.trackEvent(
-            properties: productViewInfo,
-            timestamp: nil,
-            eventType: "ssec_product_view"
-        )
+            // Отправка события
+            Sendsay.shared.trackSSEC(
+                properties: productViewInfo!.toSsecProps(),
+                timestamp: nil,
+                eventType: TrackingSSECType.viewProduct.rawValue
+            )
+        } catch {
+            Sendsay.logger.log(.error, message: "Error trackPorduct: \(error.localizedDescription)")
+        }
     }
 
     @IBAction func trackOrder() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let currentDateTime = dateFormatter.string(from: Date())
-
+        let currentDateTime = Date()
+        let formattedDT = dateFormatter.string(from: currentDateTime)
         let randomTransactionId = UUID().uuidString
 
-        let productOrder: [String: JSONConvertible] = [
-            "ssec": [
-                "dt": currentDateTime,
-                "transaction_id": randomTransactionId,
-                "transaction_dt": currentDateTime,
-                "transaction_sum": 100.9,
-                "update_per_item": 0,
-                "items": [
-                    [
-                        "id": "product1",
-                        "available": 1,
-                        "name": "name",
-                        "qnt": 1,
-                        "price": 7.88,
-                        "old_price": 5.99,
-                        "picture": [],
-                        "url": "url",
-                        "model": "model",
-                        "vendor": "vendor",
-                        "category_id": 777,
-                        "category": "category name"
-                    ]
-                ]
-            ]
-        ]
+        let productOrder: TrackSSECData?
 
-        // Отправка события
-        Sendsay.shared.trackEvent(
-            properties: productOrder,
-            timestamp: nil,
-            eventType: "ssec_order"
-        )
+        do {
+            productOrder = try TrackSSECDataBuilder(type: .order)
+                .setProduct(dateTime: formattedDT)
+                .setTransaction(id: randomTransactionId, dt: formattedDT, sum: 100.9)
+                .setUpdate(isUpdatePerItem: false)
+                .setItems([
+                    OrderItem(
+                        id: "product1",
+                        qnt: 1,
+                        price: 7.88,
+                        available: 1,
+                        oldPrice: 5.99,
+                        picture: [],
+                        url: "url",
+                        model: "model",
+                        vendor: "vendor",
+                        categoryId: 777,
+                        category: "category name"
+                    )
+                ])
+                .build()
+            
+//            let productOrderJSON: [String: Any] = [
+//                "dt": currentDateTime,
+//                "transaction_id": randomTransactionId,
+//                "transaction_dt": currentDateTime,
+//                "transaction_sum": 100.9,
+//                "update_per_item": 0,
+//                "items": [
+//                    [
+//                        "id": "product1",
+//                        "available": 1,
+//                        "name": "name",
+//                        "qnt": 1,
+//                        "price": 7.88,
+//                        "old_price": 5.99,
+//                        "picture": [],
+//                        "url": "url",
+//                        "model": "model",
+//                        "vendor": "vendor",
+//                        "category_id": 777,
+//                        "category": "category name"
+//                    ]
+//                ]
+//            ]
+//            productOrder = try TrackSSECData.fromJSON(productOrderJSON)
+
+            // Отправка события
+            Sendsay.shared.trackSSEC(
+                properties: productOrder!.toSsecProps(),
+                timestamp: nil,
+                eventType: TrackingSSECType.order.rawValue
+            )
+        } catch {
+            Sendsay.logger.log(.error, message: "Error trackOrder: \(error.localizedDescription)")
+        }
     }
 
     @IBAction func trackBasket() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let currentDateTime = dateFormatter.string(from: Date())
+        let currentDateTime = Date()
+        let formattedDT = dateFormatter.string(from: currentDateTime)
+        let randomTransactionId = UUID().uuidString
 
-        let productBasket: [String: JSONConvertible] = [
-            "ssec": [
-                "dt": currentDateTime,
-                "transaction_sum": 100.9,
-                "update_per_item": 0,
-                "items": [
-                    [
-                        "id": "product1",
-                        "available": 1,
-                        "name": "name",
-                        "qnt": 1,
-                        "price": 7.88,
-                        "old_price": 5.99,
-                        "picture": [],
-                        "url": "url",
-                        "model": "model",
-                        "vendor": "vendor",
-                        "category_id": 777,
-                        "category": "category name"
-                    ]
-                ]
-            ]
-        ]
+        let data: TrackSSECData?
 
-        // Отправка события
-        Sendsay.shared.trackSSEC(placeholderId: <#T##String#>, messsage: <#T##MessageItem#>)
-        Sendsay.shared.trackEvent(
-            properties: productBasket,
-            timestamp: nil,
-            eventType: "ssec_basket"
-        )
+        do {
+            data = try TrackSSECDataBuilder(type: .basketAdd)
+                .setProduct(dateTime: formattedDT)
+                .setTransaction(id: randomTransactionId, sum: 100.9)
+                .setUpdate(isUpdatePerItem: false)
+                .setItems([
+                    OrderItem(
+                        id: "product1",
+                        qnt: 1,
+                        price: 7.88,
+                        available: 1,
+                        oldPrice: 5.99,
+                        picture: [],
+                        url: "url",
+                        model: "model",
+                        vendor: "vendor",
+                        categoryId: 777,
+                        category: "category name"
+                    )
+                ])
+                .build()
+
+//            let productBasketJson: [String: Any] = [
+//                    "dt": currentDateTime,
+//                    "transaction_sum": 100.9,
+//                    "update_per_item": 0,
+//                    "items": [
+//                        [
+//                            "id": "product1",
+//                            "available": 1,
+//                            "name": "name",
+//                            "qnt": 1,
+//                            "price": 7.88,
+//                            "old_price": 5.99,
+//                            "picture": [],
+//                            "url": "url",
+//                            "model": "model",
+//                            "vendor": "vendor",
+//                            "category_id": 777,
+//                            "category": "category name"
+//                        ]
+//                    ]
+//                ]
+//            data = try TrackSSECData.fromJSON(productBasketJson)
+
+            // Отправка события
+            Sendsay.shared.trackSSEC(
+                properties: data!.toSsecProps(),
+                timestamp: currentDateTime.timeIntervalSince1970,
+                eventType: TrackingSSECType.basketAdd.rawValue
+            )
+        } catch {
+            Sendsay.logger.log(.error, message: "Error trackBasket: \(error.localizedDescription)")
+        }
     }
 }
