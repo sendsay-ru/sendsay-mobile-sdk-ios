@@ -43,6 +43,11 @@ extension Double: JSONConvertible {
         return .double(self)
     }
 }
+extension Decimal: JSONConvertible {
+    public var jsonValue: JSONValue {
+        return .decimal(self)
+    }
+}
 extension NSNull: JSONConvertible {
     public var jsonValue: JSONValue {
         return .null("")
@@ -98,6 +103,7 @@ public indirect enum JSONValue: Sendable {
     case bool(Bool)
     case int(Int)
     case double(Double)
+    case decimal(Decimal)
     case dictionary([String: JSONValue])
     case array([JSONValue])
     case null(String)
@@ -109,6 +115,7 @@ public indirect enum JSONValue: Sendable {
             switch value {
             case is Bool: result[key] = .bool(value as! Bool)
             case is Int: result[key] = .int(value as! Int)
+            case is Decimal: result[key] = .decimal(value as! Decimal)
             case is Double: result[key] = .double(value as! Double)
             case is String: result[key] = .string(value as! String)
             case is [Any]: result[key] = .array(convert(value as! [Any]))
@@ -130,6 +137,7 @@ public indirect enum JSONValue: Sendable {
             case is Bool: result.append(.bool(value as! Bool))
             case is Int: result.append(.int(value as! Int))
             case is Double: result.append(.double(value as! Double))
+            case is Decimal: result.append(.decimal(value as! Decimal))
             case is String: result.append(.string(value as! String))
             case is [Any]: result.append(.array(convert(value as! [Any])))
             case is [String: Any]: result.append(.dictionary(convert(value as! [String: Any])))
@@ -155,6 +163,10 @@ extension JSONValue: ExpressibleByIntegerLiteral {
 extension JSONValue: ExpressibleByFloatLiteral {
     public init(floatLiteral value: Double) { self = .double(value) }
 }
+
+//extension JSONValue: ExpressibleByStringLiteral {
+//    public init(decimalLiteral value: Decimal) { self = .string(value) }
+//}
 
 extension JSONValue: ExpressibleByBooleanLiteral {
     public init(booleanLiteral value: Bool) { self = .bool(value) }
@@ -184,6 +196,7 @@ public extension JSONValue {
         case .bool(let bool): return bool
         case .int(let int): return int
         case .double(let double): return double
+        case .decimal(let decimal): return decimal
         case .dictionary(let dictionary): return dictionary.mapValues { $0.rawValue }
         case .array(let array): return array.map { $0.rawValue }
         case .null(_): return NSNull()
@@ -196,6 +209,7 @@ public extension JSONValue {
         case .bool(let bool): return bool
         case .int(let int): return int
         case .double(let double): return double
+        case .decimal(let decimal): return decimal
         case .dictionary(let dictionary): return dictionary
         case .array(let array): return array
         case .null(_): return NSNull()
@@ -225,7 +239,8 @@ extension JSONValue: Codable, Equatable {
                         self = .int(try container.decode(Int.self))
                     } catch {
                         do {
-                            self = .double(try container.decode(Double.self))
+                            self = .decimal(try container.decode(Decimal.self))
+//                            self = .double(try container.decode(Double.self))
                         } catch {
                             self = .bool(try container.decode(Bool.self))
                         }
@@ -243,6 +258,7 @@ extension JSONValue: Codable, Equatable {
         case .array(let array): try container.encode(array)
         case .bool(let bool): try container.encode(bool)
         case .double(let double): try container.encode(double)
+        case .decimal(let decimal): try container.encode(decimal)
         case .dictionary(let dictionary): try container.encode(dictionary)
         case .null(_): try container.encodeNil()
         }
@@ -253,6 +269,7 @@ extension JSONValue: Codable, Equatable {
         case (.int(let int1), .int(let int2)): return int1 == int2
         case (.bool(let bool1), .bool(let bool2)): return bool1 == bool2
         case (.double(let double1), .double(let double2)): return double1 == double2
+        case (.decimal(let decimal1), .decimal(let decimal2)): return decimal1 == decimal2
         case (.string(let string1), .string(let string2)): return string1 == string2
         case (.array(let array1), .array(let array2)): return array1 == array2
         case (.dictionary(let dict1), .dictionary(let dict2)): return dict1 == dict2
@@ -270,6 +287,7 @@ public extension JSONValue {
         case .string(let string): return NSString(string: string)
         case .array(let array): return array.map({ $0.objectValue }) as NSArray
         case .double(let double): return NSNumber(value: double)
+        case .decimal(let decimal): return NSDecimalNumber(decimal: decimal)
         case .dictionary(let dictionary): return dictionary.mapValues({ $0.objectValue }) as NSDictionary
         case .null(_): return NSNull()
         }

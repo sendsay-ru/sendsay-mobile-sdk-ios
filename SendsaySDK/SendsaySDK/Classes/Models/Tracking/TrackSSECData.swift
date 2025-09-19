@@ -46,56 +46,38 @@ public struct TrackSSECData: Codable {
     // items
     var items: [OrderItem]?
     
-    // cp1..cp20
-    var cp: [String: AnyCodable]?
-    
-    
-    // Пример заполнения cp:
-//    func payload() -> TrackSSECData {
-//        return TrackSSECData(
-//            // ...
-//            cp: [
-//                "cp1": AnyCodable(.string("foo")),
-//                "cp2": AnyCodable(.int(42)),
-//                "cp3": AnyCodable(.double(3.14)),
-//                "cp4": AnyCodable(.array([AnyCodable(.bool(true)), AnyCodable(.null)]))
-//            ]
-//        )
-//    }
-    
     enum CodingKeys: String, CodingKey {
-        case productId = "product.id"
-        case productName = "product.name"
+        case productId = "id"
+        case productName = "name"
         case dateTime = "dt"
-        case picture = "product.picture"
-        case url = "product.url"
-        case available = "product.available"
-        case categoryPaths = "product.category_paths"
-        case categoryId = "product.category_id"
-        case category = "product.category"
-        case description = "product.description"
-        case vendor = "product.vendor"
-        case model = "product.model"
-        case type = "product.type"
-        case price = "product.price"
-        case oldPrice = "product.old_price"
+        case picture = "picture"
+        case url = "url"
+        case available = "available"
+        case categoryPaths = "category_paths"
+        case categoryId = "category_id"
+        case category = "category"
+        case description = "description"
+        case vendor = "vendor"
+        case model = "model"
+        case type = "type"
+        case price = "price"
+        case oldPrice = "old_price"
         
         case email
         case updatePerItem = "update_per_item"
         case update
         
-        case transactionId = "transaction.id"
-        case transactionDt = "transaction.dt"
-        case transactionStatus = "transaction.status"
-        case transactionDiscount = "transaction.discount"
-        case transactionSum = "transaction.sum"
+        case transactionId = "transaction_id"
+        case transactionDt = "transaction_dt"
+        case transactionStatus = "transaction_status"
+        case transactionDiscount = "transaction_discount"
+        case transactionSum = "transaction_sum"
         
-        case deliveryDt = "delivery.dt"
-        case deliveryPrice = "delivery.price"
-        case paymentDt = "payment.dt"
+        case deliveryDt = "delivery_dt"
+        case deliveryPrice = "delivery_price"
+        case paymentDt = "payment_dt"
         
         case items
-        case cp
     }
     
     public func toSsecProps() -> [String: JSONConvertible] {
@@ -146,6 +128,7 @@ public struct TrackSSECData: Codable {
         case .bool(let b): return b
         case .int(let i): return i
         case .double(let d): return d
+        case .decimal(let dec): return NSDecimalNumber(decimal: dec)
         case .dictionary(let dict):
             return dict.mapValues { foundationObject(from: $0) }
         case .array(let arr):
@@ -193,14 +176,18 @@ public struct TrackSSECData: Codable {
     }
 
     private func validate() throws {
-        if let cp = self.cp, !cp.isEmpty {
-            let bad = cp.keys.filter { key in
-                guard key.hasPrefix("cp") else { return true }
-                let suffix = key.dropFirst(2)
-                guard let n = Int(suffix) else { return true }
-                return !(1...20).contains(n)
+        if let items = self.items, !items.isEmpty {
+            for item in items {
+                if let cp = item.cp, !cp.isEmpty {
+                    let bad = cp.keys.filter { key in
+                        guard key.hasPrefix("cp") else { return true }
+                        let suffix = key.dropFirst(2)
+                        guard let n = Int(suffix) else { return true }
+                        return !(1...20).contains(n)
+                    }
+                    if !bad.isEmpty { throw ParseError.invalidCPKeys(bad) }
+                }
             }
-            if !bad.isEmpty { throw ParseError.invalidCPKeys(bad) }
         }
     }
 }

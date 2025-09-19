@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Errors
 enum TrackBuildError: Error, LocalizedError {
     case requiredFieldMissing(String)
     case invalidItems(String)
@@ -20,54 +21,55 @@ enum TrackBuildError: Error, LocalizedError {
     }
 }
 
-public final class TrackSSECDataBuilder {
-    private let type: TrackingSSECType
+// MARK: - Protocol
+public protocol TrackSSECBuildable {
+    func build() throws -> TrackSSECData
+}
 
+// MARK: - Common base for all builders
+/// Contains fields and setters common to all SSEC events.
+/// Subclasses perform their own validations in `build()`.
+public class _CommonSSECBuilder: TrackSSECBuildable {
     // product.*
-    private var productId: String?
-    private var productName: String?
-    private var productDateTime: String?
-    private var productPicture: [String]?
-    private var productUrl: String?
-    private var productAvailable: Int64?
-    private var productCategoryPaths: [String]?
-    private var productCategoryId: Int64?
-    private var productCategory: String?
-    private var productDescription: String?
-    private var productVendor: String?
-    private var productModel: String?
-    private var productType: String?
-    private var productPrice: Double?
-    private var productOldPrice: Double?
+    public var productId: String?
+    public var productName: String?
+    public var productDateTime: String?
+    public var productPicture: [String]?
+    public var productUrl: String?
+    public var productAvailable: Int64?
+    public var productCategoryPaths: [String]?
+    public var productCategoryId: Int64?
+    public var productCategory: String?
+    public var productDescription: String?
+    public var productVendor: String?
+    public var productModel: String?
+    public var productType: String?
+    public var productPrice: Double?
+    public var productOldPrice: Double?
 
     // other
-    private var email: String?
-    private var updatePerItem: Int64?
-    private var update: Int64?
+    public var email: String?
+    public var updatePerItem: Int64?
+    public var update: Int64?
 
     // transaction.*
-    private var transactionId: String?
-    private var transactionDt: String?
-    private var transactionSum: Double?
-    private var transactionDiscount: Double?
-    private var transactionStatus: Int64?
+    public var transactionId: String?
+    public var transactionDt: String?
+    public var transactionSum: Double?
+    public var transactionDiscount: Double?
+    public var transactionStatus: Int64?
 
     // delivery / payment
-    private var deliveryDt: String?
-    private var deliveryPrice: Double?
-    private var paymentDt: String?
+    public var deliveryDt: String?
+    public var deliveryPrice: Double?
+    public var paymentDt: String?
 
     // items
-    private var items: [OrderItem]?
+    public var items: [OrderItem]?
 
-    // cp
-    private var cpMap: [String: AnyCodable]?
+    public init() {}
 
-    public init(type: TrackingSSECType) {
-        self.type = type
-    }
-
-    // MARK: - Setters (чейнинг)
+    // MARK: Chain setters
 
     @discardableResult
     public func setProduct(
@@ -122,24 +124,25 @@ public final class TrackSSECDataBuilder {
     }
 
     @discardableResult
-    public func setDelivery(dt: String, deliveryPrice: Double? = nil) -> Self {
+    public func setDelivery(dt: String? = nil, deliveryPrice: Double? = nil) -> Self {
         self.deliveryDt = dt
         self.deliveryPrice = deliveryPrice
         return self
     }
 
     @discardableResult
-    public func setPayment(dt: String) -> Self {
+    public func setPayment(dt: String? = nil) -> Self {
         self.paymentDt = dt
         return self
     }
 
     @discardableResult
-    public func setEmail(_ email: String) -> Self {
+    public func setEmail(_ email: String?) -> Self {
         self.email = email
         return self
     }
 
+    /// `update` — флаг обновления целиком, `isUpdatePerItem` — построчно.
     @discardableResult
     public func setUpdate(isUpdate: Bool? = nil, isUpdatePerItem: Bool? = nil) -> Self {
         if let u = isUpdate { self.update = u ? 1 : 0 }
@@ -153,82 +156,13 @@ public final class TrackSSECDataBuilder {
         return self
     }
 
-    /// Удобный способ передать произвольную карту cp
-    @discardableResult
-    public func setCP(_ cp: [String: Any]) -> Self {
-        self.cpMap = cp.mapValues { AnyCodable($0) }
-        return self
-    }
-
-    // MARK: - Build
-
-    public func build() throws -> TrackSSECData {
-        // Валидации по типу события
-        switch type {
-        case .viewProduct:
-            guard productId != nil else {
-                throw TrackBuildError.requiredFieldMissing("product.id is required for VIEW_PRODUCT")
-            }
-
-        case .order:
-            guard transactionId != nil else {
-                throw TrackBuildError.requiredFieldMissing("transaction.id is required for type ORDER")
-            }
-            guard transactionDt != nil else {
-                throw TrackBuildError.requiredFieldMissing("transaction.dt is required for type ORDER")
-            }
-            guard transactionSum != nil else {
-                throw TrackBuildError.requiredFieldMissing("transaction.sum is required for type ORDER")
-            }
-            guard transactionStatus != nil else {
-                throw TrackBuildError.requiredFieldMissing("transaction.status is required for type ORDER")
-            }
-            if update == 1, (items?.isEmpty ?? true) {
-                throw TrackBuildError.requiredFieldMissing("items must be provided for type ORDER and 'update' == 1")
-            }
-
-        case .basketAdd:
-            guard transactionId != nil else {
-                throw TrackBuildError.requiredFieldMissing("transaction.id is required for type BASKET_ADD")
-            }
-            guard transactionDt != nil else {
-                throw TrackBuildError.requiredFieldMissing("transaction.dt is required for type BASKET_ADD")
-            }
-            guard let items, !items.isEmpty else {
-                throw TrackBuildError.requiredFieldMissing("items must be provided for type BASKET_ADD")
-            }
-            let bad = items.contains { $0.id.isEmpty || $0.price == nil || $0.qnt == nil }
-            if bad {
-                throw TrackBuildError.invalidItems("items must contain id, price & qnt for type BASKET_ADD")
-            }
-            self.updatePerItem = 0
-
-        case .basketClear:
-//            guard productDateTime != nil else {
-//                throw TrackBuildError.requiredFieldMissing("dt is required for type BASKET_CLEAR")
-//            }
-            guard let items, !items.isEmpty else {
-                throw TrackBuildError.requiredFieldMissing("items must be provided for type BASKET_CLEAR")
-            }
-            let bad = items.contains { $0.id.isEmpty }
-            if bad {
-                throw TrackBuildError.invalidItems("items must contain id for type BASKET_CLEAR")
-            }
-
-        default:
-            // другие события
-            break
-        }
-
-        let formattedProductDateTime = productDateTime
-        let formattedTransactionDt   = transactionDt
-        let formattedDeliveryDt      = deliveryDt
-        let formattedPaymentDt       = paymentDt
-
+    /// Builds a `TrackSSECData` from the accumulated common fields only.
+    /// Subclasses should call this and then apply their validations.
+    public func buildCommon() -> TrackSSECData {
         return TrackSSECData(
             productId: productId,
             productName: productName,
-            dateTime: formattedProductDateTime,
+            dateTime: productDateTime,
             picture: productPicture,
             url: productUrl,
             available: productAvailable,
@@ -245,15 +179,78 @@ public final class TrackSSECDataBuilder {
             updatePerItem: updatePerItem,
             update: update,
             transactionId: transactionId,
-            transactionDt: formattedTransactionDt,
+            transactionDt: transactionDt,
             transactionStatus: transactionStatus,
             transactionDiscount: transactionDiscount,
             transactionSum: transactionSum,
-            deliveryDt: formattedDeliveryDt,
+            deliveryDt: deliveryDt,
             deliveryPrice: deliveryPrice,
-            paymentDt: formattedPaymentDt,
-            items: items,
-            cp: cpMap
+            paymentDt: paymentDt,
+            items: items
         )
     }
+
+    // default impl; subclasses override with validation
+    public func build() throws -> TrackSSECData { buildCommon() }
+}
+
+// MARK: - View Product
+public final class ViewProductBuilder: _CommonSSECBuilder {
+    public override func build() throws -> TrackSSECData {
+        guard productId != nil else {
+            throw TrackBuildError.requiredFieldMissing("product.id is required for VIEW_PRODUCT")
+        }
+        return buildCommon()
+    }
+}
+
+// MARK: - Order
+public final class OrderBuilder: _CommonSSECBuilder {
+    public override func build() throws -> TrackSSECData {
+        guard transactionId != nil else { throw TrackBuildError.requiredFieldMissing("transaction.id is required for ORDER") }
+        guard transactionDt != nil else { throw TrackBuildError.requiredFieldMissing("transaction.dt is required for ORDER") }
+        guard transactionSum != nil else { throw TrackBuildError.requiredFieldMissing("transaction.sum is required for ORDER") }
+        guard transactionStatus != nil else { throw TrackBuildError.requiredFieldMissing("transaction.status is required for ORDER") }
+        // items для ORDER не обязательно, но если update == 1 — требуем
+        if update == 1, (items?.isEmpty ?? true) {
+            throw TrackBuildError.requiredFieldMissing("items must be provided for ORDER when 'update' == 1")
+        }
+        return buildCommon()
+    }
+}
+
+// MARK: - Basket Add
+public final class BasketAddBuilder: _CommonSSECBuilder {
+    public override func build() throws -> TrackSSECData {
+        guard transactionId != nil else { throw TrackBuildError.requiredFieldMissing("transaction.id is required for BASKET_ADD") }
+        guard transactionDt != nil else { throw TrackBuildError.requiredFieldMissing("transaction.dt is required for BASKET_ADD") }
+        guard let items, !items.isEmpty else {
+            throw TrackBuildError.requiredFieldMissing("items must be provided for BASKET_ADD")
+        }
+        let hasBad = items.contains { $0.id.isEmpty || $0.price == nil || $0.qnt == nil }
+        if hasBad { throw TrackBuildError.invalidItems("items must contain id, price & qnt for BASKET_ADD") }
+        // по требованиям BASKET_ADD — update_per_item = 0
+        self.updatePerItem = 0
+        return buildCommon()
+    }
+}
+
+// MARK: - Basket Clear
+public final class BasketClearBuilder: _CommonSSECBuilder {
+    public override func build() throws -> TrackSSECData {
+        guard let items, !items.isEmpty else {
+            throw TrackBuildError.requiredFieldMissing("items must be provided for BASKET_CLEAR")
+        }
+        let hasBad = items.contains { $0.id.isEmpty }
+        if hasBad { throw TrackBuildError.invalidItems("items must contain id for BASKET_CLEAR") }
+        return buildCommon()
+    }
+}
+
+// MARK: - Factory
+public enum TrackSSECDataBuilders {
+    public static func viewProduct() -> ViewProductBuilder { .init() }
+    public static func order() -> OrderBuilder { .init() }
+    public static func basketAdd() -> BasketAddBuilder { .init() }
+    public static func basketClear() -> BasketClearBuilder { .init() }
 }

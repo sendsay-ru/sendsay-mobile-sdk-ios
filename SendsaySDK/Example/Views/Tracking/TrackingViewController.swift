@@ -9,6 +9,7 @@
 import UIKit
 import SendsaySDK
 import UserNotifications
+import Foundation
 
 class TrackingViewController: UIViewController {
     @IBOutlet weak var trackProductButton: UIButton!
@@ -178,8 +179,8 @@ class TrackingViewController: UIViewController {
         let clearBasketInfo: TrackSSECData?
         
         do {
-            clearBasketInfo = try TrackSSECDataBuilder(type: .basketClear)
-                .setTransaction(dt: dateFormatter.string(from: currentDateTime))
+            clearBasketInfo = try TrackSSECDataBuilders.basketClear()
+                .setProduct(dateTime: dateFormatter.string(from: currentDateTime))
                 .setItems([
                     OrderItem(id: "-1")
                 ])
@@ -212,7 +213,7 @@ class TrackingViewController: UIViewController {
         let productViewInfo: TrackSSECData?
 
         do {
-            productViewInfo = try TrackSSECDataBuilder(type: .viewProduct)
+            productViewInfo = try TrackSSECDataBuilders.viewProduct()
                 .setProduct(id: "product1",
                             name: "name",
                             dateTime: dateFormatter.string(from: currentDateTime),
@@ -264,9 +265,8 @@ class TrackingViewController: UIViewController {
         let productOrder: TrackSSECData?
 
         do {
-            productOrder = try TrackSSECDataBuilder(type: .order)
-                .setProduct(dateTime: formattedDT)
-                .setTransaction(id: randomTransactionId, dt: formattedDT, sum: 100.9)
+            productOrder = try TrackSSECDataBuilders.order()
+                .setTransaction(id: randomTransactionId, dt: formattedDT, sum: 100.9, status: 1)
                 .setUpdate(isUpdatePerItem: false)
                 .setItems([
                     OrderItem(
@@ -331,9 +331,8 @@ class TrackingViewController: UIViewController {
         let data: TrackSSECData?
 
         do {
-            data = try TrackSSECDataBuilder(type: .basketAdd)
-                .setProduct(dateTime: formattedDT)
-                .setTransaction(id: randomTransactionId, sum: 100.9)
+            data = try TrackSSECDataBuilders.basketAdd()
+                .setTransaction(id: randomTransactionId, dt: formattedDT, sum: 100.9)
                 .setUpdate(isUpdatePerItem: false)
                 .setItems([
                     OrderItem(
@@ -347,7 +346,8 @@ class TrackingViewController: UIViewController {
                         model: "model",
                         vendor: "vendor",
                         categoryId: 777,
-                        category: "category name"
+                        category: "category name",
+                        cp: ["cp1": AnyCodable("promo-2025")]
                     )
                 ])
                 .build()
