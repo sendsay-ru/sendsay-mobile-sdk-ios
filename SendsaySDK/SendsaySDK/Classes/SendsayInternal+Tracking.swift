@@ -676,4 +676,39 @@ extension SendsayInternal {
             )
         }
     }
+    
+    public func trackSSEC(
+        properties: [String: JSONConvertible],
+        timestamp: Double?,
+        eventType: String?
+    ) {
+        executeSafelyWithDependencies { dependencies in
+            guard dependencies.configuration.authorization != Authorization.none else {
+                throw SendsayError.authorizationInsufficient
+            }
+            var data: [DataType] = [.properties(properties.mapValues({ $0.jsonValue })), .timestamp(timestamp)]
+
+            // If event type was provided, use it
+            if let eventType = eventType {
+                data.append(.eventType(eventType))
+            }
+
+            // Do the actual tracking
+            try dependencies.trackingManager.track(.customEvent, with: data)
+        }
+        
+//        public func trackSSEC(
+    //        placeholderId: String,
+    //        message: MessageItem
+//        ) {
+//        executeSafelyWithDependencies { dependencies in
+//            guard dependencies.configuration.authorization != Authorization.none else {
+//                throw SendsayError.authorizationInsufficient
+//            }
+//            dependencies.trackingConsentManager.trackSSEC(
+//                message: message,
+//                mode: .CONSIDER_CONSENT
+//            )
+//        }
+    }
 }

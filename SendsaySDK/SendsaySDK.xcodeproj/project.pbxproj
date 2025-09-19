@@ -353,6 +353,8 @@
 		7F646D3CA7CCA3D9D2CB8C74 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA74DF46A34FE1BF7B4749BC /* Pods_Example.framework */; };
 		B112D7F92E096048009C628B /* SwiftSoup.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B72A7E229C068BC00E1A1F9 /* SwiftSoup.xcframework */; };
 		B112D7FA2E096048009C628B /* SwiftSoup.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B72A7E229C068BC00E1A1F9 /* SwiftSoup.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B12D01272E7871A9002804EE /* TrackSSECDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC49022E6AF1B90064C39C /* TrackSSECDataBuilder.swift */; };
+		B12D01282E7871DE002804EE /* TrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB5D9C20B8193A00F1031F /* TrackingViewController.swift */; };
 		B18474B32E1291BF002FEDEF /* objc_tryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05114E68234747BC00201EE6 /* objc_tryCatch.m */; };
 		B18474B42E1291F5002FEDEF /* objc_tryCatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 05114E6A234747DE00201EE6 /* objc_tryCatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B18474BC2E129851002FEDEF /* SendsaySDKObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 0563750E25AF030A00AB68DA /* SendsaySDKObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -361,6 +363,10 @@
 		B1AB19F52E31190800554B39 /* InitConfigCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19F32E31080000554B39 /* InitConfigCache.swift */; };
 		B1AB19F62E31190B00554B39 /* InitConfigManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19EF2E30DB8500554B39 /* InitConfigManager.swift */; };
 		B1AB19F72E31191000554B39 /* InitConfigManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19F02E30DB8500554B39 /* InitConfigManagerType.swift */; };
+		B1AC48FD2E6885C80064C39C /* TrackSSECData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC48FC2E6885B30064C39C /* TrackSSECData.swift */; };
+		B1AC48FF2E68877F0064C39C /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC48FE2E68877A0064C39C /* OrderItem.swift */; };
+		B1AC49012E688D6C0064C39C /* AnyCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC49002E688D640064C39C /* AnyCodable.swift */; };
+		B1AC490A2E6B3CC70064C39C /* SendsayInternal+Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2406D20BC511500CAF7CE /* SendsayInternal+Tracking.swift */; };
 		B1B7C24A2E3A6C4100ABC6F1 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1B7C2492E3A6C4100ABC6F1 /* DropDownCell.xib */; };
 		B1B7C24B2E3A6C4100ABC6F1 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B1B7C2492E3A6C4100ABC6F1 /* DropDownCell.xib */; };
 		B1B7C24D2E3A827700ABC6F1 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B7C24C2E3A827000ABC6F1 /* DropDownCell.swift */; };
@@ -413,7 +419,6 @@
 		C0EB5D9520B8123200F1031F /* PushNotificationSelectors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB5D9420B8123200F1031F /* PushNotificationSelectors.swift */; };
 		C0EB5D9720B8190500F1031F /* FetchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB5D9620B8190500F1031F /* FetchViewController.swift */; };
 		C0EB5D9B20B8193200F1031F /* FlushingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB5D9A20B8193200F1031F /* FlushingViewController.swift */; };
-		C0EB5D9D20B8193A00F1031F /* TrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB5D9C20B8193A00F1031F /* TrackingViewController.swift */; };
 		C0ED33A621A6FA31003649C3 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED33A521A6FA31003649C3 /* NotificationService.swift */; };
 		C0ED33AA21A6FA31003649C3 /* ExampleNotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C0ED33A321A6FA31003649C3 /* ExampleNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C0ED33B821A6FB10003649C3 /* SendsaySDKNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = C0ED33B621A6FB10003649C3 /* SendsaySDKNotifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -423,7 +428,6 @@
 		C0ED33C221A72E40003649C3 /* SendsaySDKNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; };
 		C0F2406A20BC38EC00CAF7CE /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2406920BC38EC00CAF7CE /* Swizzle.swift */; };
 		C0F2406C20BC50A000CAF7CE /* SendsayInternal+Fetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2406B20BC50A000CAF7CE /* SendsayInternal+Fetching.swift */; };
-		C0F2406E20BC511500CAF7CE /* SendsayInternal+Tracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2406D20BC511500CAF7CE /* SendsayInternal+Tracking.swift */; };
 		C0F2407020BD98EB00CAF7CE /* MemoryLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2406F20BD98EB00CAF7CE /* MemoryLogger.swift */; };
 		C0F2407220BD9A5500CAF7CE /* LogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2407120BD9A5500CAF7CE /* LogViewController.swift */; };
 		C0F2407420BDA42600CAF7CE /* ExportFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2407320BDA42600CAF7CE /* ExportFormat.swift */; };
@@ -941,6 +945,10 @@
 		B1AB19EF2E30DB8500554B39 /* InitConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigManager.swift; sourceTree = "<group>"; };
 		B1AB19F02E30DB8500554B39 /* InitConfigManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigManagerType.swift; sourceTree = "<group>"; };
 		B1AB19F32E31080000554B39 /* InitConfigCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigCache.swift; sourceTree = "<group>"; };
+		B1AC48FC2E6885B30064C39C /* TrackSSECData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackSSECData.swift; sourceTree = "<group>"; };
+		B1AC48FE2E68877A0064C39C /* OrderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItem.swift; sourceTree = "<group>"; };
+		B1AC49002E688D640064C39C /* AnyCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyCodable.swift; sourceTree = "<group>"; };
+		B1AC49022E6AF1B90064C39C /* TrackSSECDataBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackSSECDataBuilder.swift; sourceTree = "<group>"; };
 		B1B7C2492E3A6C4100ABC6F1 /* DropDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = DropDownCell.xib; path = "/Users/stasprosky/StudioProjects/sendsay-ios-sdk-main/SendsaySDK/Example/Views/Tracking/DropDownCell.xib"; sourceTree = "<absolute>"; };
 		B1B7C24C2E3A827000ABC6F1 /* DropDownCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		B1BE5AAD2E0C385700B425CA /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -1952,6 +1960,16 @@
 			path = InitConfig;
 			sourceTree = "<group>";
 		};
+		B1AC49042E6AFE7C0064C39C /* Tracking */ = {
+			isa = PBXGroup;
+			children = (
+				B1AC49022E6AF1B90064C39C /* TrackSSECDataBuilder.swift */,
+				B1AC48FE2E68877A0064C39C /* OrderItem.swift */,
+				B1AC48FC2E6885B30064C39C /* TrackSSECData.swift */,
+			);
+			path = Tracking;
+			sourceTree = "<group>";
+		};
 		B42DA68A22B03FAC00BBA225 /* Consents */ = {
 			isa = PBXGroup;
 			children = (
@@ -2374,6 +2392,7 @@
 		F0C1C1CE207384ED005EB697 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B1AC49042E6AFE7C0064C39C /* Tracking */,
 				B42DA68A22B03FAC00BBA225 /* Consents */,
 				C0A6DE9420EAC14200C5F744 /* Core Data */,
 				057A4ED023EAC17200C94556 /* Event Filter */,
@@ -2406,6 +2425,7 @@
 		F0E757DE207CF98600FE8C21 /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				B1AC49002E688D640064C39C /* AnyCodable.swift */,
 				31E9CBA12AE9494B00A333C8 /* URL+Init.swift */,
 				55391D482953051E001D95B8 /* AppInboxParser.swift */,
 				6BA73FEC29B6377E009F92DF /* AtomicValue.swift */,
@@ -3044,7 +3064,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0EB5D9D20B8193A00F1031F /* TrackingViewController.swift in Sources */,
 				55F6A41A29891F710029D628 /* CustomerTokenStorage.swift in Sources */,
 				31C7B4242A822848001BA5E2 /* Coordinator.swift in Sources */,
 				55F6A41829891F130029D628 /* ExampleAuthProvider.swift in Sources */,
@@ -3062,6 +3081,7 @@
 				B1B7C24D2E3A827700ABC6F1 /* DropDownCell.swift in Sources */,
 				C0EB5D9B20B8193200F1031F /* FlushingViewController.swift in Sources */,
 				C0F2407220BD9A5500CAF7CE /* LogViewController.swift in Sources */,
+				B12D01282E7871DE002804EE /* TrackingViewController.swift in Sources */,
 				C0EB5D9720B8190500F1031F /* FetchViewController.swift in Sources */,
 				C07E41FF20C930E400920809 /* IdentifyCustomerViewController.swift in Sources */,
 				C07E41FD20C930C400920809 /* TrackEventViewController.swift in Sources */,
@@ -3094,16 +3114,19 @@
 				3189E2DF2C4B965100C4CD68 /* ContentBlockCarouselCallback.swift in Sources */,
 				3175368C2BD2AFF70062A5E5 /* Debouncer.swift in Sources */,
 				05CDD8392391193E00C7291A /* InAppMessagesCache.swift in Sources */,
+				B1AC48FF2E68877F0064C39C /* OrderItem.swift in Sources */,
 				0591905D23EC1A550037BD88 /* EventFilterConstraint.swift in Sources */,
 				C07E420F20CA8AF700920809 /* DateFilter.swift in Sources */,
 				057A4ED223EAC22200C94556 /* EventFilter.swift in Sources */,
 				057F448F23995DC20070DF30 /* InAppMessagePresenterType.swift in Sources */,
+				B1AC48FD2E6885C80064C39C /* TrackSSECData.swift in Sources */,
 				31EBB85F2A6AC3020003AAA5 /* InAppContentBlockResponse.swift in Sources */,
 				31513E292CA97F4700A975F8 /* ManualSegmentationManager.swift in Sources */,
 				6BA73FED29B6377E009F92DF /* AtomicValue.swift in Sources */,
 				053E12CD23A26187009CEF03 /* RecommendationOptions.swift in Sources */,
 				318EFF622D898BE4004C5E1F /* InAppLayoutConfig.swift in Sources */,
 				01EC2DBD207E68BF0031BFEB /* DatabaseManager.swift in Sources */,
+				B12D01272E7871A9002804EE /* TrackSSECDataBuilder.swift in Sources */,
 				5568874C2A17598000498B40 /* ProgressBarStyle.swift in Sources */,
 				55C08DD32A568C74000BA66A /* FileUtils.swift in Sources */,
 				55130C4928DDC81600B4FE77 /* TrackingConsentManagerType.swift in Sources */,
@@ -3138,7 +3161,6 @@
 				5567C090290808F600318E68 /* MessageItemContent.swift in Sources */,
 				3175368A2BD29F6E0062A5E5 /* EmptyDTO.swift in Sources */,
 				05B78B1E2355CAFA0055077A /* NSManagedObjectWithContext.swift in Sources */,
-				C0F2406E20BC511500CAF7CE /* SendsayInternal+Tracking.swift in Sources */,
 				5567C092290809EB00318E68 /* MessageItemAction.swift in Sources */,
 				05B4D64C238FEB9200F5010F /* InAppMessagesResponse.swift in Sources */,
 				556887462A17570100498B40 /* TextViewStyle.swift in Sources */,
@@ -3233,6 +3255,7 @@
 				053CA200247D4A42003B699C /* ServerRepository+SelfCheckRepository.swift in Sources */,
 				556887542A176A6800498B40 /* AppInboxStyleParser.swift in Sources */,
 				3189E2E32C4EBEFE00C4CD68 /* InAppCarouselStateType.swift in Sources */,
+				B1AC490A2E6B3CC70064C39C /* SendsayInternal+Tracking.swift in Sources */,
 				55EFD7A129225060002569FB /* DefaultAppInboxProvider.swift in Sources */,
 				CCB87B7A28169F4B005DFB8E /* VersionCheckRepository.swift in Sources */,
 				31EBB8602A6AC3020003AAA5 /* StaticQueueData.swift in Sources */,
@@ -3286,6 +3309,7 @@
 				31EBB8552A6AC3020003AAA5 /* StaticInAppContentBlockView.swift in Sources */,
 				B1AB19F52E31190800554B39 /* InitConfigCache.swift in Sources */,
 				C0753E9720A5808C00A779FF /* NSPersistentContainer+Bundle.swift in Sources */,
+				B1AC49012E688D6C0064C39C /* AnyCodable.swift in Sources */,
 				C030AF48216F4335004413F0 /* PushNotificationReceiver.swift in Sources */,
 				33FC6CCC29A9195B001F113F /* Typealiases.swift in Sources */,
 				C0A6DEA920EAC16900C5F744 /* TrackEvent.swift in Sources */,
