@@ -187,7 +187,7 @@ public extension SendsayInternal {
     }
 
     // swiftlint:disable:next line_length
-    @available(*, deprecated, message: "Automatic push notification tracking is deprecated. Find more information in the documentation. https://github.com/sendsay/sendsay-ios-sdk/blob/main/Documentation/PUSH.md")
+    @available(*, deprecated, message: "Automatic push notification tracking is deprecated. Find more information in the documentation. https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/Documentation/PUSH.md")
     func configure(
         _ projectSettings: Sendsay.ProjectSettings,
         automaticPushNotificationTracking: Sendsay.AutomaticPushNotificationTracking,

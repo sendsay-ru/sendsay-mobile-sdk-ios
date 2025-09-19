@@ -36,18 +36,6 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
     var menu2 = DropDown()
     var menu3 = DropDown()
     
-//    let actionsToImages = [
-//        "set" : "plus.app",
-//        "update" : "square.and.pencil",
-//        "insert" : "square.and.arrow.down.on.square.fill",
-//        "merge" : "arrow.merge",
-//        "merge_update" : "long.text.page.and.pencil",
-//        "merge_insert" : "pencil.and.list.clipboard",
-//        "push" : "square.and.arrow.up",
-//        "unshift" : "list.bullet.indent",
-//        "delete" : "eraser"
-//    ]
-    
     let actions = [
         "set",
         "update",
@@ -87,7 +75,6 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
         menu2.textColor = .white
         menu3.textColor = .white
 
-//        menu1.dataSource = Array(actionsToImages.keys)
         menu1.dataSource = actions
         menu2.dataSource = actions
         menu3.dataSource = actions
@@ -151,7 +138,6 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func showDropDown1(_ sender: Any) {
-//        print("Tapped!")
         menu1.show()
     }
     @IBAction func showDropDown2(_ sender: Any) {
@@ -163,7 +149,6 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
 
 
     @IBAction func hideKeyboard() {
-//        print("Tapped!")
         view.endEditing(true)
     }
 
@@ -183,19 +168,6 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
         var memberSet: [String: JSONValue] = [:]
         var datakey: [JSONValue] = []
 
-//        if let value1 = valueField1.text, !value1.isEmpty {
-//            var key1 = keyField1.text ?? DEFAULT_PROP_KEY
-//            if key1.isEmpty {
-//                key1 = DEFAULT_PROP_KEY
-//            }
-//            
-//            var mode = ddButton1.title(for: .normal) ?? ""
-//            if(copySwitch1.isOn && !mode.isEmpty) {
-//                mode += ".copy"
-//            }
-//
-//            datakey.append([key1, mode, value1,])
-//        }
         let key1  = (keyField1.text?.isEmpty == false ? keyField1.text! : DEFAULT_PROP_KEY)
         var mode1 = ddButton1.title(for: .normal) ?? ""
         if copySwitch1.isOn, !mode1.isEmpty { mode1 += ".copy" }
@@ -204,15 +176,6 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
             datakey.append(.array([ .string(key1), .string(mode1), .string(v1) ]))
         }
 
-//        if let key2 = keyField2.text, !key2.isEmpty {
-//            var mode = ddButton2.title(for: .normal) ?? ""
-//            if(copySwitch2.isOn && !mode.isEmpty) {
-//                mode += ".copy"
-//            }
-//
-//            datakey.append([key2, mode, valueField2.text ?? ""])
-//        }
-        
         if let key2 = keyField2.text, !key2.isEmpty {
             var mode2 = ddButton2.title(for: .normal) ?? ""
             if copySwitch2.isOn, !mode2.isEmpty { mode2 += ".copy" }
@@ -222,14 +185,6 @@ class TrackEventViewController: UIViewController, UITextFieldDelegate {
             }
         }
 
-//        if let key3 = keyField3.text, !key3.isEmpty {
-//            var mode = ddButton3.title(for: .normal) ?? ""
-//            if(copySwitch3.isOn && !mode.isEmpty) {
-//                mode += ".copy"
-//            }
-//
-//            datakey.append(.array([key3, mode, valueField3.text ?? ""]))
-//        }
         if let key3 = keyField3.text, !key3.isEmpty {
             var mode3 = ddButton3.title(for: .normal) ?? ""
             if copySwitch3.isOn, !mode3.isEmpty { mode3 += ".copy" }

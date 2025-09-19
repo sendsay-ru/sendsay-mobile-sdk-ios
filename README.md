@@ -1,88 +1,29 @@
 <p align="center">
-  <img src="./Documentation/images/logo_engagement.png?raw=true" alt="Sendsay"/>
+  <img src="./docs/img/sendsay-logo.png?raw=true" alt="Sendsay"/>
 </p>
 
-![Platform](https://img.shields.io/badge/Platform-iOS-lightgrey.svg?style=flat)
-![Platform](https://img.shields.io/badge/Swift-4.2+-green.svg?style=flat)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Что такое Sendsay iOS SDK?
 
-## Sendsay iOS SDK
+Sendsay iOS SDK позволяет интегрировать ваше мобильное приложение с CDP Sendsay и отслеживать поведение ваших клиентов в приложении. Интеграция SDK в ваше приложение позволит вам отправлять push-уведомления и отслеживать события и свойства клиентов.
 
-This library allows you to interact with Bloomreach Engagement from your application or game. Engagement empowers B2C marketers to raise conversion rates, improve acquisition ROI, and maximize customer lifetime value.
+SDK [доступен как открытый исходный код на GitHub](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios) для максимальной прозрачности и включает [пример приложения](docs/example-app.md), который вы можете использовать в качестве тестовой реализации.
 
-It has been written 100% in Swift with ❤️
 
-> 
-> Bloomreach Engagement was formerly known as Sendsay. For backward compatibility, the Sendsay name continues to be used in the iOS SDK.
+## Начало работы
 
-## 📦 Installation
-
-### CocoaPods
-
-```ruby
-# Add this under your main application target
-pod "SendsaySDK", "~> 3.5.2"
-
-# If you also use rich push notifications,
-# add this line to your notification service extension target.
-pod "SendsaySDK-Notifications", "~> 3.5.2"
-```
-
-### Carthage
-
-> Carthage will by default build both `SendsaySDK` and `SendsaySDKNotifications` frameworks. The latter one is only supposed to be used in a notification service extension if you wish to support rich push notifications. Read more about rich push notifications [here](https://documentation.bloomreach.com/engagement/docs/ios-sdk-push-notifications#rich-push-notifications).
-
-```
-github "sendsay/sendsay-ios-sdk" ~> 3.5.2
-```
-> And then in your Command line tool type ```carthage update --use-xcframeworks --platform ios```
-
-> In your Target's General tab, under section Frameworks, Libraries and Embeeded Content, add the carthage built xcfw into it and set to them 'Embed & Sign'.
-
-## 📱 Example Application
-
-Check out our [example app](https://github.com/sendsay/sendsay-ios-sdk/tree/master/SendsaySDK/Example) to try it yourself! 😉
-
-## 💻 Usage
-
-### Getting Started
-
-Follow the detailed [step by step guide here](https://documentation.bloomreach.com/engagement/docs/ios-sdk-setup) to get started.
-
-### Documentation
-
-- [Initial SDK Setup](https://documentation.bloomreach.com/engagement/docs/ios-sdk-setup)
-  - [Configuration](https://documentation.bloomreach.com/engagement/docs/ios-sdk-configuration)
-  - [Data Flushing](https://documentation.bloomreach.com/engagement/docs/ios-sdk-data-flushing)
-- [Tracking](https://documentation.bloomreach.com/engagement/docs/ios-sdk-tracking)
-- [Universal Links](https://documentation.bloomreach.com/engagement/docs/ios-sdk-universal-links)
-- [Push Notifications](https://documentation.bloomreach.com/engagement/docs/ios-sdk-push-notifications)
-  - [Configure Apple Push Notification Service](https://documentation.bloomreach.com/engagement/docs/ios-sdk-configure-apns)
-  - [Notification Extensions](https://documentation.bloomreach.com/engagement/docs/ios-sdk-notification-extensions)
-- [Fetch Data](https://documentation.bloomreach.com/engagement/docs/ios-sdk-fetch-data)
-- [In-App Personalization](https://documentation.bloomreach.com/engagement/docs/ios-sdk-in-app-personalization)
-  - [In-App Messages](https://documentation.bloomreach.com/engagement/docs/ios-sdk-in-app-messages)
-  - [In-App Content Blocks](https://documentation.bloomreach.com/engagement/docs/ios-sdk-in-app-content-blocks)
-- [App Inbox](https://documentation.bloomreach.com/engagement/docs/ios-sdk-app-inbox)
-- [Tracking Consent](https://documentation.bloomreach.com/engagement/docs/ios-sdk-tracking-consent)
-- [Example App](https://documentation.bloomreach.com/engagement/docs/ios-sdk-example-app)
-- [Release Notes](https://documentation.bloomreach.com/engagement/docs/ios-sdk-release-notes)
-  - [SDK Version Update Guide](https://documentation.bloomreach.com/engagement/docs/ios-sdk-version-update)
-
-## 🔗 Useful links
-
-* [Bloomreach Engagement login](https://app.sendsay.com/login)
-
-## 📝 Release Notes
-
-Release notes can be found [here](https://documentation.bloomreach.com/engagement/docs/ios-sdk-release-notes).
-
-## Support
-
-Are you a Bloomreach customer and having some issues with the mobile SDK? You can reach the official Engagement Support [via these recommended ways](https://documentation.bloomreach.com/engagement/docs/engagement-support#contacting-the-support).
-
-Note that Github repository issues and PRs will also be considered but with the lowest priority and without guaranteed output.
-
-- [Mobile SDK tracking FAQ](https://support.bloomreach.com/hc/en-us/articles/18153058904733-Mobile-SDK-tracking-FAQ) at Bloomreach Support Help Center
-- [Mobile push notifications FAQ](https://support.bloomreach.com/hc/en-us/articles/18152713374877-Mobile-Push-Notifications-FAQ) at Bloomreach Support Help Center
-- [In-app messages FAQ](https://support.bloomreach.com/hc/en-us/articles/18152718785437-In-App-Messages-FAQ) at Bloomreach Support Help Center
+- [Первоначальная настройка SDK](docs/setup.md)
+  - [Конфигурация](docs/configuration.md)
+  - [Авторизация](docs/authorization.md)
+  - [Отправка данных](docs/data-flushing.md)
+- [Отслеживание](docs/tracking.md)
+- [Универсальные ссылки](docs/universal-links.md)
+- [Push-уведомления](docs/push-notifications.md)
+  - [Настройка Apple Push Notification Service](docs/configure-apns.md)
+  - [Расширения уведомлений](docs/notification-extensions.md)
+- Получение данных (в разработке)
+- In-app персонализация (в разработке)
+  - In-app сообщения (в разработке)
+  - Блоки контента в приложении (в разработке)
+- In-app Inbox (в разработке)
+- Сегментация (в разработке)
+- [Пример приложения](docs/example-app.md)
