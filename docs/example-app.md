@@ -19,9 +19,9 @@ iOS SDK Sendsay включает пример приложения, которы
 
 ## Сборка и запуск примера приложения
 
-1. Клонируйте репозиторий [sendsay-ios-sdk](https://github.com/sendsay/sendsay-ios-sdk) на GitHub:
+1. Клонируйте репозиторий [sendsay-ios-sdk](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios) на GitHub:
    ```shell
-   git clone https://github.com/sendsay/sendsay-ios-sdk.git
+   git clone https://github.com/sendsay-ru/sendsay-mobile-sdk-ios.git
    ```
 2. Выполните следующую команду CocoaPods:
    ```shell
@@ -43,27 +43,27 @@ iOS SDK Sendsay включает пример приложения, которы
 ![Экраны примера приложения: конфигурация, получение данных, отслеживание, отслеживание событий](https://raw.githubusercontent.com/exponea/exponea-ios-sdk/main/Documentation/images/sample-app-1.png)
 
 Когда вы запускаете приложение в симуляторе, вы увидите представление **Authentication**. Введите ваш [токен проекта, API токен и базовый URL API](https://documentation.bloomreach.com/engagement/docs/mobile-sdks-api-access-management), затем нажмите `Start`, чтобы [инициализировать SDK](https://documentation.bloomreach.com/engagement/docs/ios-sdk-setup#initialize-the-sdk).
-> [`AuthenticationViewController.swift`](https://github.com/sendsay/sendsay-ios-sdk/blob/main/SendsaySDK/Example/Views/AuthenticationViewController.swift)
+> [`AuthenticationViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/AuthenticationViewController.swift)
 
 Приложение предоставляет несколько представлений, доступных через нижнюю навигацию, для тестирования различных функций SDK:
 
 - Представление **Fetch Data** позволяет получать рекомендации и согласия, а также открывать почтовый ящик приложения.
-  > [`FetchViewController.swift`](https://github.com/sendsay/sendsay-ios-sdk/blob/main/SendsaySDK/Example/Views/Fetching/FetchViewController.swift)
+  > [`FetchViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/Fetching/FetchViewController.swift)
 
 - Представление **Tracking** позволяет тестировать отслеживание различных событий и свойств. Кнопки `Custom Event` и `Identify Customer` ведут к отдельным представлениям для ввода тестовых данных.
-  > [`TrackingViewController.swift`](https://github.com/sendsay/sendsay-ios-sdk/blob/main/SendsaySDK/Example/Views/Tracking/TrackingViewController.swift)
-  > [`TrackEventViewController.swift`](https://github.com/sendsay/sendsay-ios-sdk/blob/main/SendsaySDK/Example/Views/Tracking/TrackEventViewController.swift)
-  > [`IdentifyCustomerViewController.swift`](https://github.com/sendsay/sendsay-ios-sdk/blob/main/SendsaySDK/Example/Views/Tracking/IdentifyCustomerViewController.swift)
+  > [`TrackingViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/Tracking/TrackingViewController.swift)
+  > [`TrackEventViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/Tracking/TrackEventViewController.swift)
+  > [`IdentifyCustomerViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/Tracking/IdentifyCustomerViewController.swift)
 
 - Представление **Flushing** позволяет запустить ручную отправку данных, анонимизировать данные клиента и выйти из системы.
-  > [`FlushingViewController.swift`](https://github.com/sendsay/sendsay-ios-sdk/blob/main/SendsaySDK/Example/Views/Flushing/FlushingViewController.swift)
+  > [`FlushingViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/Flushing/FlushingViewController.swift)
 
 - Представление **Logging** отображает сообщения журнала от SDK.
-  > [`LogViewController.swift`](https://github.com/sendsay/sendsay-ios-sdk/blob/main/SendsaySDK/Example/Views/Logging/LogViewController.swift)
+  > [`LogViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/Logging/LogViewController.swift)
 
 - Представление **In-app Content Blocks** отображает блоки контента в приложении. Используйте ID плейсхолдеров `example_top`, `ph_x_example_iOS`, `example_list`, `example_carousel` и `example_carousel_ios` в настройках ваших блоков контента в приложении.
-  > [`InAppContentBlocksViewController.swift`](https://github.com/sendsay/sendsay-ios-sdk/blob/main/SendsaySDK/Example/Views/InAppContentBlocks/InAppContentBlocksViewController.swift)
-  > [`InAppContentBlockCarouselViewController.swift`](https://github.com/sendsay/sendsay-ios-sdk/blob/main/SendsaySDK/Example/Views/InAppContentBlocks/InAppContentBlockCarouselViewController.swift)
+  > [`InAppContentBlocksViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/InAppContentBlocks/InAppContentBlocksViewController.swift)
+  > [`InAppContentBlockCarouselViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/InAppContentBlocks/InAppContentBlockCarouselViewController.swift)
 
 Попробуйте различные функции в приложении, затем найдите профиль клиента в веб-приложении Engagement (в разделе `Data & Assets` > `Customers`), чтобы увидеть свойства и события, отслеживаемые SDK.
 

@@ -181,14 +181,6 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
         var memberSet: [String: JSONValue] = [:]
         var datakey: [JSONValue] = []
 
-//        if let key1 = keyField1.text, !key1.isEmpty {
-//            var mode = ddButton1.title(for: .normal) ?? ""
-//            if(copySwitch1.isOn && !mode.isEmpty) {
-//                mode += ".copy"
-//            }
-//
-//            datakey.append([key1, mode, valueField1.text ?? "",])
-//        }
         if let key1 = keyField1.text, !key1.isEmpty {
             var mode1 = ddButton1.title(for: .normal) ?? ""
             if copySwitch1.isOn, !mode1.isEmpty { mode1 += ".copy" }
@@ -198,14 +190,6 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
             }
         }
 
-//        if let key2 = keyField2.text, !key2.isEmpty {
-//            var mode = ddButton2.title(for: .normal) ?? ""
-//            if(copySwitch2.isOn && !mode.isEmpty) {
-//                mode += ".copy"
-//            }
-//
-//            datakey.append([key2, mode, valueField2.text ?? "",])
-//        }
         if let key2 = keyField2.text, !key2.isEmpty {
             var mode2 = ddButton2.title(for: .normal) ?? ""
             if copySwitch2.isOn, !mode2.isEmpty { mode2 += ".copy" }
@@ -215,14 +199,6 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
             }
         }
 
-//        if let key3 = keyField3.text, !key3.isEmpty {
-//            var mode = ddButton3.title(for: .normal) ?? ""
-//            if(copySwitch3.isOn && !mode.isEmpty) {
-//                mode += ".copy"
-//            }
-//
-//            datakey.append([key3, mode, valueField3.text ?? "",])
-//        }
         if let key3 = keyField3.text, !key3.isEmpty {
             var mode3 = ddButton3.title(for: .normal) ?? ""
             if copySwitch3.isOn, !mode3.isEmpty { mode3 += ".copy" }

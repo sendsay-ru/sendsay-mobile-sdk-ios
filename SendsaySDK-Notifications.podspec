@@ -29,8 +29,8 @@ Pod::Spec.new do |s|
   It should not be used standalone, please see the SendsaySDK pod.
                    DESC
 
-  s.homepage     = "https://github.com/sendsay/sendsay-ios-sdk"
-  s.readme       = "https://github.com/sendsay/sendsay-ios-sdk/blob/main/README.md"
+  s.homepage     = "https://github.com/sendsay-ru/sendsay-mobile-sdk-ios"
+  s.readme       = "https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/README.md"
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -68,7 +68,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/sendsay/sendsay-ios-sdk.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/sendsay-ru/sendsay-mobile-sdk-ios.git", :tag => "#{s.version}" }
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #

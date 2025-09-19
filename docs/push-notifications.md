@@ -81,7 +81,7 @@ Sendsay.shared.configure(
 - `userNotificationCenter(_:didReceive:withCompletionHandler:)` 
    Вызывается, когда пользователь открывает push-уведомление с предупреждением.
 
-Класс [`SendsayAppDelegate`](https://github.com/sendsay/sendsay-ios-sdk/blob/main/SendsaySDK/SendsaySDK/Classes/SendsayAppDelegate.swift) в SDK предоставляет реализации этих методов по умолчанию. Мы рекомендуем вам расширить `SendsayAppDelegate` в вашем `AppDelegate`. 
+Класс [`SendsayAppDelegate`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/SendsaySDK/Classes/SendsayAppDelegate.swift) в SDK предоставляет реализации этих методов по умолчанию. Мы рекомендуем вам расширить `SendsayAppDelegate` в вашем `AppDelegate`. 
 
 Для приложений, использующих жизненный цикл UIKit, убедитесь, что ваш класс AppDelegate наследует SendsayAppDelegate:
 
@@ -236,7 +236,7 @@ extension AppDelegate: PushNotificationManagerDelegate {
 
 > 📘
 >
-> Обратитесь к [`AppDelegate`](https://github.com/sendsay/sendsay-ios-sdk/blob/main/SendsaySDK/Example/AppDelegate.swift) в [примере приложения](https://documentation.bloomreach.com/engagement/docs/ios-sdk-example-app) для базового примера.
+> Обратитесь к [`AppDelegate`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/AppDelegate.swift) в [примере приложения](https://documentation.bloomreach.com/engagement/docs/ios-sdk-example-app) для базового примера.
 
 ### Тихие push-уведомления
 
@@ -386,12 +386,12 @@ UNUserNotificationCenter.current().setNotificationCategories([category1])
     "image": "https://example.com/image.jpg",
     "actions": [
         {"title": "Action 1", "action": "app", "url": "https://example.com/action1/ios"},
-        {"title": "Action 2", "action": "browser", "url": "https://example.com/action2/ios"},
+        {"title": "Action 2", "action": "browser", "url": "https://example.com/action2/ios"}
     ],
     "sound": "default",
     "aps": {
         "alert": {"title": "iOS Alert Title", "body": "iOS Alert Body"},
-        "mutable-content": 1,
+        "mutable-content": 1
     },
     "attributes": {
         "event_type": "campaign",
@@ -406,13 +406,13 @@ UNUserNotificationCenter.current().setNotificationCategories([category1])
         "language": "en",
         "platform": "ios",
         "sent_timestamp": 1631234567.89,
-        "recipient": "ios@example.com",
+        "recipient": "ios@example.com"
     },
     "url_params": {"param1": "value1", "param2": "value2"},
     "source": "xnpe_platform",
     "silent": false,
     "has_tracking_consent": true,
-    "consent_category_tracking": "iOS Consent",
+    "consent_category_tracking": "iOS Consent"
 }
 ```
 

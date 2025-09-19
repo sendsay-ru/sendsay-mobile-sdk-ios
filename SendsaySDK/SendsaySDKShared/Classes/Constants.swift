@@ -60,7 +60,7 @@ public enum Constants {
         public static let sdkNotConfigured = "Sendsay SDK isn't configured. " +
             "Before any calls to SDK functions, please configure the SDK " +
             "with Sendsay.shared.config() according to the documentation " +
-            "https://github.com/sendsay/sendsay-ios-sdk/blob/main/Documentation/configuration.md"
+            "https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/Documentation/configuration.md"
     }
 
     /// Success messages

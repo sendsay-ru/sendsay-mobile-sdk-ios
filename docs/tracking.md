@@ -29,13 +29,51 @@
 Обратитесь к документации [События модуля "Продажи"](https://docs.sendsay.ru/ecom/how-to-configure-data-transfer).
 
 ```swift
-тут пример ssec-события
+let dateFormatter = DateFormatter()
+dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+let currentDateTime = Date()
+
+let clearBasketInfo: TrackSSECData?
+
+do {
+    // Создание события очистки корзины
+    clearBasketInfo = try TrackSSECDataBuilders.basketClear()
+    .setProduct(dateTime: dateFormatter.string(from: currentDateTime))
+    .setItems([
+        OrderItem(id: "-1")
+    ])
+    .build()
+    // Отправка события
+    Sendsay.shared.trackEvent(
+        properties: clearBasketInfo!.toSsecProps(),
+        timestamp: nil,
+        eventType: TrackingSSECType.basketClear.rawValue
+    )
+} catch {
+    Sendsay.logger.log(.error, message: "trackClearBasket parse error: \(error)")
+}
 ```
 
-#### CCE (Пользовательские события)
+#### CCE (Пользовательские события) (в разработке)
 
 ```swift
-тут пример cce-события
+do {
+    let properties: [String: JSONValue] = [:]
+    let customJsonString = """{"any-key": "any-value"}""".trimIndent()
+    let eventType = "any_custom_event_name"
+
+    properties["cce"] = .string(jsonString)
+    
+    /// ......
+
+    Sendsay.shared.trackEvent(
+        properties: properties, 
+        timestamp: nil, 
+        eventType: eventType
+    )
+} catch {
+    Sendsay.logger.log(.error, message: "CCE error: \(error)")
+}
 ```
 
 
@@ -48,18 +86,33 @@
 ТУТ СДЕЛАТЬ ПРИМЕР С ПЕРЕДАЧЕЙ CCE
 
 ```swift
-let properties: [String: JSONConvertible] = [
-    "screen_name": "dashboard", 
-    "other_property": 123.45
-]
+do {
+    let properties: [String: JSONValue] = [
+        "screen_name": "dashboard",
+        "other_property": 123.45
+    ]
+    let eventType = "screen_view"
+
+    properties["cce"] = .string(jsonString)
+
+    Sendsay.shared.trackEvent(
+        properties: properties,
+        timestamp: nil,
+        eventType: eventType
+    )
+} catch {
+    Sendsay.logger.log(.error, message: "CCE error: \(error)")
+}
 ```
 
 Передайте словарь в `trackEvent()` вместе с `eventType` (`screen_view`) следующим образом:
 
 ```swift
-Sendsay.shared.trackEvent(properties: properties, 
-    timestamp: nil, 
-    eventType: "screen_view")
+Sendsay.shared.trackEvent(
+    properties: properties,
+    timestamp: nil,
+    eventType: "screen_view"
+)
 ```
 
 Второй пример ниже показывает, как вы можете использовать вложенную JSON структуру для сложных свойств при необходимости:
@@ -73,9 +126,11 @@ let properties: [String: JSONConvertible] = [
     ],
     "total_price": 7.99,
 ]
-Sendsay.shared.trackEvent(properties: properties,
-        timestamp: nil,
-        eventType: "purchase")
+Sendsay.shared.trackEvent(
+    properties: properties,
+    timestamp: nil,
+    eventType: "purchase"
+)
 ```
 
 ## Клиенты
