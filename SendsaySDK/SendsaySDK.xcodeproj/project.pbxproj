@@ -467,56 +467,56 @@
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0561829625AD959C001E30A3;
-			remoteInfo = ExponeaSDKShared;
+			remoteInfo = SendsaySDKShared;
 		};
 		0561835625ADB50E001E30A3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0561829625AD959C001E30A3;
-			remoteInfo = ExponeaSDKShared;
+			remoteInfo = SendsaySDKShared;
 		};
 		0563753925AF035700AB68DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0563750B25AF030A00AB68DA;
-			remoteInfo = ExponeaSDKObjC;
+			remoteInfo = SendsaySDKObjC;
 		};
 		0563754F25AF03CA00AB68DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0563750B25AF030A00AB68DA;
-			remoteInfo = ExponeaSDKObjC;
+			remoteInfo = SendsaySDKObjC;
 		};
 		05B97D382417CDFD00FE9309 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C0ED33B321A6FB0F003649C3;
-			remoteInfo = ExponeaSDKNotifications;
+			remoteInfo = SendsaySDKNotifications;
 		};
 		C02C562621C9B4F20087A990 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C0ED33B321A6FB0F003649C3;
-			remoteInfo = ExponeaSDKNotifications;
+			remoteInfo = SendsaySDKNotifications;
 		};
 		C0753E9320A5793200A779FF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F021E858206CF10200788ABC;
-			remoteInfo = ExponeaSDK;
+			remoteInfo = SendsaySDK;
 		};
 		C0861C0120F919CF00C57997 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = F021E858206CF10200788ABC;
-			remoteInfo = ExponeaSDK;
+			remoteInfo = SendsaySDK;
 		};
 		C08D53D921B9474E00EA2C13 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -537,14 +537,14 @@
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C0ED33B321A6FB0F003649C3;
-			remoteInfo = "ExponeaSDK-Notifications";
+			remoteInfo = "SendsaySDK-Notifications";
 		};
 		C0ED33C321A72E48003649C3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C0ED33B321A6FB0F003649C3;
-			remoteInfo = "ExponeaSDK-Notifications";
+			remoteInfo = "SendsaySDK-Notifications";
 		};
 		CCB87B75281688EC005DFB8E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -2564,7 +2564,7 @@
 			dependencies = (
 			);
 			name = SendsaySDKShared;
-			productName = ExponeaSDKShared;
+			productName = SendsaySDKShared;
 			productReference = 0561829725AD959C001E30A3 /* SendsaySDKShared.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -2582,7 +2582,7 @@
 			dependencies = (
 			);
 			name = SendsaySDKObjC;
-			productName = ExponeaSDKObjC;
+			productName = SendsaySDKObjC;
 			productReference = 0563750C25AF030A00AB68DA /* SendsaySDKObjC.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -2637,7 +2637,7 @@
 				0561835725ADB50E001E30A3 /* PBXTargetDependency */,
 			);
 			name = SendsaySDKNotifications;
-			productName = "ExponeaSDK-Notifications";
+			productName = "SendsaySDK-Notifications";
 			productReference = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -2687,7 +2687,7 @@
 				0563753A25AF035700AB68DA /* PBXTargetDependency */,
 			);
 			name = SendsaySDK;
-			productName = ExponeaSDK;
+			productName = SendsaySDK;
 			productReference = F021E859206CF10200788ABC /* SendsaySDK.framework */;
 			productType = "com.apple.product-type.framework";
 		};
@@ -2711,7 +2711,7 @@
 				CCB87B76281688EC005DFB8E /* PBXTargetDependency */,
 			);
 			name = SendsaySDKTests;
-			productName = ExponeaSDKTests;
+			productName = SendsaySDKTests;
 			productReference = F021E862206CF10200788ABC /* SendsaySDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};

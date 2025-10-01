@@ -37,10 +37,10 @@ pod "SendsaySDK", "~> 3.6.0"
 2. Откройте `File -> Add Package Dependencies...`
 3. В появившемся диалоговом окне введите URL репозитория Sendsay iOS SDK `https://github.com/sendsay-ru/sendsay-mobile-sdk-ios` в поле поиска.
 4. В разделе `Dependency Rule` выберите версию SDK.
-   ![Диалог Add Package Dependencies](https://raw.githubusercontent.com/exponea/exponea-ios-sdk/main/Documentation/images/swift-pm-1.png)
+   ![Диалог Add Package Dependencies](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/swift-pm-1.png)
 5. Нажмите на `Add Package`.
 6. В следующем диалоговом окне убедитесь, что выбраны и `SendsaySDK`, и `SendsaySDK-Notifications`.
-   ![Диалог Choose Packages](https://raw.githubusercontent.com/exponea/exponea-ios-sdk/main/Documentation/images/swift-pm-2.png)
+   ![Диалог Choose Packages](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/swift-pm-2.png)
 7. Нажмите на `Add Package`.
 
 ## Инициализация SDK

@@ -40,7 +40,7 @@ iOS SDK Sendsay включает пример приложения, которы
 
 ## Навигация по примеру приложения
 
-![Экраны примера приложения: конфигурация, получение данных, отслеживание, отслеживание событий](https://raw.githubusercontent.com/exponea/exponea-ios-sdk/main/Documentation/images/sample-app-1.png)
+![Экраны примера приложения: конфигурация, получение данных, отслеживание, отслеживание событий](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/sample-app-1.png)
 
 Когда вы запускаете приложение в симуляторе, вы увидите представление **Authentication**. Введите ваш [токен проекта, API токен и базовый URL API](https://documentation.bloomreach.com/engagement/docs/mobile-sdks-api-access-management), затем нажмите `Start`, чтобы [инициализировать SDK](https://documentation.bloomreach.com/engagement/docs/ios-sdk-setup#initialize-the-sdk).
 > [`AuthenticationViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/AuthenticationViewController.swift)
@@ -75,7 +75,7 @@ iOS SDK Sendsay включает пример приложения, которы
 >
 > Обратитесь к [Идентификация клиента](https://documentation.bloomreach.com/engagement/docs/customer-identification) для получения дополнительной информации о soft ID и hard ID.
 
-![Экраны примера приложения: идентификация, отправка данных, логирование, блоки контента](https://raw.githubusercontent.com/exponea/exponea-ios-sdk/main/Documentation/images/sample-app-2.png)
+![Экраны примера приложения: идентификация, отправка данных, логирование, блоки контента](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/sample-app-2.png)
 
 ## Устранение неполадок
 
