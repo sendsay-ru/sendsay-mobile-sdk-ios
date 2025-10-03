@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SendsaySDK"
-  s.version      = "3.5.2"
+  s.version      = "0.1.0"
   s.summary      = "Sendsay SDK used to track and fetch data from Sendsay Experience Cloud."
 
   # This description is used to generate tags and improve search results.
@@ -51,7 +51,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Sendsay" => "info@sendsay.com" }
+  s.author             = { "Sendsay" => "ask@sendsay.com" }
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
