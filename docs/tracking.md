@@ -43,6 +43,7 @@ do {
         OrderItem(id: "-1")
     ])
     .build()
+
     // Отправка события
     Sendsay.shared.trackEvent(
         properties: clearBasketInfo!.toSsecProps(),
@@ -60,12 +61,13 @@ do {
 do {
     let properties: [String: JSONValue] = [:]
     let customJsonString = """{"any-key": "any-value"}""".trimIndent()
-    let eventType = "any_custom_event_name"
+    let eventType = "custom_event_name"
 
     properties["cce"] = .string(jsonString)
     
     /// ......
 
+    // Отправка события
     Sendsay.shared.trackEvent(
         properties: properties, 
         timestamp: nil, 
@@ -83,26 +85,15 @@ do {
 
 Сначала создайте словарь со свойствами, которые вы хотите отслеживать с этим событием. В нашем примере вы хотите отслеживать название экрана, поэтому включите свойство `screen_name` вместе с любыми другими релевантными свойствами:
 
-ТУТ СДЕЛАТЬ ПРИМЕР С ПЕРЕДАЧЕЙ CCE
-
 ```swift
-do {
-    let properties: [String: JSONValue] = [
-        "screen_name": "dashboard",
-        "other_property": 123.45
-    ]
-    let eventType = "screen_view"
+let properties: [String: JSONValue] = [
+    "screen_name": "dashboard",
+    "other_property": 123.45
+]
+let eventType = "screen_view"
 
-    properties["cce"] = .string(jsonString)
+properties["cce"] = .string(jsonString)
 
-    Sendsay.shared.trackEvent(
-        properties: properties,
-        timestamp: nil,
-        eventType: eventType
-    )
-} catch {
-    Sendsay.logger.log(.error, message: "CCE error: \(error)")
-}
 ```
 
 Передайте словарь в `trackEvent()` вместе с `eventType` (`screen_view`) следующим образом:
@@ -111,7 +102,7 @@ do {
 Sendsay.shared.trackEvent(
     properties: properties,
     timestamp: nil,
-    eventType: "screen_view"
+    eventType: eventType
 )
 ```
 

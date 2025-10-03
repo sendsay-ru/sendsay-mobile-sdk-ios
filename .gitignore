@@ -65,7 +65,8 @@ fastlane/screenshots
 .idea
 .idea/
 .idea/*
+.index-build/
+.index-build/*
 SendsaySDK.xcworkspace/xcshareddata/swiftpm/Package.resolved
 *.git/
-.*
 *.plist

@@ -19,7 +19,7 @@ parentDocSlug: ios-sdk-push-notifications
 
 Перейдите в `File` > `New` > `Target` в Xcode и выберите тип расширения (`Notification Service Extension` или `Notification Content Extension`).
 
-![Создание нового расширения уведомлений в Xcode](https://raw.githubusercontent.com/exponea/exponea-ios-sdk/main/Documentation/images/extension1.png)
+![Создание нового расширения уведомлений в Xcode](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/extension1.png)
 
 > ❗️
 >
@@ -114,7 +114,7 @@ class NotificationService: UNNotificationServiceExtension {
   - Удалите `NSExtensionMainStoryboard`.
   - Добавьте `NSExtensionPrincipalClass` и установите его значение в класс вашего контроллера представления, например, `TestingPushContentExtension.NotificationViewController`.
 
-![Настройка расширения контента уведомлений в Xcode](https://raw.githubusercontent.com/exponea/exponea-ios-sdk/main/Documentation/images/extension3.png)
+![Настройка расширения контента уведомлений в Xcode](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/extension3.png)
 
 Обратите внимание на параметр `UNNotificationExtensionInitialContentSizeRatio` (со значением по умолчанию 1). Он указывает соотношение между шириной и высотой контента в push-уведомлении. По умолчанию контент такой же высоты, как и ширины. Эта настройка не является частью SDK, но может вызвать нежелательное пустое пространство, когда изображение отсутствует. Измените это значение на 0, если вы хотите, чтобы высота была динамической (она будет масштабироваться до правильной высоты, если изображение присутствует, но не будет пустого пространства, если его нет).
 
