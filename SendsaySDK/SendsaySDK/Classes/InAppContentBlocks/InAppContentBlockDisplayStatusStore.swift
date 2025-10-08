@@ -3,7 +3,7 @@
 //  SendsaySDK
 //
 //  Created by Adam Mihalik on 11/04/2024.
-//  Copyright © 2024 Sendsay. All rights reserved.
+//  Copyright © 2025 Sendsay. All rights reserved.
 //
 
 import Foundation

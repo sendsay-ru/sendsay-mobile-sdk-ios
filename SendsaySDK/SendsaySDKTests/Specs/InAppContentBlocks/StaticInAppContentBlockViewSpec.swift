@@ -3,7 +3,7 @@
 //  SendsaySDKTests
 //
 //  Created by Adam Mihalik on 02/02/2024.
-//  Copyright © 2024 Sendsay. All rights reserved.
+//  Copyright © 2025 Sendsay. All rights reserved.
 //
 
 import Foundation

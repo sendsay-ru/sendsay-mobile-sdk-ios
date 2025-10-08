@@ -398,7 +398,7 @@ public class SendsayInternal: SendsayType {
             telemetryManager?.report(exception: exception)
             Sendsay.logger.log(.error, message: """
             Error while creating dependencies, Sendsay cannot be configured.\n
-            \(SendsayError.nsExceptionRaised(exception).localizedDescription)
+            \(SendsayError.nsExceptionRaised(NonSendableBox(exception)).localizedDescription)
             """)
         }
     }
@@ -503,10 +503,10 @@ internal extension SendsayInternal {
         }
         if let exception = exception {
             telemetryManager?.report(exception: exception)
-            Sendsay.logger.log(.error, message: SendsayError.nsExceptionRaised(exception).localizedDescription)
+            Sendsay.logger.log(.error, message: SendsayError.nsExceptionRaised(NonSendableBox(exception)).localizedDescription)
             if safeModeEnabled {
                 nsExceptionRaised = true
-                errorHandler?(SendsayError.nsExceptionRaised(exception))
+                errorHandler?(SendsayError.nsExceptionRaised(NonSendableBox(exception)))
             } else {
                 Sendsay.logger.log(.error, message: "Re-raising caugth NSException in debug build.")
                 exception.raise()
@@ -557,11 +557,25 @@ internal extension SendsayInternal {
 
 // MARK: - Public -
 
+extension UIApplication {
+    var mainKeyWindow: UIWindow? {
+        get {
+            if #available(iOS 13, *) {
+                return connectedScenes
+                    .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+                    .first { $0.isKeyWindow }
+            } else {
+                return keyWindow
+            }
+        }
+    }
+}
+
 public extension SendsayInternal {
     @objc
     func openAppInboxList(sender: UIButton!) {
         onMain {
-            let window = UIApplication.shared.keyWindow
+            let window = UIApplication.shared.mainKeyWindow
             guard let topViewController = InAppMessagePresenter.getTopViewController(window: window) else {
                 Sendsay.logger.log(.error, message: "Unable to show AppInbox list - no view controller")
                 return

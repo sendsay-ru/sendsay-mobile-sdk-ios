@@ -3,7 +3,7 @@
 //  SendsaySDKTests
 //
 //  Created by Ankmara on 24.04.2024.
-//  Copyright © 2024 Sendsay. All rights reserved.
+//  Copyright © 2025 Sendsay. All rights reserved.
 //
 
 import Quick

@@ -3,7 +3,7 @@
 //  SendsaySDK
 //
 //  Created by Ankmara on 17.07.2024.
-//  Copyright © 2024 Sendsay. All rights reserved.
+//  Copyright © 2025 Sendsay. All rights reserved.
 //
 
 import Foundation

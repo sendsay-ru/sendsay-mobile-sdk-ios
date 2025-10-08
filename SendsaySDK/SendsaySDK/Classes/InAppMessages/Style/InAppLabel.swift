@@ -3,7 +3,7 @@
 //  SendsaySDK
 //
 //  Created by Ankmara on 2024/10/23.
-//  Copyright © 2024 Sendsay. All rights reserved.
+//  Copyright © 2025 Sendsay. All rights reserved.
 //
 
 import UIKit
