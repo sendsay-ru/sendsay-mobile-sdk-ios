@@ -51,7 +51,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Sendsay" => "ask@sendsay.com" }
+  s.author             = { "Sendsay" => "ask@sendsay.ru" }
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
