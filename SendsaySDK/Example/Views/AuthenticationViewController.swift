@@ -101,7 +101,7 @@ class AuthenticationViewController: UIViewController {
             Coordinator(navigationController: self.navigationController).start()
         }
         Sendsay.logger.logLevel = .verbose
-        sendsay.checkPushSetup = true
+        sendsay.checkPushSetup = false
         Sendsay.logger.log(.verbose, message: "Before Configuration call")
         sendsay.configure(
             Sendsay.ProjectSettings(

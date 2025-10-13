@@ -11,7 +11,6 @@ target 'SendsaySDKTests' do
 
     inhibit_all_warnings!
 
-
     # Pods for testing
     pod 'Quick'
     pod 'Nimble', '~>9.2.0'
