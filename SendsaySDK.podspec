@@ -51,7 +51,7 @@ Pod::Spec.new do |s|
   #  profile URL.
   #
 
-  s.author             = { "Sendsay" => "ask@sendsay.com" }
+  s.author             = { "Sendsay" => "ask@sendsay.ru" }
 
   # ――― Platform Specifics ――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -60,7 +60,7 @@ Pod::Spec.new do |s|
   #
 
   s.platform     = :ios, "13.0"
-  s.swift_versions = ['4.2.0', '5.0', '5.6.1', '5.7', '5.8', '5.8.1', '5.9', '5.10']
+  s.swift_versions = ['5.9', '5.10']
 
   # ――― Source Location ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
@@ -89,6 +89,6 @@ Pod::Spec.new do |s|
   s.resource_bundles = {'SendsaySDK' => ['SendsaySDK/SendsaySDK/Supporting Files/PrivacyInfo.xcprivacy']}
   s.exclude_files = "SendsaySDK/SendsaySDK-Notifications/**/*"
   s.resources = ["SendsaySDK/SendsaySDK/Classes/Database/*.xcdatamodeld"]
-  s.dependency 'SwiftSoup', '2.6.1'
+#  s.dependency 'SwiftSoup', '2.6.1'
   
 end

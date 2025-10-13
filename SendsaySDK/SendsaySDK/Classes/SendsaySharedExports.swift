@@ -29,6 +29,7 @@ public typealias SendsayNotificationActionType = SendsaySDKShared.SendsayNotific
 public typealias Result = SendsaySDKShared.Result
 public typealias SendsayProject = SendsaySDKShared.SendsayProject
 public typealias SendsayError = SendsaySDKShared.SendsayError
+public typealias NonSendableBox = SendsaySDKShared.NonSendableBox
 public typealias EventType = SendsaySDKShared.EventType
 public typealias TokenTrackFrequency = SendsaySDKShared.TokenTrackFrequency
 public typealias NotificationData = SendsaySDKShared.NotificationData

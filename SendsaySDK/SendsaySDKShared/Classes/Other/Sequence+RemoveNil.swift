@@ -23,7 +23,7 @@ public extension Sequence where Self == Dictionary<String, Any> {
                     filtered[dict.key] = dictionaryToAdd
                 }
             } else {
-                if let optionalValue = dict.value as? Any?, optionalValue != nil {
+                if let optionalValue = dict.value as Any?, true {
                     filtered[dict.key] = dict.value
                 }
             }

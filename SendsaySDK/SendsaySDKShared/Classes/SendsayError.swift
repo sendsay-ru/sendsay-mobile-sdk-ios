@@ -19,7 +19,7 @@ public enum SendsayError: LocalizedError {
     /// Uknown error occured, check the description provided.
     case unknownError(String?)
     /// Safety wrapper caught NSException while executing SDK operation.
-    case nsExceptionRaised(NSException)
+    case nsExceptionRaised(NonSendableBox<NSException>)
     /// After Sendsay SDK runs into an NSException, further calls to SDK will fail with this exception.
     case nsExceptionInconsistency
     /// Unable to finish an async process
@@ -51,7 +51,7 @@ public enum SendsayError: LocalizedError {
             """
 
         case .nsExceptionRaised(let exception):
-            return "NSException raised. \(String(describing: exception))"
+            return "NSException raised. \(String(describing: exception.value))"
 
         case .nsExceptionInconsistency:
             return "SendsaySDK ran into NSException, SDK disabled until next run."
@@ -68,3 +68,5 @@ public enum SendsayError: LocalizedError {
         }
     }
 }
+
+public final class NonSendableBox<T>: @unchecked Sendable { public let value: T; public init(_ value: T) { self.value = value } }

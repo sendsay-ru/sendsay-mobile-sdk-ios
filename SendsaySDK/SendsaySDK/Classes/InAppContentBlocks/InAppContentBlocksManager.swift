@@ -8,7 +8,7 @@
 
 import Foundation
 import AppTrackingTransparency
-import WebKit
+@preconcurrency import WebKit
 
 final class InAppContentBlocksManager: NSObject {
 
@@ -439,7 +439,7 @@ extension InAppContentBlocksManager: InAppContentBlocksManagerType, WKNavigation
             return returnEmptyView(tag: Int.random(in: 0..<99999999))
         }
         let contentBlocksForId = usedInAppContentBlocks[placeholderId] ?? []
-        let messagesForThisIndexPath = contentBlocksForId.filter { $0.indexPath == indexPath }
+        var messagesForThisIndexPath = contentBlocksForId.filter { $0.indexPath == indexPath }
         var messagesToFilter: [InAppContentBlockResponse] = []
         for message in inAppContentBlockMessages where contentBlocksForId.contains(where: { $0.messageId == message.id }) {
             messagesToFilter.append(message)

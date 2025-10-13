@@ -185,7 +185,7 @@ open class AppInboxDetailViewController: UIViewController, WKUIDelegate {
             attrs[NSAttributedString.Key.kern] = kern
         }
         if let lineHeightMultiplier = lineHeightMultiplier {
-            var paragraphStyle = NSMutableParagraphStyle()
+            let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineHeightMultiple = lineHeightMultiplier
             attrs[NSAttributedString.Key.paragraphStyle] = paragraphStyle
         }
