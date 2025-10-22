@@ -69,4 +69,5 @@ fastlane/screenshots
 .index-build/*
 SendsaySDK.xcworkspace/xcshareddata/swiftpm/Package.resolved
 *.git/
-*.plist
+*.lock
+#*.plist
