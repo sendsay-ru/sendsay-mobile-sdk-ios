@@ -24,7 +24,7 @@
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" secondItem="yhz-tc-rLC" secondAttribute="height" multiplier="923:381" id="d4i-Bc-IVd"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Project Token" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UdZ-x9-xZO">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Project id / Account id" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UdZ-x9-xZO">
                                 <rect key="frame" x="20" y="163.5" width="335" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -33,16 +33,23 @@
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Authorization (optional)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="New-Sc-ct3">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Authorization Token (optional)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="New-Sc-ct3">
                                 <rect key="frame" x="20" y="218.5" width="335" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Base (API) URL" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qHW-dd-hdr">
+                            <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Base (API) URL" minimumFontSize="22" translatesAutoresizingMaskIntoConstraints="NO" id="qHW-dd-hdr">
                                 <rect key="frame" x="20" y="328.5" width="335" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <attributedString key="attributedText"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="https://mobi.sendsay.ru/xnpe/v100">
+                                        <attributes>
+                                            <font key="NSFont" metaFont="cellTitle"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" placeholder="Advanced Auth (optional)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Jkh-w6-4ME" userLabel="AdvancedAuth Field">
@@ -54,7 +61,7 @@
                                 <attributedString key="attributedText"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6j4-no-XJU" customClass="AnimatedButton" customModule="Example" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6j4-no-XJU" customClass="AnimatedButton" customModule="Example" customModuleProvider="target">
                                 <rect key="frame" x="20" y="392.5" width="335" height="45"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.38431372549999998" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -125,6 +132,11 @@
                             <constraint firstItem="qHW-dd-hdr" firstAttribute="height" secondItem="New-Sc-ct3" secondAttribute="height" id="yiV-jZ-o5e"/>
                             <constraint firstItem="New-Sc-ct3" firstAttribute="height" secondItem="UdZ-x9-xZO" secondAttribute="height" id="zwE-J6-vPd"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="Jkh-w6-4ME"/>
+                            </mask>
+                        </variation>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="gKH-6p-lY4" appends="YES" id="IB0-z6-6Y1"/>
                         </connections>
@@ -1626,7 +1638,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
