@@ -62,7 +62,7 @@ Sendsay.shared.configure(
   Sendsay.ProjectSettings(
     projectToken: "ID вашего аккаунта в Sendsay",
     authorization: .token("YOUR API KEY"),
-    baseUrl: "https://mobi.sendsay.ru/mobi/api/v100/json"
+    baseUrl: "https://mobi.sendsay.ru/xnpe/v100/json"
   ),
   pushNotificationTracking: .disabled
 )
