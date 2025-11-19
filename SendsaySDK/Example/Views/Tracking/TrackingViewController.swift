@@ -214,34 +214,30 @@ class TrackingViewController: UIViewController {
 
         do {
             productViewInfo = try TrackSSECDataBuilders.viewProduct()
-                .setProduct(id: "product1",
-                            name: "name",
-                            dateTime: dateFormatter.string(from: currentDateTime),
-                            picture: [],
-                            url: "url",
-                            available: 1,
-                            categoryId: 777,
-                            category: "category name",
-                            vendor: "vendor",
-                            model: "model",
-                            price: 7.88,
-                            oldPrice: 5.99)
+                .setProduct(id: "101626",
+                            name: "Кеды",
+//                            dateTime: dateFormatter.string(from: currentDateTime),
+                            picture: [
+                                "https://m.media-amazon.com/images/I/71UiJ6CG9ZL._AC_UL320_.jpg"
+                            ],
+                            url: "https://sendsay.ru/catalog/kedy/kedy_290/",
+                            categoryId: 1117,
+                            model: "506-066 139249",
+                            price: 4490)
                 .build()
-            
-//            let productViewInfoJSON: [String: Any] = [
-//                "dt": currentDateTime,
-//                "id": "product1",
-//                "available": 1,
-//                "name": "name",
-//                "price": 7.88,
-//                "old_price": 5.99,
-//                "picture": [],
-//                "url": "url",
-//                "model": "model",
-//                "vendor": "vendor",
-//                "category_id": 777,
-//                "category": "category name"
-//            ]
+
+//            let productViewInfoJSON: [String: Any] =
+//                {
+//                    "id": "101626",
+//                    "price": 4490,
+//                    "model": "506-066 139249",
+//                    "name": "Кеды",
+//                    "picture": [
+//                        "https://m.media-amazon.com/images/I/71UiJ6CG9ZL._AC_UL320_.jpg"
+//                    ],
+//                    "url": "https://sendsay.ru/catalog/kedy/kedy_290/",
+//                    "category_id": 1117
+//                }
 //            productViewInfo = try TrackSSECData.fromJSON(productViewInfoJSON)
 
             // Отправка события
@@ -266,47 +262,47 @@ class TrackingViewController: UIViewController {
 
         do {
             productOrder = try TrackSSECDataBuilders.order()
-                .setTransaction(id: randomTransactionId, dt: formattedDT, sum: 100.9, status: 1)
+                .setTransaction(id: randomTransactionId, dt: formattedDT, sum: 1490, status: 1)
                 .setUpdate(isUpdatePerItem: false)
                 .setItems([
                     OrderItem(
-                        id: "product1",
+                        id: "101695",
                         qnt: 1,
-                        price: 7.88,
-                        available: 1,
-                        oldPrice: 5.99,
-                        picture: [],
-                        url: "url",
-                        model: "model",
-                        vendor: "vendor",
-                        categoryId: 777,
-                        category: "category name"
+                        price: 1490,
+                        name: "Сумка",
+                        picture: [
+                            "https://m.media-amazon.com/images/I/81h0fWxyp9S._AC_UL320_.jpg"
+                        ],
+                        url: "https://sendsay.ru/catalog/sumki_1/sumka_468/",
+                        model: "1110-001 139276",
+                        categoryId: 1154
+//                        cp: ["cp1": AnyCodable("promo-2025")]
                     )
                 ])
                 .build()
             
 //            let productOrderJSON: [String: Any] = [
-//                "dt": currentDateTime,
-//                "transaction_id": randomTransactionId,
-//                "transaction_dt": currentDateTime,
-//                "transaction_sum": 100.9,
-//                "update_per_item": 0,
-//                "items": [
-//                    [
-//                        "id": "product1",
-//                        "available": 1,
-//                        "name": "name",
-//                        "qnt": 1,
-//                        "price": 7.88,
-//                        "old_price": 5.99,
-//                        "picture": [],
-//                        "url": "url",
-//                        "model": "model",
-//                        "vendor": "vendor",
-//                        "category_id": 777,
-//                        "category": "category name"
+//                {
+//                    "transaction_id": randomTransactionId,
+//                    "transaction_dt": formattedDT,
+//                    "transaction_status": 1,
+//                    "transaction_sum": 1490,
+//                    "update": 0,
+//                    "items": [
+//                         {
+//                            "id": "101695",
+//                            "qnt": 1,
+//                            "price": 1490,
+//                            "model": "1110-001 139276",
+//                            "name": "Сумка",
+//                            "picture": [
+//                                "https://m.media-amazon.com/images/I/81h0fWxyp9S._AC_UL320_.jpg"
+//                            ],
+//                            "url": "https://sendsay.ru/catalog/sumki_1/sumka_468/",
+//                            "category_id": 1154
+//                        }
 //                    ]
-//                ]
+//                }
 //            ]
 //            productOrder = try TrackSSECData.fromJSON(productOrderJSON)
 
@@ -332,47 +328,45 @@ class TrackingViewController: UIViewController {
 
         do {
             data = try TrackSSECDataBuilders.basketAdd()
-                .setTransaction(id: randomTransactionId, dt: formattedDT, sum: 100.9)
+                .setTransaction(id: "2968", dt: formattedDT, sum: 2590, status: 1)
                 .setUpdate(isUpdatePerItem: false)
                 .setItems([
                     OrderItem(
-                        id: "product1",
+                        id: "101115",
                         qnt: 1,
-                        price: 7.88,
-                        available: 1,
-                        oldPrice: 5.99,
-                        picture: [],
-                        url: "url",
-                        model: "model",
-                        vendor: "vendor",
-                        categoryId: 777,
-                        category: "category name",
-                        cp: ["cp1": AnyCodable("promo-2025")]
+                        price: 2590,
+                        name: "Рюкзак",
+                        picture: [
+                            "https://m.media-amazon.com/images/I/91fkUMA5K1L._AC_UL320_.jpg"
+                        ],
+                        url: "https://sendsay.ru/catalog/ryukzaki/ryukzak_745/",
+                        model: "210-045 138761",
+                        categoryId: 1153
+//                        cp: ["cp1": AnyCodable("promo-2025")]
                     )
                 ])
                 .build()
 
 //            let productBasketJson: [String: Any] = [
-//                    "dt": currentDateTime,
-//                    "transaction_sum": 100.9,
-//                    "update_per_item": 0,
-//                    "items": [
-//                        [
-//                            "id": "product1",
-//                            "available": 1,
-//                            "name": "name",
-//                            "qnt": 1,
-//                            "price": 7.88,
-//                            "old_price": 5.99,
-//                            "picture": [],
-//                            "url": "url",
-//                            "model": "model",
-//                            "vendor": "vendor",
-//                            "category_id": 777,
-//                            "category": "category name"
+//                    {
+//                        "transaction_id": "2968",
+//                        "transaction_sum": 2590,
+//                        "items": [
+//                            {
+//                                "id": "101115",
+//                                "qnt": 1,
+//                                "price": 2590,
+//                                "model": "210-045 138761",
+//                                "name": "Рюкзак",
+//                                "picture": [
+//                                    "https://m.media-amazon.com/images/I/91fkUMA5K1L._AC_UL320_.jpg"
+//                                ],
+//                                "url": "https://sendsay.ru/catalog/ryukzaki/ryukzak_745/",
+//                                "category_id": 1153
+//                            }
 //                        ]
-//                    ]
-//                ]
+//                    }
+//            ]
 //            data = try TrackSSECData.fromJSON(productBasketJson)
 
             // Отправка события
