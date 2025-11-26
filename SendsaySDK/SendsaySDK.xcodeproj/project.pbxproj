@@ -279,8 +279,10 @@
 		33FC6CC829A912CC001F113F /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FC6CC729A912CC001F113F /* Extension+UIView.swift */; };
 		33FC6CCA29A9158F001F113F /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FC6CC929A9158F001F113F /* Reusable.swift */; };
 		33FC6CCC29A9195B001F113F /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FC6CCB29A9195B001F113F /* Typealiases.swift */; };
+		40E41B361C8E8E0646AE7885 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19801282ED79466005A034F /* Pods_Example.framework */; };
 		4C169E3122B6524C00C425DA /* TrackUniversalLinkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C169E3022B6524C00C425DA /* TrackUniversalLinkSpec.swift */; };
 		4C3F5F2D22DF98C00069E71D /* MockSendsay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3F5F2C22DF98C00069E71D /* MockSendsay.swift */; };
+		4E8CA2184C621EB1984A5137 /* Pods_SendsaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486299A97905BE77A09EC216 /* Pods_SendsaySDK.framework */; };
 		551301372D072338005C71C8 /* CampaignRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551301362D072338005C71C8 /* CampaignRepositoryType.swift */; };
 		551301392D07288D005C71C8 /* CampaignRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551301382D07288D005C71C8 /* CampaignRepository.swift */; };
 		5513013B2D088AC1005C71C8 /* CampaignRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5513013A2D088AC1005C71C8 /* CampaignRepositorySpec.swift */; };
@@ -352,7 +354,6 @@
 		7F646D3CA7CCA3D9D2CB8C74 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA74DF46A34FE1BF7B4749BC /* Pods_Example.framework */; };
 		B12D01272E7871A9002804EE /* TrackSSECDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC49022E6AF1B90064C39C /* TrackSSECDataBuilder.swift */; };
 		B12D01282E7871DE002804EE /* TrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB5D9C20B8193A00F1031F /* TrackingViewController.swift */; };
-		B145CA0C2E9D5A5500836AF2 /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = B145CA0B2E9D5A5500836AF2 /* SwiftSoup */; };
 		B18474B32E1291BF002FEDEF /* objc_tryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05114E68234747BC00201EE6 /* objc_tryCatch.m */; };
 		B18474B42E1291F5002FEDEF /* objc_tryCatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 05114E6A234747DE00201EE6 /* objc_tryCatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B18474BC2E129851002FEDEF /* SendsaySDKObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 0563750E25AF030A00AB68DA /* SendsaySDKObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -767,6 +768,7 @@
 		05FD178E2403C4CC003A799B /* BuildConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
 		05FEBDBF23A7BA2A007C2372 /* InAppMessageTrackingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppMessageTrackingDelegate.swift; sourceTree = "<group>"; };
 		05FEBDC123A7C940007C2372 /* MockInAppMessageTrackingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInAppMessageTrackingDelegate.swift; sourceTree = "<group>"; };
+		20355A7B550170380CC33DC1 /* Pods-SendsaySDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsaySDK.debug.xcconfig"; path = "Target Support Files/Pods-SendsaySDK/Pods-SendsaySDK.debug.xcconfig"; sourceTree = "<group>"; };
 		23E725E3214AA7A900B552B8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		311268DA2CD10E9C00C38394 /* InAppButtonContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButtonContainer.swift; sourceTree = "<group>"; };
 		311268DC2CD1135900C38394 /* InAppButtonConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButtonConfig.swift; sourceTree = "<group>"; };
@@ -923,6 +925,7 @@
 		7F417E0EA9B478FEF72999D9 /* HtmlNormalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlNormalizer.swift; sourceTree = "<group>"; };
 		7F417FBE26AB2DD5FE31707E /* HtmlNormalizerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlNormalizerSpec.swift; sourceTree = "<group>"; };
 		A64D92FEFD20D8844C3C3BF9 /* Pods_SendsaySDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SendsaySDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B19801282ED79466005A034F /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1AB19E02E2FF6A500554B39 /* InitConfigResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigResponse.swift; sourceTree = "<group>"; };
 		B1AB19E42E2FF7D600554B39 /* ConfigItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigItem.swift; sourceTree = "<group>"; };
 		B1AB19EF2E30DB8500554B39 /* InitConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigManager.swift; sourceTree = "<group>"; };
@@ -1025,6 +1028,7 @@
 		CCB87B7928169F4B005DFB8E /* VersionCheckRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckRepository.swift; sourceTree = "<group>"; };
 		CCB87B7B28169FF5005DFB8E /* ServerRepository+VersionCheckRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ServerRepository+VersionCheckRepository.swift"; sourceTree = "<group>"; };
 		CCB87B7D2816A6A6005DFB8E /* GitHubReleaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubReleaseResponse.swift; sourceTree = "<group>"; };
+		D2A77F0831DA6FC2F84139AB /* Pods-SendsaySDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsaySDK.release.xcconfig"; path = "Target Support Files/Pods-SendsaySDK/Pods-SendsaySDK.release.xcconfig"; sourceTree = "<group>"; };
 		DD0C9C5D960517190C44E4C8 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		E4CBEFA68DA6BB67543DB2C3 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		EA74DF46A34FE1BF7B4749BC /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1112,6 +1116,7 @@
 				C0843CF120B6E7C900FAF0CB /* SendsaySDK.framework in Frameworks */,
 				C0ED33BB21A6FB10003649C3 /* SendsaySDKNotifications.framework in Frameworks */,
 				7F646D3CA7CCA3D9D2CB8C74 /* Pods_Example.framework in Frameworks */,
+				40E41B361C8E8E0646AE7885 /* Pods_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1119,7 +1124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B145CA0C2E9D5A5500836AF2 /* SwiftSoup in Frameworks */,
+				4E8CA2184C621EB1984A5137 /* Pods_SendsaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1920,6 +1925,7 @@
 		A3613BD1E2C1D4616B6A9767 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B19801282ED79466005A034F /* Pods_Example.framework */,
 				551F65192BAAD0F60072B980 /* Build */,
 				C08D53CE21B9474E00EA2C13 /* UserNotifications.framework */,
 				C08D53D021B9474E00EA2C13 /* UserNotificationsUI.framework */,
@@ -1966,6 +1972,8 @@
 				708D18AA4839AA0535A582B8 /* Pods-SendsaySDKTests.release.xcconfig */,
 				E4CBEFA68DA6BB67543DB2C3 /* Pods-Example.debug.xcconfig */,
 				DD0C9C5D960517190C44E4C8 /* Pods-Example.release.xcconfig */,
+				20355A7B550170380CC33DC1 /* Pods-SendsaySDK.debug.xcconfig */,
+				D2A77F0831DA6FC2F84139AB /* Pods-SendsaySDK.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
@@ -2653,6 +2661,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F021E86D206CF10200788ABC /* Build configuration list for PBXNativeTarget "SendsaySDK" */;
 			buildPhases = (
+				CB380C479AC8013363C820CE /* [CP] Check Pods Manifest.lock */,
 				F021E856206CF10200788ABC /* Headers */,
 				F021E854206CF10200788ABC /* Sources */,
 				F021E855206CF10200788ABC /* Frameworks */,
@@ -2761,9 +2770,6 @@
 				Base,
 			);
 			mainGroup = F021E84F206CF10200788ABC;
-			packageReferences = (
-				B145CA0A2E9D5A5500836AF2 /* XCLocalSwiftPackageReference "../Carthage/Checkouts/SwiftSoup" */,
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F021E85A206CF10200788ABC /* Products */;
 			projectDirPath = "";
@@ -2949,6 +2955,28 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-SendsaySDKTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB380C479AC8013363C820CE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SendsaySDK-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4004,6 +4032,7 @@
 		};
 		F021E86E206CF10200788ABC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20355A7B550170380CC33DC1 /* Pods-SendsaySDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -4015,7 +4044,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftSoup\"",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/SendsaySDK/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 13;
@@ -4039,6 +4071,7 @@
 		};
 		F021E86F206CF10200788ABC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2A77F0831DA6FC2F84139AB /* Pods-SendsaySDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -4050,7 +4083,10 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
-				FRAMEWORK_SEARCH_PATHS = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftSoup\"",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/SendsaySDK/Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -4205,20 +4241,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCLocalSwiftPackageReference section */
-		B145CA0A2E9D5A5500836AF2 /* XCLocalSwiftPackageReference "../Carthage/Checkouts/SwiftSoup" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../Carthage/Checkouts/SwiftSoup;
-		};
-/* End XCLocalSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		B145CA0B2E9D5A5500836AF2 /* SwiftSoup */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SwiftSoup;
-		};
-/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		01EC2DBB207E68BF0031BFEB /* DatabaseModel.xcdatamodeld */ = {
