@@ -6,16 +6,8 @@ platform :ios, '13.0'
 
 use_frameworks!
 
-target 'SendsaySDKTests' do
-    inherit! :search_paths
-
-    inhibit_all_warnings!
-
-    # Pods for testing
-    pod 'Quick'
-    pod 'Nimble', '~>9.2.0'
-    pod 'SwiftLint'
-    pod 'Mockingjay', :git => 'https://github.com/kylef/Mockingjay.git', :branch => 'master'
+target 'SendsaySDK' do
+    pod 'SwiftSoup', '>= 2.7.6', '< 3.0'
 end
 
 target 'Example' do
@@ -33,6 +25,17 @@ target 'Example' do
     pod 'FirebaseMessaging'
 end
 
+target 'SendsaySDKTests' do
+    inherit! :search_paths
+
+    inhibit_all_warnings!
+
+    # Pods for testing
+    pod 'Quick'
+    pod 'Nimble', '~>9.2.0'
+    pod 'SwiftLint'
+    pod 'Mockingjay', :git => 'https://github.com/kylef/Mockingjay.git', :branch => 'master'
+end
 
 
 post_install do |installer|

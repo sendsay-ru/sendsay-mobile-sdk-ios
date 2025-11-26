@@ -89,6 +89,6 @@ Pod::Spec.new do |s|
   s.resource_bundles = {'SendsaySDK' => ['SendsaySDK/SendsaySDK/Supporting Files/PrivacyInfo.xcprivacy']}
   s.exclude_files = "SendsaySDK/SendsaySDK-Notifications/**/*"
   s.resources = ["SendsaySDK/SendsaySDK/Classes/Database/*.xcdatamodeld"]
-#  s.dependency 'SwiftSoup', '2.6.1'
+  s.dependency 'SwiftSoup', '>= 2.7.6', '< 3.0'
   
 end
