@@ -195,7 +195,7 @@ class TrackingViewController: UIViewController {
 //            clearBasketInfo = try TrackSSECData.fromJSON(clearBasketInfoJSON)
 
             // Отправка события
-            Sendsay.shared.trackEvent(
+            Sendsay.shared.trackSSEC(
                 properties: clearBasketInfo!.toSsecProps(),
                 timestamp: nil,
                 eventType: TrackingSSECType.basketClear.rawValue
