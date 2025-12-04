@@ -6,87 +6,94 @@ categorySlug: integrations
 parentDocSlug: ios-sdk-setup
 ---
 
-Эта страница предоставляет обзор всех параметров конфигурации для SDK и несколько примеров того, как инициализировать SDK с различными конфигурациями.
+На этой странице собраны все параметры конфигурации iOS SDK и примеры инициализации с разными настройками.
 
 ## Параметры конфигурации
 
 * `projectToken` **(обязательный)**
-   * Ваш токен проекта. Вы можете найти его в веб-приложении Engagement в разделе `Project settings` > `Access management` > `API`.
+   * Токен проекта. Его можно посмотреть в веб-приложении Engagement в разделе `Project settings` > `Access management` > `API`.
 
 * `authorization` **(обязательный)**
-   * Варианты: `.none` или `.token(token)`.
-   * Токен должен быть **публичным** ключом Engagement. См. [Управление доступом к API мобильных SDK](https://documentation.bloomreach.com/engagement/docs/mobile-sdks-api-access-management) для получения подробностей.
-   * Для получения дополнительной информации обратитесь к [документации Bloomreach Engagement API](https://documentation.bloomreach.com/engagement/reference/authentication).
+   * Поддерживает варианты: `.none` или `.token(token)`.
+   * Используйте **публичный** API-ключ Engagement. 
+   * Подробнее — в разделах [Управление доступом к API мобильных SDK](https://documentation.bloomreach.com/engagement/docs/mobile-sdks-api-access-management) и [Authentication API](https://documentation.bloomreach.com/engagement/reference/authentication) в документации Engagement.
 
 * `baseUrl`
-  * Ваш базовый URL API, который можно найти в веб-приложении Engagement в разделе `Project settings` > `Access management` > `API`.
-  * Значение по умолчанию: `https://api.sendsay.com`.
-  * Если у вас есть пользовательский базовый URL, вы должны установить это свойство.
+  * Базовый URL API. По умолчанию: `https://api.sendsay.com`. 
+  * Укажите своё значение, если используйте пользовательский базовый URL.
 
 * `projectMapping`
-  * Если вам нужно отслеживать события в более чем одном проекте, вы можете определить информацию о проекте для "типов событий", которые должны отслеживаться несколько раз.
+  * Позволяет отслеживать события в нескольких проектах. Используйте, если отдельные «типы событий» должны отслеживать несколько раз и отправляться в разные проекты.
 
 * `defaultProperties`
-  * Список свойств, которые будут добавлены ко всем событиям отслеживания.
-  * Значение по умолчанию: `nil`
+  * Свойства, которые SDK добавляет ко всем событиям отслеживания.
+  * По умолчанию: `nil`.
 
 * `allowDefaultCustomerProperties`
-  * Флаг для применения списка `defaultProperties` к событию отслеживания `identifyCustomer`
-  * Значение по умолчанию: `true`
+  * Применяет список `defaultProperties` к событию отслеживания `identifyCustomer`.
+  * По умолчанию: `true`.
 
 * `automaticSessionTracking`
-  * Флаг для управления автоматическим отслеживанием событий `session_start` и `session_end`.
-  * Значение по умолчанию: `true`
+  * Включает автоматическое отслеживание событий `session_start` и `session_end`.
+  * По умолчанию: `true`.
 
 * `sessionTimeout`
-  * Сессия - это фактическое время, проведенное в приложении. Она начинается при запуске приложения и заканчивается, когда приложение переходит в фон.
-  * Это значение используется для расчета времени сессии.
-  * Значение по умолчанию: `60.0` секунд.
-  * Минимальное значение: `5.0` секунд.
-  * **Рекомендуемое** максимальное значение: `120.0` секунд, но **абсолютный** максимум составляет `180.0` секунд. Большее значение приведет к тому, что iOS завершит сессию.
-  * Подробнее читайте в разделе [Отслеживание сессий](tracking#session)
+  * Время сессии в секундах.
+  * По умолчанию — `60.0`, минимум — `5.0`, рекомендуемый максимум — `120.0`, абсолютный максимум — `180.0`.
+  * Большее значение приведет к тому, что iOS завершит сессию. 
+  * Подробнее — в разделе [Отслеживание сессий](tracking#session).
+  
+  > ❗️ 
+  > 
+  > Сессия — это фактическое время, проведенное в приложении. Она начинается при запуске приложения и заканчивается, когда приложение переходит в фон.
 
-* `automaticPushNotificationTracking` - УСТАРЕЛ
-  * Управляет тем, будет ли SDK автоматически обрабатывать push-уведомления с использованием method swizzling. Эта функция устарела, поскольку ее использование method swizzling может вызвать проблемы в случае, если хост-приложение использует несколько SDK, которые делают то же самое.
-  * Заменено на `pushNotificationTracking`. С `pushNotificationTracking` у вас больше контроля над тем, что происходит внутри вашего приложения, в дополнение к упрощению отладки. При миграции с `automaticPushNotificationTracking` требуется дополнительная работа. Обратитесь к документации [Push-уведомления](https://documentation.bloomreach.com/engagement/docs/ios-sdk-push-notifications) для получения подробностей.
-  * Значение по умолчанию: `true`
+* `automaticPushNotificationTracking` (устарело)
+  * Ранее управляло обработкой push-уведомлений через method swizzling.
+  * Заменено на `pushNotificationTracking`.
+  * По умолчанию: `true`.
+  
+  > ❗️ 
+  > 
+  > С функцией `pushNotificationTracking` у вас больше контроля над тем, что происходит внутри вашего приложения и упрощённая отладка. При миграции с `automaticPushNotificationTracking` потребуются допольнительные настройки, подробнее — в документации Engagement: [Push-уведомления](https://documentation.bloomreach.com/engagement/docs/ios-sdk-push-notifications).
 
 * `pushNotificationTracking`
-  * Управляет тем, будет ли SDK обрабатывать push-уведомления. Регистрирует приложение для получения push-уведомлений на основе настройки `requirePushAuthorization`.
-  * Значение по умолчанию: `true`
+  * Управляет обработкой push-уведомлений и регистрацией приложения для получения push-уведомлений на основе настройки `requirePushAuthorization`.
+  * По умолчанию: `true`.
 
 * `appGroup`
-  * **Обязательно** для того, чтобы SDK автоматически отслеживал доставленные push-уведомления. Обратитесь к документации [Push-уведомления](https://documentation.bloomreach.com/engagement/docs/ios-sdk-push-notifications) для получения подробностей.
+  * **Обязательно** для автоматического отслеживания доставленных push-уведомлений. 
+  * Подробнее — в документации Engagement: [Push-уведомления](https://documentation.bloomreach.com/engagement/docs/ios-sdk-push-notifications).
 
 * `requirePushAuthorization`
-  * SDK может проверить статус авторизации push-уведомлений ([документация Apple](https://developer.apple.com/documentation/usernotifications/unnotificationsettings/1648391-authorizationstatus)) и отслеживать push-токен только в том случае, если пользователь авторизован для получения push-уведомлений.
-  * При отключении SDK автоматически зарегистрируется для push-уведомлений при запуске приложения и отследит токен в Engagement, чтобы ваше приложение могло получать тихие push-уведомления.
-  * При включении SDK автоматически зарегистрируется для push-уведомлений, если приложение авторизовано показывать push-уведомления пользователю.
-  * Значение по умолчанию: `true`
+  * Определяет, должен ли SDK проверять разрешение на push-уведомления перед отправкой push-токена.
+  * По умолчанию: `true`.
+  
+  > ❗️ 
+  > 
+  > SDK может проверить, разрешены ли push-уведомления, и отправлять push-токен только при наличии разрешения. Если параметр отключён, SDK автоматически зарегистрируется для получения push-уведомлений при запуске приложения и отправит токен в Engagement — это позволит приложению получать тихие уведомления. Если параметр включён, SDK зарегистрируется для push-уведомлений только после того, как пользователь даст разрешение. Подробнее — в [документации Apple](https://developer.apple.com/documentation/usernotifications/unnotificationsettings/1648391-authorizationstatus).
 
 * `tokenTrackFrequency`
-  * Указывает частоту, с которой токен APNs должен отслеживаться в Engagement.
-  * Значение по умолчанию: `onTokenChange`
-  * Возможные значения:
-    * `onTokenChange` - отслеживает push-токен, если он отличается от ранее отслеженного
-    * `everyLaunch` - всегда отслеживает push-токен
-    * `daily` - отслеживает push-токен раз в день
+  * Частота отслеживания push-токена в Engagement.
+  * По умолчанию: `onTokenChange` — отслеживает push-токен, если он отличается от ранее отслеженного.
+  * Другие возможные значения:
+    * `everyLaunch` — всегда отслеживает push-токен.
+    * `daily` — отслеживает push-токен раз в день.
 
 * `flushEventMaxRetries`
-  * Управляет тем, сколько раз событие должно быть отправлено перед прерыванием. Полезно, например, в случае недоступности API или других временных ошибок.
-  * Значение по умолчанию: `5`
+  * Количество попыток отправки события перед остановкой. Полезно в случае недоступности API или других временных ошибок.
+  * По умолчанию: `5`.
 
 * `advancedAuthEnabled`
-  * Если установлено в `true`, SDK использует авторизацию по [токену клиента](https://documentation.bloomreach.com/engagement/docs/customer-token) для связи с API Engagement, перечисленными в [Авторизация по токену клиента](https://documentation.bloomreach.com/engagement/docs/ios-sdk-authorization#customer-token-authorization).
-  * Обратитесь к [документации по авторизации](https://documentation.bloomreach.com/engagement/docs/ios-sdk-authorization) для получения подробностей.
-  * Значение по умолчанию: `false`
+  * Включает авторизацию по [токену клиента](https://documentation.bloomreach.com/engagement/docs/customer-token), если установлено в `true`.
+  * По умолчанию: `false`.
+  * Подробнее — в [документации по авторизации](https://documentation.bloomreach.com/engagement/docs/ios-sdk-authorization) Engagement.
 
 * `inAppContentBlocksPlaceholders`
-  * Если установлено, все [блоки контента в приложении](https://documentation.bloomreach.com/engagement/docs/ios-sdk-in-app-content-blocks) будут предварительно загружены сразу после инициализации SDK.
+  * При включении SDK заранее загрузит [блоки контента](https://documentation.bloomreach.com/engagement/docs/ios-sdk-in-app-content-blocks) в приложении.
 
 * `manualSessionAutoClose`
   * Определяет, должен ли SDK автоматически отслеживать `session_end` для сессий, которые остаются открытыми, когда `Sendsay.shared.trackSessionStart()` вызывается несколько раз в режиме ручного отслеживания сессий.
-  * Значение по умолчанию: `true`
+  * По умолчанию: `true`.
 
 ## Настройка SDK
 
@@ -104,24 +111,30 @@ func configure(
 
 * `ProjectSettings` **(обязательный)**
   * Содержит основные настройки проекта: `projectToken`, `authorization`, `baseUrl` и `projectMapping`.
-  * В большинстве случаев использования требуются только `projectToken` и `authorization`.
+  * В большинстве случаев достаточно указать `projectToken` и `authorization`.
 
 * `pushNotificationTracking` **(обязательный)**
-  * Либо `.disabled`, либо `.enabled(appGroup, delegate, requirePushAuthorization, tokenTrackFrequency)`. Только `appGroup` требуется для корректной работы SDK.
-  * Установка `delegate` имеет тот же эффект, что и установка `Sendsay.shared.pushNotificationsDelegate`.
+  * Варианты: 
+    * `.disabled`,
+	* `.enabled(appGroup, delegate, requirePushAuthorization, tokenTrackFrequency)`. Для корректной работы обязателен `appGroup`.
+  * Установка `delegate` эквивалентна указанию `Sendsay.shared.pushNotificationsDelegate`.
 
 * `automaticSessionTracking`
-  * Либо `.disabled`, либо `.enabled(timeout)`.
-  * Значение по умолчанию: `enabled()` (рекомендуется, использует таймаут сессии по умолчанию)
+  * `.disabled` или `.enabled(timeout)`.
+  * По умолчанию: `enabled()`.
 
 * `defaultProperties`
-  * Как описано выше в [Параметры конфигурации](#параметры-конфигурации).
+  * Работает так же, как описано выше — [Параметры конфигурации](#параметры-конфигурации).
 
 * `flushingSetup`
-  * Позволяет настроить `flushingMode` и `maxRetries`. По умолчанию отправка событий происходит как только вы отслеживаете событие (`.immediate`). Вы можете изменить это поведение на одно из `.manual`, `.automatic`, `periodic(period)`.
-  * См. [Отправка данных](https://documentation.bloomreach.com/engagement/docs/ios-sdk-data-flushing) для получения подробностей.
+  * Определяет режим отправки событий:
+	* По умолчанию: `.immediate` — отправка происходит как только вы отслеживаете событие.
+	* `.manual`.
+	* `.automatic`.
+	* `periodic(period)`.
+  * Подробнее — в документации Engagement: [Отправка данных](https://documentation.bloomreach.com/engagement/docs/ios-sdk-data-flushing)
 
-#### Примеры
+#### Примеры конфигурации
 Наиболее распространенный случай использования:
 ``` swift
 Sendsay.shared.configure(
@@ -175,24 +188,20 @@ Sendsay.shared.configure(
 ```
 
 
-### Использование файла конфигурации - УСТАРЕЛО
+### Настройка через файл конфигурации (устарело)
 > ❗️ 
 > 
-> Настройка SDK с использованием файла `plist` устарела, но все еще поддерживается для обратной совместимости.
+> Настройка SDK через файл `.plist` устарела, но остаётся доступной для обратной совместимости.
 
-Создайте файл конфигурации `.plist`, содержащий как минимум обязательные переменные конфигурации.
+Создайте файл `.plist` с обязательными настройками:
 ``` swift
 public func configure(plistName: String)
 ```
-
-#### Пример
-
+и передайте его имя в метод:
 ```
 Sendsay.shared.configure(plistName: "ExampleConfig.plist")
 ```
-
-
-*ExampleConfig.plist*
+#### Пример файла ExampleConfig.plist:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
