@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SendsaySDK"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "Sendsay SDK used to track and fetch data from Sendsay Experience Cloud."
 
   # This description is used to generate tags and improve search results.

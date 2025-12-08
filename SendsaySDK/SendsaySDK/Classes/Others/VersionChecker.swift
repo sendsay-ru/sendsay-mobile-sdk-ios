@@ -23,18 +23,19 @@ internal class VersionChecker {
     func warnIfNotLatestSDKVersion() {
         var actualVersion: String?
         var gitProject: String
-        if isReactNativeSDK() {
-            actualVersion = getReactNativeSDKVersion()
-            gitProject = "sendsay-react-native-sdk"
-        } else if isFlutterSDK() {
+//        if isReactNativeSDK() {
+//            actualVersion = getReactNativeSDKVersion()
+//            gitProject = "sendsay-react-native-sdk"
+//        } else
+        if isFlutterSDK() {
             actualVersion = getFlutterSDKVersion()
-            gitProject = "sendsay-flutter-sdk"
+            gitProject = "sendsay-mobile-sdk-flutter"
         } else if isXamarinSDK() {
             actualVersion = getXamarinSDKVersion()
             gitProject = "sendsay-xamarin-sdk"
         } else {
             actualVersion = Sendsay.version
-            gitProject = "sendsay-ios-sdk"
+            gitProject = "sendsay-mobile-sdk-ios"
         }
 
         if let actualVersion = actualVersion {
@@ -53,7 +54,7 @@ internal class VersionChecker {
                             "#### Your version: \(actualVersion)  Last version: \(lastVersion)\n" +
                             "#### Upgrade to the latest version to benefit from the new features " +
                                     "and better stability:\n" +
-                            "#### https://github.com/sendsay/\(gitProject)/releases\n" +
+                            "#### https://github.com/sendsay-ru/\(gitProject)/releases\n" +
                             "####"
                         )
                     }

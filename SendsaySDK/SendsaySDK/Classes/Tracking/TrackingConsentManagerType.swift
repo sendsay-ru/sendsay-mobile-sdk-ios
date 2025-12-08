@@ -56,7 +56,7 @@ public enum TrackingSSECType: String, CaseIterable {
     case registration = "ssec_registration"
     case authorization = "ssec_authorization"
     
-    static func find(value: String?) -> TrackingSSECType? {
+    public static func find(value: String?) -> TrackingSSECType? {
         guard let value = value else { return nil }
         return TrackingSSECType.allCases.first { $0.rawValue.caseInsensitiveCompare(value) == .orderedSame }
     }
