@@ -11,7 +11,7 @@ parentDocSlug: ios-sdk-setup
 ## Параметры конфигурации
 
 * `projectToken` **(обязательный)**
-   * Токен проекта. Его можно посмотреть в веб-приложении Engagement в разделе `Project settings` > `Access management` > `API`.
+   * Токен проекта. Его можно посмотреть в веб-приложении Engagement в разделе **Project settings** > **Access management** > **API**.
 
 * `authorization` **(обязательный)**
    * Поддерживает варианты: `.none` или `.token(token)`.
@@ -47,7 +47,7 @@ parentDocSlug: ios-sdk-setup
   > 
   > Сессия — это фактическое время, проведенное в приложении. Она начинается при запуске приложения и заканчивается, когда приложение переходит в фон.
 
-* `automaticPushNotificationTracking` (устарело)
+* `automaticPushNotificationTracking` (**устарело**)
   * Ранее управляло обработкой push-уведомлений через method swizzling.
   * Заменено на `pushNotificationTracking`.
   * По умолчанию: `true`.
@@ -129,9 +129,9 @@ func configure(
 * `flushingSetup`
   * Определяет режим отправки событий:
 	* По умолчанию: `.immediate` — отправка происходит как только вы отслеживаете событие.
-	* `.manual`.
-	* `.automatic`.
-	* `periodic(period)`.
+	* `.manual`
+	* `.automatic`
+	* `periodic(period)`
   * Подробнее — в документации Engagement: [Отправка данных](https://documentation.bloomreach.com/engagement/docs/ios-sdk-data-flushing)
 
 #### Примеры конфигурации
@@ -191,9 +191,9 @@ Sendsay.shared.configure(
 ### Настройка через файл конфигурации (устарело)
 > ❗️ 
 > 
-> Настройка SDK через файл `.plist` устарела, но остаётся доступной для обратной совместимости.
+> Настройка SDK через файл **.plist** устарела, но остаётся доступной для обратной совместимости.
 
-Создайте файл `.plist` с обязательными настройками:
+Создайте файл **.plist** с обязательными настройками:
 ``` swift
 public func configure(plistName: String)
 ```

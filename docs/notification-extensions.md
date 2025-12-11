@@ -9,7 +9,7 @@ parentDocSlug: ios-sdk-push-notifications
 Некоторые функции push-уведомлений в iOS SDK требуют добавления в приложение одного или двух расширений:
 
 - [Notification Service Extension](https://developer.apple.com/documentation/usernotifications/unnotificationserviceextension) — позволяет настроить содержимое уведомления перед его показом.
-- [Notification Content Extension](https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextension) - отвечает за настройку способа отображения уведомления.
+- [Notification Content Extension](https://developer.apple.com/documentation/usernotificationsui/unnotificationcontentextension) — отвечает за настройку способа отображения уведомления.
 
 Оба расширения используют Sendsay Notification Service, который входит в SDK.
 
@@ -33,18 +33,20 @@ parentDocSlug: ios-sdk-push-notifications
 
 ### CocoaPods
 
-1. Добавьте зависимость в `Podfile`, в корневой папке вашего проекта Xcode:
+1. Добавьте зависимость в **Podfile**, в корневой папке вашего проекта Xcode:
    ```
    target 'YourAppExtensionTarget' do
      pod 'SendsaySDK-Notifications'
    end
    ```
    Замените `YourAppExtensionTarget` на таргет расширения вашего приложения.
+
 2. В окне терминала перейдите в папку проекта Xcode и выполните команду для установки зависимости:
    ```
    pod install
    ```
-3. Повторно откройте файл `HelloWorld.xcworkspace`, расположенный в папке вашего проекта в XCode.
+
+3. Повторно откройте файл **HelloWorld.xcworkspace**, расположенный в папке вашего проекта в XCode.
 
 Чтобы разрешить автоматические обновления меньше минорной версии:
 ```
@@ -64,29 +66,29 @@ pod "SendsaySDK-Notifications", "~> 3.6.0"
 
 1. В таргете расширения откройте вкладку **Signing & Capabilities** добавьте возможность `App Groups` — ту же, что использует основное приложение.
 
-2. Откройте файл `NotificationService.swift` и замените содержимое:
+2. Откройте файл **NotificationService.swift** и замените содержимое:
 
-``` swift
-import UserNotifications
-import SendsaySDKNotifications
+    ``` swift
+    import UserNotifications
+    import SendsaySDKNotifications
 
-class NotificationService: UNNotificationServiceExtension {
-    let sendsayService = SendsayNotificationService(
-        appGroup: "YOUR_APP_GROUP"
-    )
+    class NotificationService: UNNotificationServiceExtension {
+        let sendsayService = SendsayNotificationService(
+            appGroup: "YOUR_APP_GROUP"
+        )
 
-    override func didReceive(
-        _ request: UNNotificationRequest,
-        withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void
-    ) {
-        sendsayService.process(request: request, contentHandler: contentHandler)
+        override func didReceive(
+            _ request: UNNotificationRequest,
+            withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void
+        ) {
+            sendsayService.process(request: request, contentHandler: contentHandler)
+        }
+
+        override func serviceExtensionTimeWillExpire() {
+            sendsayService.serviceExtensionTimeWillExpire()
+        }
     }
-
-    override func serviceExtensionTimeWillExpire() {
-        sendsayService.serviceExtensionTimeWillExpire()
-    }
-}
-```
+    ```
 
 > ❗️
 >
@@ -103,38 +105,37 @@ class NotificationService: UNNotificationServiceExtension {
 1. Удалите созданный по умолчанию `MainInterface.storyboard` — он не понадобится.
 
 2. SDK меняет `categoryIdentifier` уведомления на `SENDSAY_ACTIONABLE`. Чтобы расширение отображалось для таких уведомлений, настройте `Info.plist` расширения:
+    - Под `NSExtension` > `NSExtensionAttributes`:
+        - Установите `UNNotificationExtensionCategory` в `SENDSAY_ACTIONABLE`.
+    - Под `NSExtension`:
+        - Удалите `NSExtensionMainStoryboard`.
+        - Добавьте `NSExtensionPrincipalClass` и установите его значение в класс вашего контроллера представления, например, `TestingPushContentExtension.NotificationViewController`.
 
-- Под `NSExtension` > `NSExtensionAttributes`:
-  - Установите `UNNotificationExtensionCategory` в `SENDSAY_ACTIONABLE`.
-- Под `NSExtension`:
-  - Удалите `NSExtensionMainStoryboard`.
-  - Добавьте `NSExtensionPrincipalClass` и установите его значение в класс вашего контроллера представления, например, `TestingPushContentExtension.NotificationViewController`.
-
-![Настройка расширения контента уведомлений в Xcode](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/extension3.png)
+    ![Настройка расширения контента уведомлений в Xcode](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/extension3.png)
 
 
-> ❗️ Параметр высоты контента
->
-> Параметр `UNNotificationExtensionInitialContentSizeRatio` (по умолчанию — 1) задаёт пропорции высоты и ширины контента в уведомлении.
+    > ❗️ Параметр высоты контента
+    >
+    > Параметр `UNNotificationExtensionInitialContentSizeRatio` (по умолчанию — 1) задаёт пропорции высоты и ширины контента в уведомлении.
 
-Если в уведомлении отсутствует изображение, может появиться пустое пространство. Чтобы избежать этого, установите значение 0 — высота будет динамической.
+    Если в уведомлении отсутствует изображение, может появиться пустое пространство. Чтобы избежать этого, установите значение 0 — высота будет динамической.
 
 3. Замените содержимое `NotificationViewController.swift`:
 
-```swift
-import UIKit
-import UserNotifications
-import UserNotificationsUI
-import SendsaySDKNotifications
+    ```swift
+    import UIKit
+    import UserNotifications
+    import UserNotificationsUI
+    import SendsaySDKNotifications
 
-class NotificationViewController: UIViewController, UNNotificationContentExtension {
-    let sendsayService = SendsayNotificationContentService()
+    class NotificationViewController: UIViewController, UNNotificationContentExtension {
+        let sendsayService = SendsayNotificationContentService()
 
-    func didReceive(_ notification: UNNotification) {
-        sendsayService.didReceive(notification, context: extensionContext, viewController: self)
+        func didReceive(_ notification: UNNotification) {
+            sendsayService.didReceive(notification, context: extensionContext, viewController: self)
+        }
     }
-}
-```
+    ```
 
 > ❗️
 >

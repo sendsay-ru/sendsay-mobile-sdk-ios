@@ -1,4 +1,4 @@
-#Универсальные ссылки
+# Универсальные ссылки
 
 Универсальные ссылки позволяют открывать ваше приложение напрямую по ссылкам, которые вы отправляете через CDP Sendsay. Пользователю не приходится проходить через промежуточные редиректы, а приложение получает возможность обработать ссылку и отследить переход.
 
@@ -12,7 +12,7 @@
 
 ### 1. Добавьте Associated Domains в Xcode
 
-В Xcode откройте вкладку **Signing & Capabilities** таргета вашего приложения и добавьте [Associated Domains Entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_associated-domains) в `Associated Domains`:
+В Xcode откройте вкладку **Signing & Capabilities** таргета вашего приложения и добавьте [Associated Domains Entitlement](https://developer.apple.com/documentation/bundleresources/entitlements/com_apple_developer_associated-domains) в **Associated Domains**:
 
   ```
   applinks:example.com
@@ -21,7 +21,7 @@
 
 ### 2. Настройте файл apple-app-site-association на сайте
 
-На вашем веб-сайте должен быть размещён файл `apple-app-site-association`, в котором перечислены идентификаторы приложений для вашего домена в сервисе `applinks`:
+На вашем веб-сайте должен быть размещён файл **apple-app-site-association**, в котором перечислены идентификаторы приложений для вашего домена в сервисе `applinks`:
 
   ```
   {
