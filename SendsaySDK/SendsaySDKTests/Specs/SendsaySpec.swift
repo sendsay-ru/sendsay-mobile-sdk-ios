@@ -133,7 +133,7 @@ class SendsaySpec: QuickSpec {
                     expect(sendsay.configuration?.projectToken).to(equal("0aef3a96-3804-11e8-b710-141877340e97"))
                 }
                 it("Should return the default base url") {
-                    expect(sendsay.configuration?.baseUrl).to(equal("https://api.sendsay.com"))
+                    expect(sendsay.configuration?.baseUrl).to(equal("https://mobi.sendsay.ru/xnpe/v100"))
                 }
                 it("Should return the default session timeout") {
                     expect(sendsay.configuration?.sessionTimeout).to(equal(Constants.Session.defaultTimeout))

@@ -13,7 +13,7 @@ import UIKit
 public enum Constants {
     /// Network
     public enum Repository {
-        public static let baseUrl = "https://api.sendsay.com"
+        public static let baseUrl = "https://mobi.sendsay.ru/xnpe/v100"
         public static let contentType = "application/json"
         public static let headerContentType = "content-type"
         public static let headerAccept = "accept"

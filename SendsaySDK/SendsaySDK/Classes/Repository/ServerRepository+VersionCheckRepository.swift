@@ -11,7 +11,7 @@ import Foundation
 
 extension ServerRepository: VersionCheckRepository {
 
-    var baseUrl: String { return "https://api.github.com/repos/sendsay/%@/releases/latest" }
+    var baseUrl: String { return "https://api.github.com/repos/sendsay-ru/%@/releases/latest" }
 
     func requestLastSDKVersion(
         completion: @escaping (Result<String>) -> Void

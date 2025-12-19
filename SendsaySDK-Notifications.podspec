@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SendsaySDK-Notifications"
-  s.version      = "0.1.0"
+  s.version      = "0.1.1"
   s.summary      = "A completementary extension-safe framework for supporting rich push notifications in Sendsay SDK."
 
   # This description is used to generate tags and improve search results.

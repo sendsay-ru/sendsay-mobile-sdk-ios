@@ -33,7 +33,6 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
     // product.*
     public var productId: String?
     public var productName: String?
-    public var productDateTime: String?
     public var productPicture: [String]?
     public var productUrl: String?
     public var productAvailable: Int64?
@@ -91,7 +90,6 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
     ) -> Self {
         self.productId = id
         self.productName = name
-        self.productDateTime = dateTime
         self.productPicture = picture
         self.productUrl = url
         self.productAvailable = available
@@ -162,7 +160,6 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
         return TrackSSECData(
             productId: productId,
             productName: productName,
-            dateTime: productDateTime,
             picture: productPicture,
             url: productUrl,
             available: productAvailable,

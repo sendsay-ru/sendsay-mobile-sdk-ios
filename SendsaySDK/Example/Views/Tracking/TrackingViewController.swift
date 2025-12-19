@@ -256,7 +256,7 @@ class TrackingViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let currentDateTime = Date()
         let formattedDT = dateFormatter.string(from: currentDateTime)
-        let randomTransactionId = UUID().uuidString
+        let randomTransactionId = String(Int.random(in: 10101...99999))
 
         let productOrder: TrackSSECData?
 
@@ -275,8 +275,8 @@ class TrackingViewController: UIViewController {
                         ],
                         url: "https://sendsay.ru/catalog/sumki_1/sumka_468/",
                         model: "1110-001 139276",
-                        categoryId: 1154
-//                        cp: ["cp1": AnyCodable("promo-2025")]
+                        categoryId: 1154,
+                        cp: ["cp1": AnyCodable("promo-2025")]
                     )
                 ])
                 .build()
@@ -322,7 +322,7 @@ class TrackingViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let currentDateTime = Date()
         let formattedDT = dateFormatter.string(from: currentDateTime)
-        let randomTransactionId = UUID().uuidString
+//        let randomTransactionId = UUID().uuidString
 
         let data: TrackSSECData?
 

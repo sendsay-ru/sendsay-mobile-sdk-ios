@@ -1,12 +1,12 @@
 ---
 title: Настройка Apple Push Notification Service
-excerpt: Настройка интеграции Apple Push Notification Service для Engagement
+excerpt: Настройка интеграции Apple Push Notification Service для CDP Sendsay
 slug: ios-sdk-configure-apns
 categorySlug: integrations
 parentDocSlug: ios-sdk-push-notifications
 ---
 
-Чтобы иметь возможность отправлять [iOS push-уведомления](https://documentation.bloomreach.com/engagement/docs/ios-sdk-push-notifications) с помощью Engagement, вы должны получить ключ подписи токена аутентификации Apple Push Notification service (APNs) и настроить интеграцию APNs в веб-приложении Engagement.
+Чтобы иметь возможность отправлять [iOS push-уведомления](../docs/push-notifications.md) с помощью CDP Sendsay, вы должны получить ключ подписи токена аутентификации Apple Push Notification service (APNs) и настроить интеграцию APNs в веб-приложении CDP Sendsay.
 
 > 📘
 >
@@ -27,26 +27,26 @@ parentDocSlug: ios-sdk-push-notifications
 >
 > Обязательно сохраните скачанный ключ в безопасном месте, так как вы не сможете скачать его повторно.
 
-## Добавление ключа APNs в Engagement
+## Добавление ключа APNs в CDP Sendsay
 
-1. Откройте веб-приложение Engagement и перейдите в `Data & Assets` > `Integrations`. Нажмите `+ Add new integration`.
-![Engagement Integrations - Добавление новой интеграции](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/apns4.png)
+1. Откройте веб-приложение CDP Sendsay и перейдите в `Подписчики` > `Мобильное приложение`. Нажмите `+ Добавить приложение`. И введите название вашего приложения. Нажмите `Продолжить`.
+![Sendsay Integrations - Добавление новой интеграции](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/docs/img/apns4.png)
 
-2. Найдите `Apple Push Notification Service` и нажмите `+ Add integration`.
-![Engagement Integrations - Выбор интеграции Apple Push Notification Service](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/apns5.png)
+2. Зайдите в созданное приложение в списке.  Вкладка `Настройки приложения и импорта` и нажмите `Подключить` напротив `APNs`.
+![Sendsay Integrations - Выбор интеграции Apple Push Notification Service](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/docs/img/apns5.png)
 
 3. Прочитайте и примите условия использования.
-![Engagement Integrations - Принятие условий использования](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/apns6.png)
+![Sendsay Integrations - Принятие условий использования](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/docs/img/apns6.png)
 
-4. Выберите `API mode` (`Development` или `Production`) и введите `Team ID` и `Key ID`. Откройте скачанный файл ключа в текстовом редакторе и скопируйте его содержимое в поле `ES256 Private Key`. Введите `Bundle ID` вашего приложения. Нажмите `Save integration` для завершения.
-![Engagement Integrations - Настройка интеграции APNs](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/apns7.png)
+4. Введите `AppID` также как в xCode в графе `bundle identifier`(или ID пакета в AppStoreConnect). Выберите `API mode` (`Development` или `Production`) и введите `Team ID` и `Key ID`. Откройте скачанный файл ключа в текстовом редакторе и скопируйте его содержимое в поле `ES256 Private Key`. Введите `Bundle ID` вашего приложения. Нажмите `Сохранить` для завершения.
+![Sendsay Integrations - Настройка интеграции APNs](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/docs/img/apns7.png)
    > ❗️
    >
    > Среда API (`Development` или `Production`) не может быть изменена позже. Вам нужно создать новую интеграцию, если вы хотите использовать другую среду. Если возникают ошибки BadDeviceToken, убедитесь, что выбрана правильная среда API.
    
    > ❗️
    >
-   > Только одна интеграция APNs может быть активна одновременно в проекте Engagement. Если вы хотите использовать среды разработки и продакшена APNs одновременно, вам нужны два отдельных проекта Engagement.
+   > Только одна интеграция APNs может быть активна одновременно в проекте CDP Sendsay. Если вы хотите использовать среды разработки и продакшена APNs одновременно, вам нужны два отдельных проекта CDP Sendsay.
 
    > ❗️
    >
@@ -54,4 +54,4 @@ parentDocSlug: ios-sdk-push-notifications
 
 
 5. Перейдите в `Settings` > `Project settings` > `Channels` > `Push notifications` > `iOS Notification` и установите `Apple Push Notification Service integration` в `Apple Push Notification Service`.
-![Engagement - Выбор интеграции APNs](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/apns8.png)
+![Sendsay - Выбор интеграции APNs](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/docs/img/apns8.png)
