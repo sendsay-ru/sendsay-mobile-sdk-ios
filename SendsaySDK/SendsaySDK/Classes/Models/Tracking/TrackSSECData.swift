@@ -12,7 +12,6 @@ public struct TrackSSECData: Codable {
     // product.*
     var productId: String?
     var productName: String?
-    var dateTime: String?
     var picture: [String]?
     var url: String?
     var available: Int64?
@@ -49,7 +48,6 @@ public struct TrackSSECData: Codable {
     enum CodingKeys: String, CodingKey {
         case productId = "id"
         case productName = "name"
-        case dateTime = "dt"
         case picture = "picture"
         case url = "url"
         case available = "available"

@@ -58,7 +58,7 @@ final class TelemetryUtilitySpec: QuickSpec {
                     equal([
                         "defaultProperties": "",
                         "automaticPushNotificationTracking": "true",
-                        "baseUrl": "https://api.sendsay.com [default]",
+                        "baseUrl": "https://mobi.sendsay.ru/xnpe/v100 [default]",
                         "appGroup": "nil",
                         "automaticSessionTracking": "true",
                         "tokenTrackFrequency": "onTokenChange [default]",
