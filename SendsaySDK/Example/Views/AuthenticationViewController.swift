@@ -63,7 +63,7 @@ class AuthenticationViewController: UIViewController {
     }
     
     @IBAction func clearTapped() {
-        Sendsay.shared.clearLocalCustomerData(appGroup: "group.com.sendsay.SendsaySDK")
+        Sendsay.shared.clearLocalCustomerData(appGroup: Constants.General.appGroupKey)
     }
 
     @IBAction func startPressed() {
@@ -110,7 +110,7 @@ class AuthenticationViewController: UIViewController {
                 baseUrl: baseUrl
             ),
             pushNotificationTracking: .enabled(
-                appGroup: "group.com.sendsay.SendsaySDK",
+                appGroup: Constants.General.appGroupKey,
                 delegate: UIApplication.shared.delegate as? AppDelegate
             ),
 //            defaultProperties: [

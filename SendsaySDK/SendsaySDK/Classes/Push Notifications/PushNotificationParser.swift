@@ -51,6 +51,31 @@ struct PushNotificationParser {
             eventData.append(.eventType(customEventType))
         }
 
+        #warning ("TODO: local save attributes")
+        // 14014 handle
+        if let userDefaults = UserDefaults(suiteName: Constants.Tracking.sendsayPushNotificationExtraData) {
+            if let issue = notificationData.attributes[Constants.Keys.issueId] {
+                userDefaults.set(issue.rawValue, forKey: Constants.Tracking.issueIdKey)
+            }
+            if let letter = notificationData.attributes[Constants.Keys.letterId] {
+                userDefaults.set(letter.rawValue, forKey: Constants.Tracking.letterIdKey)
+            }
+        } else {
+            Sendsay.logger.log(.error, message: "Unable to store local attributes")
+        }
+//        if let userDefaults = UserDefaults(suiteName: Constants.Tracking.sendsayPushNotificationExtraData) {
+//            /// attributes is extraData in our case:
+//            userDefaults.set(notificationData.attributes[Constants.Keys.issueId], forKey: Constants.Tracking.issueIdKey)
+//            userDefaults.set(notificationData.attributes[Constants.Keys.letterId], forKey: Constants.Tracking.letterIdKey)
+//        } else {
+//            Sendsay.logger.log(.error, message: "Unable to store local attributes")
+//        }
+        
+//            let delivered = userDefaults.array(forKey: Constants.General.deliveredPushUserDefaultsKey) ?? []
+//            delivered.append(serialized)
+//            userDefaults.set(delivered, forKey: Constants.General.deliveredPushUserDefaultsKey)
+        
+
         // Handle actions
 
         let action: SendsayNotificationActionType

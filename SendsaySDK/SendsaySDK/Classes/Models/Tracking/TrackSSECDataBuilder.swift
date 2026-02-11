@@ -12,11 +12,13 @@ import Foundation
 enum TrackBuildError: Error, LocalizedError {
     case requiredFieldMissing(String)
     case invalidItems(String)
+    case initError(String)
 
     var errorDescription: String? {
         switch self {
         case .requiredFieldMissing(let msg): return msg
         case .invalidItems(let msg): return msg
+        case .initError(let msg): return msg
         }
     }
 }
@@ -45,6 +47,11 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
     public var productType: String?
     public var productPrice: Double?
     public var productOldPrice: Double?
+    
+    // release notes about CDP Sendsay
+    public var issue: Int?
+    public var letter: Int?
+    public var issueDt: String?
 
     // other
     public var email: String?
@@ -65,8 +72,19 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
 
     // items
     public var items: [OrderItem]?
+    
+    
+    private let repository: ServerRepository
 
-    public init() {}
+    public init() throws {
+        guard let configuration = Configuration.loadFromUserDefaults(appGroup: Constants.General.appGroupKey) else {
+            throw TrackBuildError.initError("ConfigurationNotFound: \(Constants.General.appGroupKey)")
+        }
+        guard let customerIds = EventTrackingObject.loadCustomerIdsFromUserDefaults(appGroup: Constants.General.appGroupKey) else {
+            throw TrackBuildError.initError("CustomerIdsNotFound: \(Constants.General.appGroupKey)")
+        }
+        repository = ServerRepository(configuration: configuration)
+    }
 
     // MARK: Chain setters
 
@@ -153,10 +171,100 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
         self.items = items
         return self
     }
+    
+    @discardableResult
+    public func setIssueLetter(
+        issue: Int? = nil,
+        letter: Int? = nil,
+        issueDt: String? = nil,
+    ) -> Self {
+        self.issue = issue != 0 ? issue : nil
+        self.letter = letter != 0 ? letter : nil
+        self.issueDt = issueDt != "" ? issueDt : nil
+        return self
+    }
 
     /// Builds a `TrackSSECData` from the accumulated common fields only.
     /// Subclasses should call this and then apply their validations.
     public func buildCommon() -> TrackSSECData {
+        // Передача данных о выпуске CDP Sendsay (Redmine 14014)
+//        let properties = repository.configuration.defaultProperties?.mapValues { $0.jsonValue } ?? [:]
+        
+        if let userDefaults = UserDefaults(suiteName: Constants.Tracking.sendsayPushNotificationExtraData) {
+            // attributes is extraData in our case:
+            #warning("Сохранять именно в момент получения, иначе DateTime будет неправильный")
+            let issueAny = userDefaults.object(forKey: Constants.Tracking.issueIdKey)
+            let letterAny = userDefaults.object(forKey: Constants.Tracking.letterIdKey)
+
+            let issueInt: Int? = (issueAny as? Int)
+                ?? (issueAny as? NSNumber)?.intValue
+                ?? Int(issueAny as? String ?? "")
+
+            let letterInt: Int? = (letterAny as? Int)
+                ?? (letterAny as? NSNumber)?.intValue
+                ?? Int(letterAny as? String ?? "")
+            
+            setIssueLetter(
+                issue: issueInt,
+                letter: letterInt,
+//                issueDt: userDefaults.string(forKey: Constants.Tracking.issueLetterDatetimeKey)
+
+//                issue: userDefaults.(forKey: Constants.Keys.issueId).flatMap { $0.jsonConvertible as? String? } ?? -1,
+//                letter: userDefaults.object(forKey: Constants.Keys.letterId).flatMap { $0.jsonConvertible as? Int } ?? -1,
+    //            issueDt: notification[Constants.Tracking.issueLetterDatetimeKey].flatMap { $0.rawValue as? String } ?? ""
+            )
+        } else {
+            Sendsay.logger.log(.error, message: "Unable to store local attributes")
+        }
+        
+//        let userDefaults = UserDefaults(suiteName: Constants.General.userDefaultsSuite)
+        
+//        let userDefaults?.array(forKey: Constants.General.deliveredPushUserDefaultsKey)
+
+//        if let array = userDefaults?.array(forKey: Constants.General.deliveredPushUserDefaultsKey) {
+//            if let dataArray = array as? [Data] {
+//                // Process notification events
+//                for data in dataArray {
+//                    guard let notification = NotificationData.deserialize(from: data) else {
+//                        Sendsay.logger.log(.warning, message: "Cannot deserialize stored delivered push data on build TrackSSECData.")
+//                        continue
+//                    }
+//                    
+//                    #warning("Сохранять именно в момент получения, иначе DateTime будет неправильный")
+//                    setIssueLetter(
+//                        issue: notification.attributes[Constants.Keys.issueId].flatMap { $0.jsonConvertible as? Int } ?? -1,
+//                        letter: notification.attributes[Constants.Keys.letterId].flatMap { $0.jsonConvertible as? Int } ?? -1,
+//            //            issueDt: notification[Constants.Tracking.issueLetterDatetimeKey].flatMap { $0.rawValue as? String } ?? ""
+//                    )
+//                }
+//            } else {
+//                Sendsay.logger.log(.warning, message: "Push events present in local userDefaults on build TrackSSECData, but have incorrect type.")
+//    //            return
+//            }
+//        } else {
+//            Sendsay.logger.log(.verbose, message: "No delivered pushes in local userDefaults on build TrackSSECData.")
+////            return
+//        }
+
+//        properties = properties.merging(notification.properties, uniquingKeysWith: { (_, new) in new })
+//        properties["status"] = .string("delivered")
+//        properties["state"] = .string("shown")
+//        if notification.consentCategoryTracking != nil {
+//            properties["consent_category_tracking"] = .string(notification.consentCategoryTracking!)
+//        }
+
+//        setIssueLetter(
+//            issue: properties[Constants.Tracking.issueIdKey].flatMap { $0.jsonConvertible as? Int } ?? -1,
+//            letter: properties[Constants.Tracking.letterIdKey].flatMap { $0.jsonConvertible as? Int } ?? -1,
+////            issueDt: properties[Constants.Tracking.issueLetterDatetimeKey].flatMap { $0.rawValue as? String } ?? ""
+//        )
+
+//        setIssueLetter(
+//            issue = (prefs.entries.find { it.key == KEY_ISSUE }?.value as String).toIntOrNull() ?? -1,
+//            letter = (prefs.entries.find { it.key == KEY_LETTER }?.value as String).toIntOrNull() ?? -1,
+////            issueDt = prefs.entries.find { it.key == KEY_ISSUE_LETTER_DATETIME_DATA_UTC }?.value as String
+//        )
+
         return TrackSSECData(
             productId: productId,
             productName: productName,
@@ -172,6 +280,9 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
             type: productType,
             price: productPrice,
             oldPrice: productOldPrice,
+            issue: issue,
+            letter: letter,
+            issueDt: issueDt,
             email: email,
             updatePerItem: updatePerItem,
             update: update,
@@ -246,8 +357,8 @@ public final class BasketClearBuilder: _CommonSSECBuilder {
 
 // MARK: - Factory
 public enum TrackSSECDataBuilders {
-    public static func viewProduct() -> ViewProductBuilder { .init() }
-    public static func order() -> OrderBuilder { .init() }
-    public static func basketAdd() -> BasketAddBuilder { .init() }
-    public static func basketClear() -> BasketClearBuilder { .init() }
+    public static func viewProduct() throws -> ViewProductBuilder { try .init()}
+    public static func order() throws -> OrderBuilder { try .init() }
+    public static func basketAdd() throws -> BasketAddBuilder { try .init() }
+    public static func basketClear() throws -> BasketClearBuilder { try .init() }
 }

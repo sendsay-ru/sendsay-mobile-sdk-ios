@@ -187,7 +187,9 @@ extension SendsayInternal {
 
     private func readNotificationData(from source: [AnyHashable: Any]) -> NotificationData {
         var notificationData = NotificationData.deserialize(
-            attributes: source["attributes"] as? [String: Any] ?? [:],
+//            attributes: source["data"] as? [String: Any] ??
+            attributes: source["attributes"] as? [String: Any]
+            ?? [:],
             campaignData: source["url_params"] as? [String: Any] ?? [:],
             consentCategoryTracking: source["consent_category_tracking"] as? String ?? nil,
             hasTrackingConsent: GdprTracking.readTrackingConsentFlag(source["has_tracking_consent"])

@@ -320,8 +320,21 @@ final class PushNotificationManager: NSObject, PushNotificationManagerType {
             Sendsay.logger.log(.verbose, message: "Unable to load local storage of delivered push to track")
             return
         }
+
         trackDeliveredPushMessages(userDefaults)
         trackDeliveredPushEvents(userDefaults)
+    }
+    
+    /// 14014 Redmine
+    #warning ("TODO: local save attributes")
+    internal func storePushExtraData(_ notification: NotificationData) {
+        guard let userDefaults = UserDefaults(suiteName: Constants.Tracking.sendsayPushNotificationExtraData) else {
+            Sendsay.logger.log(.verbose, message: "Unable to load local storage for delivered push ExtraData to store")
+            return
+        }
+        // attributes is extraData in our case:
+        userDefaults.set(notification.attributes[Constants.Keys.issueId], forKey: Constants.Tracking.issueIdKey)
+        userDefaults.set(notification.attributes[Constants.Keys.letterId], forKey: Constants.Tracking.letterIdKey)
     }
 
     /// Loads received and stored Push notifications that were not tracked due to missing SDK configuration
@@ -340,10 +353,17 @@ final class PushNotificationManager: NSObject, PushNotificationManagerType {
                 Sendsay.logger.log(.warning, message: "Cannot deserialize stored delivered push data.")
                 continue
             }
+
+            storePushExtraData(notification)
+
+//            notification.attributes.jsonValue.rawValue
+//            notification.properties
+//            repository?.configuration.defaultProperties
+
             trackingConsentManager.trackDeliveredPush(data: notification, mode: .CONSIDER_CONSENT)
         }
         // Clear after all is processed
-        source.removeObject(forKey: Constants.General.deliveredPushUserDefaultsKey)
+//        source.removeObject(forKey: Constants.General.deliveredPushUserDefaultsKey)
     }
 
     /// Uploads track events for delivered Push notifications that were not uploaded to backend because of some problem
@@ -362,6 +382,7 @@ final class PushNotificationManager: NSObject, PushNotificationManagerType {
                 Sendsay.logger.log(.warning, message: "Cannot deserialize stored delivered push event")
                 continue
             }
+
             trackingManager.trackDeliveredPushEvent(notificationEvent)
         }
         // Clear after all is processed
