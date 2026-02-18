@@ -83,10 +83,6 @@ public final class StaticInAppContentBlockView: UIView, WKNavigationDelegate {
                     contentBlock: message
                 )
             }
-            Sendsay.shared.telemetryManager?.report(
-                eventWithType: .showInAppMessage,
-                properties: ["messageType": InAppContentBlockType.contentBlock.type]
-            )
         }
         if !deferredLoad {
             getContent()

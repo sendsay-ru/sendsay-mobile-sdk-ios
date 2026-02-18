@@ -76,10 +76,6 @@ final class InitConfigManager: InitConfigManagerType, @unchecked Sendable {
 //        displayStatusStore.didDisplay(message, at: Date())
 //        trackingConsentManager.trackInitConfigShown(message: message, mode: .CONSIDER_CONSENT)
 //        Sendsay.shared.InitConfigsDelegate.InitConfigShown(message: message)
-//        Sendsay.shared.telemetryManager?.report(
-//            eventWithType: .showInitConfig,
-//            properties: ["messageType": message.rawMessageType ?? "null"]
-//        )
 //    }
 
     func fetchInitConfig(for event: [DataType], completion: ConfigItem? = nil) {

@@ -190,9 +190,12 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
         // Передача данных о выпуске CDP Sendsay (Redmine 14014)
 //        let properties = repository.configuration.defaultProperties?.mapValues { $0.jsonValue } ?? [:]
         
-        if let userDefaults = UserDefaults(suiteName: Constants.Tracking.sendsayPushNotificationExtraData) {
+        /// do not forget to check onExpire date
+//        if var userDefaults = UserDefaults(suiteName: Constants.Tracking.sendsayPushNotificationExtraData) {
+        if var userDefaults = UserDefaults(suiteName: Constants.Tracking.sendsayPushNotificationExtraData) {
+            userDefaults = PushParserCompanion.checkIssueAndLetterOnExpire(nil, userDefaults)
+
             // attributes is extraData in our case:
-            #warning("Сохранять именно в момент получения, иначе DateTime будет неправильный")
             let issueAny = userDefaults.object(forKey: Constants.Tracking.issueIdKey)
             let letterAny = userDefaults.object(forKey: Constants.Tracking.letterIdKey)
 
@@ -208,62 +211,10 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
                 issue: issueInt,
                 letter: letterInt,
 //                issueDt: userDefaults.string(forKey: Constants.Tracking.issueLetterDatetimeKey)
-
-//                issue: userDefaults.(forKey: Constants.Keys.issueId).flatMap { $0.jsonConvertible as? String? } ?? -1,
-//                letter: userDefaults.object(forKey: Constants.Keys.letterId).flatMap { $0.jsonConvertible as? Int } ?? -1,
-    //            issueDt: notification[Constants.Tracking.issueLetterDatetimeKey].flatMap { $0.rawValue as? String } ?? ""
             )
         } else {
             Sendsay.logger.log(.error, message: "Unable to store local attributes")
         }
-        
-//        let userDefaults = UserDefaults(suiteName: Constants.General.userDefaultsSuite)
-        
-//        let userDefaults?.array(forKey: Constants.General.deliveredPushUserDefaultsKey)
-
-//        if let array = userDefaults?.array(forKey: Constants.General.deliveredPushUserDefaultsKey) {
-//            if let dataArray = array as? [Data] {
-//                // Process notification events
-//                for data in dataArray {
-//                    guard let notification = NotificationData.deserialize(from: data) else {
-//                        Sendsay.logger.log(.warning, message: "Cannot deserialize stored delivered push data on build TrackSSECData.")
-//                        continue
-//                    }
-//                    
-//                    #warning("Сохранять именно в момент получения, иначе DateTime будет неправильный")
-//                    setIssueLetter(
-//                        issue: notification.attributes[Constants.Keys.issueId].flatMap { $0.jsonConvertible as? Int } ?? -1,
-//                        letter: notification.attributes[Constants.Keys.letterId].flatMap { $0.jsonConvertible as? Int } ?? -1,
-//            //            issueDt: notification[Constants.Tracking.issueLetterDatetimeKey].flatMap { $0.rawValue as? String } ?? ""
-//                    )
-//                }
-//            } else {
-//                Sendsay.logger.log(.warning, message: "Push events present in local userDefaults on build TrackSSECData, but have incorrect type.")
-//    //            return
-//            }
-//        } else {
-//            Sendsay.logger.log(.verbose, message: "No delivered pushes in local userDefaults on build TrackSSECData.")
-////            return
-//        }
-
-//        properties = properties.merging(notification.properties, uniquingKeysWith: { (_, new) in new })
-//        properties["status"] = .string("delivered")
-//        properties["state"] = .string("shown")
-//        if notification.consentCategoryTracking != nil {
-//            properties["consent_category_tracking"] = .string(notification.consentCategoryTracking!)
-//        }
-
-//        setIssueLetter(
-//            issue: properties[Constants.Tracking.issueIdKey].flatMap { $0.jsonConvertible as? Int } ?? -1,
-//            letter: properties[Constants.Tracking.letterIdKey].flatMap { $0.jsonConvertible as? Int } ?? -1,
-////            issueDt: properties[Constants.Tracking.issueLetterDatetimeKey].flatMap { $0.rawValue as? String } ?? ""
-//        )
-
-//        setIssueLetter(
-//            issue = (prefs.entries.find { it.key == KEY_ISSUE }?.value as String).toIntOrNull() ?? -1,
-//            letter = (prefs.entries.find { it.key == KEY_LETTER }?.value as String).toIntOrNull() ?? -1,
-////            issueDt = prefs.entries.find { it.key == KEY_ISSUE_LETTER_DATETIME_DATA_UTC }?.value as String
-//        )
 
         return TrackSSECData(
             productId: productId,

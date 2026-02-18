@@ -83,8 +83,6 @@ public class SendsayInternal: SendsayType {
     /// The manager for push registration and delivery tracking
     internal var notificationsManager: PushNotificationManagerType?
 
-    internal var telemetryManager: TelemetryManager?
-
     internal var campaignRepository: CampaignRepositoryType?
 
     public var inAppContentBlocksManager: InAppContentBlocksManagerType?
@@ -283,18 +281,6 @@ public class SendsayInternal: SendsayType {
 
                 let database = try DatabaseManager()
                 databaeManagerCopy = database
-                if !Sendsay.isBeingTested {
-                    telemetryManager = TelemetryManager(
-                        userDefaults: userDefaults,
-                        userId: database.currentCustomer.uuid.uuidString
-                    )
-                    telemetryManager?.start()
-                    telemetryManager?.report(initEventWithConfiguration: configuration)
-                    let eventCount = try database.countTrackCustomer() + (try database.countTrackEvent())
-                    telemetryManager?.report(
-                        eventWithType: .eventCount,
-                        properties: ["count": String(describing: eventCount)])
-                }
 
                 let repository = ServerRepository(configuration: configuration)
                 self.repository = repository
@@ -386,7 +372,6 @@ public class SendsayInternal: SendsayType {
                     SegmentationManager.shared.processTriggeredBy(type: .`init`)
                 }
             } catch {
-                telemetryManager?.report(error: error, stackTrace: Thread.callStackSymbols)
                 // Failing gracefully, if setup failed
                 Sendsay.logger.log(.error, message: """
                     Error while creating dependencies, Sendsay cannot be configured.\n\(error.localizedDescription)
@@ -395,7 +380,6 @@ public class SendsayInternal: SendsayType {
         }
         if let exception = exception {
             nsExceptionRaised = true
-            telemetryManager?.report(exception: exception)
             Sendsay.logger.log(.error, message: """
             Error while creating dependencies, Sendsay cannot be configured.\n
             \(SendsayError.nsExceptionRaised(NonSendableBox(exception)).localizedDescription)
@@ -497,12 +481,10 @@ internal extension SendsayInternal {
                 try closure()
             } catch {
                 Sendsay.logger.log(.error, message: error.localizedDescription)
-                telemetryManager?.report(error: error, stackTrace: Thread.callStackSymbols)
                 errorHandler?(error)
             }
         }
         if let exception = exception {
-            telemetryManager?.report(exception: exception)
             Sendsay.logger.log(.error, message: SendsayError.nsExceptionRaised(NonSendableBox(exception)).localizedDescription)
             if safeModeEnabled {
                 nsExceptionRaised = true

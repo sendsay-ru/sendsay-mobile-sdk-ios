@@ -380,7 +380,6 @@ extension SendsayInternal {
                 sendsayProject: sendsayProject,
                 projectMapping: projectMapping
             )
-            self.telemetryManager?.report(eventWithType: .anonymize, properties: [:])
             Sendsay.logger.log(.verbose, message: "Anonymisation request done")
         }
     }

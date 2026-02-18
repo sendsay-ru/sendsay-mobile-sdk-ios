@@ -21,7 +21,6 @@ extension SendsayInternal {
                 for: $0.trackingManager.customerIds,
                 completion: $1
             )
-            self.telemetryManager?.report(eventWithType: .fetchRecommendation, properties: [:])
         }, completion: completion)
     }
 
@@ -39,8 +38,6 @@ extension SendsayInternal {
             }
 
             $0.repository.fetchConsents(completion: $1)
-
-            self.telemetryManager?.report(eventWithType: .fetchConsents, properties: [:])
         }, completion: completion)
     }
 
@@ -53,7 +50,6 @@ extension SendsayInternal {
                 throw SendsayError.authorizationInsufficient
             }
             $0.appInboxManager?.fetchAppInbox(completion: $1)
-            self.telemetryManager?.report(eventWithType: .fetchAppInbox, properties: [:])
         }, completion: completion)
     }
 

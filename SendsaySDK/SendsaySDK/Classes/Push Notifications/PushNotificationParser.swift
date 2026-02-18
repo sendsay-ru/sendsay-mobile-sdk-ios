@@ -51,30 +51,17 @@ struct PushNotificationParser {
             eventData.append(.eventType(customEventType))
         }
 
-        #warning ("TODO: local save attributes")
-        // 14014 handle
+
+        #warning ("Redmine 14014")
+        // ExtraData from push to local storage handle
         if let userDefaults = UserDefaults(suiteName: Constants.Tracking.sendsayPushNotificationExtraData) {
-            if let issue = notificationData.attributes[Constants.Keys.issueId] {
-                userDefaults.set(issue.rawValue, forKey: Constants.Tracking.issueIdKey)
-            }
-            if let letter = notificationData.attributes[Constants.Keys.letterId] {
-                userDefaults.set(letter.rawValue, forKey: Constants.Tracking.letterIdKey)
-            }
+            let now = Int64(Date().timeIntervalSince1970 * 1000)
+            PushParserCompanion.setExtraData(notificationData, userDefaults, now)
+            PushParserCompanion.checkIssueAndLetterOnExpire(notificationData, userDefaults)
         } else {
             Sendsay.logger.log(.error, message: "Unable to store local attributes")
         }
-//        if let userDefaults = UserDefaults(suiteName: Constants.Tracking.sendsayPushNotificationExtraData) {
-//            /// attributes is extraData in our case:
-//            userDefaults.set(notificationData.attributes[Constants.Keys.issueId], forKey: Constants.Tracking.issueIdKey)
-//            userDefaults.set(notificationData.attributes[Constants.Keys.letterId], forKey: Constants.Tracking.letterIdKey)
-//        } else {
-//            Sendsay.logger.log(.error, message: "Unable to store local attributes")
-//        }
-        
-//            let delivered = userDefaults.array(forKey: Constants.General.deliveredPushUserDefaultsKey) ?? []
-//            delivered.append(serialized)
-//            userDefaults.set(delivered, forKey: Constants.General.deliveredPushUserDefaultsKey)
-        
+
 
         // Handle actions
 
@@ -142,5 +129,45 @@ struct PushNotificationParser {
             considerConsent: notificationData.considerConsent,
             origin: userInfo
         )
+    }
+}
+
+struct PushParserCompanion {
+    static func checkIssueAndLetterOnExpire(_ data: NotificationData?, _ userDefaults: UserDefaults) -> UserDefaults {
+        let now = Int64(Date().timeIntervalSince1970 * 1000)
+        let lastIssueLetterDateTime: Int64 = {
+//            if let str = data?.attributes[Constants.Tracking.issueLetterDatetimeKey]?.objectValue as? String,
+            if let str = userDefaults.object(forKey: Constants.Tracking.issueLetterDatetimeKey),
+               let value = (str as? NSNumber)?.int64Value {
+                return value
+            }
+            return now
+        }()
+
+        if (now - lastIssueLetterDateTime) >= Constants.Tracking.issueLetterExpireDuration {
+            return setExtraData(nil, userDefaults, now)
+        }
+        return userDefaults
+    }
+    
+    static func setExtraData(_ data: NotificationData?, _ userDefaults: UserDefaults, _ now: Int64) -> UserDefaults {
+        /// Если шлем data - вписываем, иначе - удаляем данные
+        if let data {
+            data.attributes[Constants.Keys.issueId]
+                .map { userDefaults.set($0.rawValue, forKey: Constants.Tracking.issueIdKey) }
+
+            data.attributes[Constants.Keys.letterId]
+                .map { userDefaults.set($0.rawValue, forKey: Constants.Tracking.letterIdKey) }
+            
+            userDefaults.set(now, forKey: Constants.Tracking.issueLetterDatetimeKey)
+            
+            return userDefaults
+        } else {
+            [Constants.Tracking.issueLetterDatetimeKey,
+             Constants.Tracking.issueIdKey,
+             Constants.Tracking.letterIdKey]
+                .forEach { userDefaults.removeObject(forKey: $0) }
+            return userDefaults
+        }
     }
 }

@@ -48,7 +48,6 @@
 		053EC59923AA32A7004D1C8B /* InAppMessageDisplayStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EC59823AA32A7004D1C8B /* InAppMessageDisplayStatus.swift */; };
 		053EC59B23AA3309004D1C8B /* InAppMessageDisplayStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EC59A23AA3309004D1C8B /* InAppMessageDisplayStateStore.swift */; };
 		053EC59F23AA61DC004D1C8B /* InAppMessageDisplayStatusStoreSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 053EC59E23AA61DC004D1C8B /* InAppMessageDisplayStatusStoreSpec.swift */; };
-		05457FAE241BCFF30067226F /* TelemetryEventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05457FAD241BCFF30067226F /* TelemetryEventType.swift */; };
 		054B7E5123F2D71A00026543 /* InAppMessageActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054B7E5023F2D71A00026543 /* InAppMessageActionButton.swift */; };
 		05583E9B23603BA900F7084E /* PushNotificationParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05583E9A23603BA900F7084E /* PushNotificationParser.swift */; };
 		05583E9E23608AE400F7084E /* PushNotificationParserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05583E9D23608AE400F7084E /* PushNotificationParserSpec.swift */; };
@@ -177,21 +176,11 @@
 		05E81632247555DD00AA28E3 /* SendsayAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E81631247555DD00AA28E3 /* SendsayAppDelegate.swift */; };
 		05F33B1B25C16DEF00CFD60A /* SendsaySDKShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0561829725AD959C001E30A3 /* SendsaySDKShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05F33B1C25C16DEF00CFD60A /* SendsaySDKObjC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0563750C25AF030A00AB68DA /* SendsaySDKObjC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		05F3EFCD237E9260006E83F4 /* TelemetryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFCC237E9260006E83F4 /* TelemetryManager.swift */; };
-		05F3EFCF237E926B006E83F4 /* CrashManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFCE237E926B006E83F4 /* CrashManager.swift */; };
-		05F3EFD3237E9291006E83F4 /* TelemetryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFD2237E9291006E83F4 /* TelemetryStorage.swift */; };
-		05F3EFD5237E92A4006E83F4 /* TelemetryUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFD4237E92A4006E83F4 /* TelemetryUpload.swift */; };
-		05F3EFD8237E938D006E83F4 /* CrashLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFD7237E938D006E83F4 /* CrashLog.swift */; };
-		05F3EFDA237E9415006E83F4 /* ErrorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFD9237E9415006E83F4 /* ErrorData.swift */; };
-		05F3EFDC237E96FA006E83F4 /* FileTelemetryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFDB237E96FA006E83F4 /* FileTelemetryStorage.swift */; };
 		05F3EFE0237E99FE006E83F4 /* FileTelemetryStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFDF237E99FE006E83F4 /* FileTelemetryStorageSpec.swift */; };
 		05F3EFE22382A814006E83F4 /* CrashManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFE12382A814006E83F4 /* CrashManagerSpec.swift */; };
-		05F3EFE42382BAB6006E83F4 /* TelemetryUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFE32382BAB6006E83F4 /* TelemetryUtility.swift */; };
-		05F3EFE62382BB88006E83F4 /* VSAppCenterTelemetryUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFE52382BB88006E83F4 /* VSAppCenterTelemetryUpload.swift */; };
 		05F3EFEA2382BC4C006E83F4 /* MockTelemetryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFE92382BC4C006E83F4 /* MockTelemetryStorage.swift */; };
 		05F3EFED2382BD08006E83F4 /* MockTelemetryUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFEC2382BD08006E83F4 /* MockTelemetryUpload.swift */; };
 		05F3EFEF2382C192006E83F4 /* TelemetryUtilitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFEE2382C192006E83F4 /* TelemetryUtilitySpec.swift */; };
-		05F3EFF12382C757006E83F4 /* VSAppCenterAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFF02382C757006E83F4 /* VSAppCenterAPIModel.swift */; };
 		05FB1BB7236AE9220089C529 /* NotificationDataSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FB1BB6236AE9220089C529 /* NotificationDataSpec.swift */; };
 		05FBB15D244709C500BDF234 /* DatabaseManager+Clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FBB15C244709C500BDF234 /* DatabaseManager+Clear.swift */; };
 		05FD178F2403C4CC003A799B /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FD178E2403C4CC003A799B /* BuildConfiguration.swift */; };
@@ -632,7 +621,6 @@
 		053EC59823AA32A7004D1C8B /* InAppMessageDisplayStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppMessageDisplayStatus.swift; sourceTree = "<group>"; };
 		053EC59A23AA3309004D1C8B /* InAppMessageDisplayStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppMessageDisplayStateStore.swift; sourceTree = "<group>"; };
 		053EC59E23AA61DC004D1C8B /* InAppMessageDisplayStatusStoreSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppMessageDisplayStatusStoreSpec.swift; sourceTree = "<group>"; };
-		05457FAD241BCFF30067226F /* TelemetryEventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryEventType.swift; sourceTree = "<group>"; };
 		054B7E5023F2D71A00026543 /* InAppMessageActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppMessageActionButton.swift; sourceTree = "<group>"; };
 		0551A0AB241A81FE009A5A5E /* JSON+SnakeCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSON+SnakeCase.swift"; sourceTree = "<group>"; };
 		05583E9A23603BA900F7084E /* PushNotificationParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNotificationParser.swift; sourceTree = "<group>"; };
@@ -748,21 +736,11 @@
 		05E1A3802359B3A500E5EDDE /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; name = .swiftlint.yml; path = ../.swiftlint.yml; sourceTree = "<group>"; };
 		05E81631247555DD00AA28E3 /* SendsayAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendsayAppDelegate.swift; sourceTree = "<group>"; };
 		05EB8B6B2344F4D700AAC98B /* Configuration+Validation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Configuration+Validation.swift"; sourceTree = "<group>"; };
-		05F3EFCC237E9260006E83F4 /* TelemetryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryManager.swift; sourceTree = "<group>"; };
-		05F3EFCE237E926B006E83F4 /* CrashManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashManager.swift; sourceTree = "<group>"; };
-		05F3EFD2237E9291006E83F4 /* TelemetryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryStorage.swift; sourceTree = "<group>"; };
-		05F3EFD4237E92A4006E83F4 /* TelemetryUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryUpload.swift; sourceTree = "<group>"; };
-		05F3EFD7237E938D006E83F4 /* CrashLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLog.swift; sourceTree = "<group>"; };
-		05F3EFD9237E9415006E83F4 /* ErrorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorData.swift; sourceTree = "<group>"; };
-		05F3EFDB237E96FA006E83F4 /* FileTelemetryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTelemetryStorage.swift; sourceTree = "<group>"; };
 		05F3EFDF237E99FE006E83F4 /* FileTelemetryStorageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTelemetryStorageSpec.swift; sourceTree = "<group>"; };
 		05F3EFE12382A814006E83F4 /* CrashManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashManagerSpec.swift; sourceTree = "<group>"; };
-		05F3EFE32382BAB6006E83F4 /* TelemetryUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryUtility.swift; sourceTree = "<group>"; };
-		05F3EFE52382BB88006E83F4 /* VSAppCenterTelemetryUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSAppCenterTelemetryUpload.swift; sourceTree = "<group>"; };
 		05F3EFE92382BC4C006E83F4 /* MockTelemetryStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTelemetryStorage.swift; sourceTree = "<group>"; };
 		05F3EFEC2382BD08006E83F4 /* MockTelemetryUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTelemetryUpload.swift; sourceTree = "<group>"; };
 		05F3EFEE2382C192006E83F4 /* TelemetryUtilitySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryUtilitySpec.swift; sourceTree = "<group>"; };
-		05F3EFF02382C757006E83F4 /* VSAppCenterAPIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSAppCenterAPIModel.swift; sourceTree = "<group>"; };
 		05FB1BB6236AE9220089C529 /* NotificationDataSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDataSpec.swift; sourceTree = "<group>"; };
 		05FBB15C244709C500BDF234 /* DatabaseManager+Clear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DatabaseManager+Clear.swift"; sourceTree = "<group>"; };
 		05FD178E2403C4CC003A799B /* BuildConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
@@ -1553,48 +1531,6 @@
 				057F44862399322D0070DF30 /* InAppMessageDialogViewSpec.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		05F3EFCB237E9237006E83F4 /* Telemetry */ = {
-			isa = PBXGroup;
-			children = (
-				05F3EFD6237E9381006E83F4 /* Model */,
-				05F3EFD1237E9283006E83F4 /* Storage */,
-				05F3EFD0237E927C006E83F4 /* Upload */,
-				05F3EFCE237E926B006E83F4 /* CrashManager.swift */,
-				05F3EFCC237E9260006E83F4 /* TelemetryManager.swift */,
-				05F3EFE32382BAB6006E83F4 /* TelemetryUtility.swift */,
-			);
-			path = Telemetry;
-			sourceTree = "<group>";
-		};
-		05F3EFD0237E927C006E83F4 /* Upload */ = {
-			isa = PBXGroup;
-			children = (
-				05F3EFD4237E92A4006E83F4 /* TelemetryUpload.swift */,
-				05F3EFF02382C757006E83F4 /* VSAppCenterAPIModel.swift */,
-				05F3EFE52382BB88006E83F4 /* VSAppCenterTelemetryUpload.swift */,
-			);
-			path = Upload;
-			sourceTree = "<group>";
-		};
-		05F3EFD1237E9283006E83F4 /* Storage */ = {
-			isa = PBXGroup;
-			children = (
-				05F3EFDB237E96FA006E83F4 /* FileTelemetryStorage.swift */,
-				05F3EFD2237E9291006E83F4 /* TelemetryStorage.swift */,
-			);
-			path = Storage;
-			sourceTree = "<group>";
-		};
-		05F3EFD6237E9381006E83F4 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				05F3EFD7237E938D006E83F4 /* CrashLog.swift */,
-				05F3EFD9237E9415006E83F4 /* ErrorData.swift */,
-				05457FAD241BCFF30067226F /* TelemetryEventType.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		05F3EFDD237E99E4006E83F4 /* Telemetry */ = {
@@ -2478,7 +2414,6 @@
 				F0E757E1207CF9BE00FE8C21 /* Repository */,
 				05C2892F2428A1270021220C /* Sessions */,
 				5568873B2A1752B900498B40 /* Style */,
-				05F3EFCB237E9237006E83F4 /* Telemetry */,
 				01EC2DB0207E55C10031BFEB /* Tracking */,
 				05D0E5552386C63800413AE2 /* Sendsay+Configuration.swift */,
 				05E81631247555DD00AA28E3 /* SendsayAppDelegate.swift */,
@@ -3151,23 +3086,17 @@
 				5568874A2A17574A00498B40 /* ListScreenStyle.swift in Sources */,
 				5567C09629091B8E00318E68 /* AppInboxRequest.swift in Sources */,
 				318EFF462D8989EA004C5E1F /* SlideInAppImageComponent.swift in Sources */,
-				05F3EFF12382C757006E83F4 /* VSAppCenterAPIModel.swift in Sources */,
 				B1AB19E52E2FF7DD00554B39 /* ConfigItem.swift in Sources */,
 				23E725E4214AA7A900B552B8 /* Reachability.swift in Sources */,
 				31EBB85A2A6AC3020003AAA5 /* UsedInAppContentBlocks.swift in Sources */,
-				05F3EFE42382BAB6006E83F4 /* TelemetryUtility.swift in Sources */,
 				55DA6EBC290ABD7500B5B285 /* AppInboxManager.swift in Sources */,
 				05C289312428A13D0021220C /* SessionManager.swift in Sources */,
-				05F3EFD8237E938D006E83F4 /* CrashLog.swift in Sources */,
-				05F3EFDC237E96FA006E83F4 /* FileTelemetryStorage.swift in Sources */,
 				B42DA68E22B0556100BBA225 /* ConsentsResponse.swift in Sources */,
-				05F3EFDA237E9415006E83F4 /* ErrorData.swift in Sources */,
 				01EC2DB6207E5F600031BFEB /* TrackingManagerType.swift in Sources */,
 				05880538241682F8001AAE8A /* SendsayInternal.swift in Sources */,
 				313C07042CD4EB8F0020DE64 /* InAppButtonContainerSwiftUI.swift in Sources */,
 				0564D14225ADE46300FDCAE5 /* SendsaySharedExports.swift in Sources */,
 				31EBB8622A6AC3020003AAA5 /* InappContentBlocksDataProvider.swift in Sources */,
-				05F3EFCF237E926B006E83F4 /* CrashManager.swift in Sources */,
 				55734B022A5E9B9400F24427 /* RegExpExtensions.swift in Sources */,
 				05C289332428A1480021220C /* SessionManagerType.swift in Sources */,
 				B1AB19F72E31191000554B39 /* InitConfigManagerType.swift in Sources */,
@@ -3186,9 +3115,7 @@
 				0591905B23EC1A170037BD88 /* EventFilterAttribute.swift in Sources */,
 				01EC2DBF207E68BF0031BFEB /* DatabaseModel.xcdatamodeld in Sources */,
 				318EFF642D898BF1004C5E1F /* InAppViewConfig.swift in Sources */,
-				05F3EFD3237E9291006E83F4 /* TelemetryStorage.swift in Sources */,
 				056772452374703B0082167C /* PushNotificationManagerType.swift in Sources */,
-				05F3EFCD237E9260006E83F4 /* TelemetryManager.swift in Sources */,
 				318EFF5C2D898B9E004C5E1F /* InAppCloseButtonConfig.swift in Sources */,
 				3189E2E12C4EBEC300C4CD68 /* CarouselContentBlockViewCell.swift in Sources */,
 				55DA6EBE290AD5E900B5B285 /* AppInboxCacheType.swift in Sources */,
@@ -3221,9 +3148,7 @@
 				01EC2DB2207E55CB0031BFEB /* TrackingManager.swift in Sources */,
 				559D97082962FCF0006D4499 /* ImageUtils.swift in Sources */,
 				55C08DD12A568A55000BA66A /* FileCache.swift in Sources */,
-				05457FAE241BCFF30067226F /* TelemetryEventType.swift in Sources */,
 				31EBB8562A6AC3020003AAA5 /* InAppContentBlocksTrackingEvent.swift in Sources */,
-				05F3EFE62382BB88006E83F4 /* VSAppCenterTelemetryUpload.swift in Sources */,
 				318EFF5A2D898B5F004C5E1F /* InAppButtonFontData.swift in Sources */,
 				55A468D0296F154C00E62438 /* WebActionsManager.swift in Sources */,
 				01EC2DC1207F63970031BFEB /* FlushingMode.swift in Sources */,
@@ -3303,7 +3228,6 @@
 				55BB0E1E28F44EDA00D6243A /* AppInboxDetailViewController.swift in Sources */,
 				C09A6499212D871600DCAC06 /* NSManagedObjectContext+Perform.swift in Sources */,
 				C030AF4E216FA154004413F0 /* PushNotificationDelegateObserver.swift in Sources */,
-				05F3EFD5237E92A4006E83F4 /* TelemetryUpload.swift in Sources */,
 				C0EB5D8E20B710A900F1031F /* Data+TokenString.swift in Sources */,
 				551301372D072338005C71C8 /* CampaignRepositoryType.swift in Sources */,
 				311268DB2CD10E9C00C38394 /* InAppButtonContainer.swift in Sources */,
@@ -3683,7 +3607,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 833J9724GH;
 				INFOPLIST_FILE = ExampleNotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13;
@@ -3692,7 +3616,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 0.1.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationContent";
@@ -3710,7 +3634,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 833J9724GH;
 				INFOPLIST_FILE = ExampleNotificationContent/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13;
@@ -3719,7 +3643,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 0.1.2;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationContent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3737,7 +3661,7 @@
 				CODE_SIGN_ENTITLEMENTS = ExampleNotificationService/ExampleNotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 833J9724GH;
 				INFOPLIST_FILE = ExampleNotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13;
@@ -3746,7 +3670,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 0.1.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationService";
@@ -3765,7 +3689,7 @@
 				CODE_SIGN_ENTITLEMENTS = ExampleNotificationService/ExampleNotificationService.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 32;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 833J9724GH;
 				INFOPLIST_FILE = ExampleNotificationService/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13;
@@ -3774,7 +3698,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 2.2.0;
+				MARKETING_VERSION = 0.1.2;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3864,7 +3788,7 @@
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 833J9724GH;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Resources/Info.plist";
@@ -3875,7 +3799,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3893,7 +3817,7 @@
 				CODE_SIGN_ENTITLEMENTS = Example/Example.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 833J9724GH;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Example/Resources/Info.plist";
@@ -3904,7 +3828,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.1.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
