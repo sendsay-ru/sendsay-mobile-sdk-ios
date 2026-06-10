@@ -12,11 +12,13 @@ import Foundation
 enum TrackBuildError: Error, LocalizedError {
     case requiredFieldMissing(String)
     case invalidItems(String)
+    case initError(String)
 
     var errorDescription: String? {
         switch self {
         case .requiredFieldMissing(let msg): return msg
         case .invalidItems(let msg): return msg
+        case .initError(let msg): return msg
         }
     }
 }
@@ -45,6 +47,11 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
     public var productType: String?
     public var productPrice: Double?
     public var productOldPrice: Double?
+    
+    // release notes about CDP Sendsay
+    public var issue: Int?
+    public var letter: Int?
+    public var issueDt: String?
 
     // other
     public var email: String?
@@ -65,8 +72,19 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
 
     // items
     public var items: [OrderItem]?
+    
+    
+    private let repository: ServerRepository
 
-    public init() {}
+    public init() throws {
+        guard let configuration = Configuration.loadFromUserDefaults(appGroup: Constants.General.appGroupKey) else {
+            throw TrackBuildError.initError("ConfigurationNotFound: \(Constants.General.appGroupKey)")
+        }
+        guard let customerIds = EventTrackingObject.loadCustomerIdsFromUserDefaults(appGroup: Constants.General.appGroupKey) else {
+            throw TrackBuildError.initError("CustomerIdsNotFound: \(Constants.General.appGroupKey)")
+        }
+        repository = ServerRepository(configuration: configuration)
+    }
 
     // MARK: Chain setters
 
@@ -153,10 +171,51 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
         self.items = items
         return self
     }
+    
+    @discardableResult
+    public func setIssueLetter(
+        issue: Int? = nil,
+        letter: Int? = nil,
+        issueDt: String? = nil,
+    ) -> Self {
+        self.issue = issue != 0 ? issue : nil
+        self.letter = letter != 0 ? letter : nil
+        self.issueDt = issueDt != "" ? issueDt : nil
+        return self
+    }
 
     /// Builds a `TrackSSECData` from the accumulated common fields only.
     /// Subclasses should call this and then apply their validations.
     public func buildCommon() -> TrackSSECData {
+        // Передача данных о выпуске CDP Sendsay (Redmine 14014)
+//        let properties = repository.configuration.defaultProperties?.mapValues { $0.jsonValue } ?? [:]
+        
+        /// do not forget to check onExpire date
+//        if var userDefaults = UserDefaults(suiteName: Constants.Tracking.sendsayPushNotificationExtraData) {
+        if var userDefaults = UserDefaults(suiteName: Constants.Tracking.sendsayPushNotificationExtraData) {
+            userDefaults = PushParserCompanion.checkIssueAndLetterOnExpire(nil, userDefaults)
+
+            // attributes is extraData in our case:
+            let issueAny = userDefaults.object(forKey: Constants.Tracking.issueIdKey)
+            let letterAny = userDefaults.object(forKey: Constants.Tracking.letterIdKey)
+
+            let issueInt: Int? = (issueAny as? Int)
+                ?? (issueAny as? NSNumber)?.intValue
+                ?? Int(issueAny as? String ?? "")
+
+            let letterInt: Int? = (letterAny as? Int)
+                ?? (letterAny as? NSNumber)?.intValue
+                ?? Int(letterAny as? String ?? "")
+            
+            setIssueLetter(
+                issue: issueInt,
+                letter: letterInt,
+//                issueDt: userDefaults.string(forKey: Constants.Tracking.issueLetterDatetimeKey)
+            )
+        } else {
+            Sendsay.logger.log(.error, message: "Unable to store local attributes")
+        }
+
         return TrackSSECData(
             productId: productId,
             productName: productName,
@@ -172,6 +231,9 @@ public class _CommonSSECBuilder: TrackSSECBuildable {
             type: productType,
             price: productPrice,
             oldPrice: productOldPrice,
+            issue: issue,
+            letter: letter,
+            issueDt: issueDt,
             email: email,
             updatePerItem: updatePerItem,
             update: update,
@@ -246,8 +308,8 @@ public final class BasketClearBuilder: _CommonSSECBuilder {
 
 // MARK: - Factory
 public enum TrackSSECDataBuilders {
-    public static func viewProduct() -> ViewProductBuilder { .init() }
-    public static func order() -> OrderBuilder { .init() }
-    public static func basketAdd() -> BasketAddBuilder { .init() }
-    public static func basketClear() -> BasketClearBuilder { .init() }
+    public static func viewProduct() throws -> ViewProductBuilder { try .init()}
+    public static func order() throws -> OrderBuilder { try .init() }
+    public static func basketAdd() throws -> BasketAddBuilder { try .init() }
+    public static func basketClear() throws -> BasketClearBuilder { try .init() }
 }

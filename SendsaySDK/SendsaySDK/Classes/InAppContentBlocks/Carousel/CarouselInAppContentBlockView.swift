@@ -410,10 +410,6 @@ extension CarouselInAppContentBlockView: UICollectionViewDelegateFlowLayout {
         currentMessage = message
         if !alreadyShowedMessages.contains(id) {
             alreadyShowedMessages.append(id)
-            Sendsay.shared.telemetryManager?.report(
-                eventWithType: .showInAppMessage,
-                properties: ["messageType": InAppContentBlockType.carouselContentBlock.type]
-            )
         }
         inAppContentBlocksManager.updateDisplayedState(for: id)
         if let index = messages.firstIndex(where: { $0.message?.id == messageResponse.id }) {

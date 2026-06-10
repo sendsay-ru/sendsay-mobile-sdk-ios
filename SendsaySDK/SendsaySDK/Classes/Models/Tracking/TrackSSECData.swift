@@ -25,6 +25,11 @@ public struct TrackSSECData: Codable {
     var price: Double?
     var oldPrice: Double?
     
+    // release notes about CDP Sendsay
+    var issue: Int?
+    var letter: Int?
+    var issueDt: String?
+    
     // other
     var email: String?
     var updatePerItem: Int64?
@@ -60,6 +65,11 @@ public struct TrackSSECData: Codable {
         case type = "type"
         case price = "price"
         case oldPrice = "old_price"
+        
+        // Данные о выпуске CDP Sendsay
+        case issue = "issue"
+        case letter = "letter"
+        case issueDt = "issue_dt"
         
         case email
         case updatePerItem = "update_per_item"

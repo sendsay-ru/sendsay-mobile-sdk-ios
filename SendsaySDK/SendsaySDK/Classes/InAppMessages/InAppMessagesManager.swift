@@ -332,10 +332,6 @@ final class InAppMessagesManager: InAppMessagesManagerType, @unchecked Sendable 
         displayStatusStore.didDisplay(message, at: Date())
         trackingConsentManager.trackInAppMessageShown(message: message, mode: .CONSIDER_CONSENT)
         Sendsay.shared.inAppMessagesDelegate.inAppMessageShown(message: message)
-        Sendsay.shared.telemetryManager?.report(
-            eventWithType: .showInAppMessage,
-            properties: ["messageType": message.rawMessageType ?? "null"]
-        )
     }
 
     private func processInAppMessageAction(button: InAppMessagePayloadButton) {

@@ -187,7 +187,9 @@ extension SendsayInternal {
 
     private func readNotificationData(from source: [AnyHashable: Any]) -> NotificationData {
         var notificationData = NotificationData.deserialize(
-            attributes: source["attributes"] as? [String: Any] ?? [:],
+//            attributes: source["data"] as? [String: Any] ??
+            attributes: source["attributes"] as? [String: Any]
+            ?? [:],
             campaignData: source["url_params"] as? [String: Any] ?? [:],
             consentCategoryTracking: source["consent_category_tracking"] as? String ?? nil,
             hasTrackingConsent: GdprTracking.readTrackingConsentFlag(source["has_tracking_consent"])
@@ -378,7 +380,6 @@ extension SendsayInternal {
                 sendsayProject: sendsayProject,
                 projectMapping: projectMapping
             )
-            self.telemetryManager?.report(eventWithType: .anonymize, properties: [:])
             Sendsay.logger.log(.verbose, message: "Anonymisation request done")
         }
     }
@@ -696,19 +697,30 @@ extension SendsayInternal {
             // Do the actual tracking
             try dependencies.trackingManager.track(.customEvent, with: data)
         }
-        
-//        public func trackSSEC(
-    //        placeholderId: String,
-    //        message: MessageItem
-//        ) {
-//        executeSafelyWithDependencies { dependencies in
-//            guard dependencies.configuration.authorization != Authorization.none else {
-//                throw SendsayError.authorizationInsufficient
-//            }
-//            dependencies.trackingConsentManager.trackSSEC(
-//                message: message,
-//                mode: .CONSIDER_CONSENT
-//            )
-//        }
+    }
+    
+
+    // MARK: AD ID (IDFA)
+    
+    public func trackIDFA() {
+        executeSafelyWithDependencies { dependencies in
+            guard !dependencies.initConfigManager.cache.config.isADTrackEnabled else {
+                throw SendsayError.configurationError("Getting IDFA is disabled by init config by \'isADTrackEnabled\'")
+            }
+
+            self.fetchIDFA { idfaString in
+                        // Переключаемся на главный поток для работы с SDK
+                        DispatchQueue.main.async {
+                            if let value = idfaString {
+                                print("IDFA успешно получен: \(value)")
+                                
+                                if let defaults = UserDefaults(suiteName: Constants.General.userDefaultsSuite) {
+                                    defaults.set(value, forKey: "idfa")
+                                    print("IDFA успешно сохранен в UserDefaults -> idfa : \(value)")
+                                }
+                            }
+                        }
+                    }
+        }
     }
 }

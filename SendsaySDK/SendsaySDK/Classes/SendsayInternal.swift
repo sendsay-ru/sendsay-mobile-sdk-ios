@@ -83,8 +83,6 @@ public class SendsayInternal: SendsayType {
     /// The manager for push registration and delivery tracking
     internal var notificationsManager: PushNotificationManagerType?
 
-    internal var telemetryManager: TelemetryManager?
-
     internal var campaignRepository: CampaignRepositoryType?
 
     public var inAppContentBlocksManager: InAppContentBlocksManagerType?
@@ -283,18 +281,6 @@ public class SendsayInternal: SendsayType {
 
                 let database = try DatabaseManager()
                 databaeManagerCopy = database
-                if !Sendsay.isBeingTested {
-                    telemetryManager = TelemetryManager(
-                        userDefaults: userDefaults,
-                        userId: database.currentCustomer.uuid.uuidString
-                    )
-                    telemetryManager?.start()
-                    telemetryManager?.report(initEventWithConfiguration: configuration)
-                    let eventCount = try database.countTrackCustomer() + (try database.countTrackEvent())
-                    telemetryManager?.report(
-                        eventWithType: .eventCount,
-                        properties: ["count": String(describing: eventCount)])
-                }
 
                 let repository = ServerRepository(configuration: configuration)
                 self.repository = repository
@@ -380,13 +366,18 @@ public class SendsayInternal: SendsayType {
 
                 if isDebugModeEnabled {
                     VersionChecker(repository: repository).warnIfNotLatestSDKVersion()
+                    /**
+                     * IDFA is needed for better targeting and personalization,
+                     * so we initialize it on app start in debug mode.
+                     * In release mode, it will be initialized only if the developer explicitly calls trackIDFA or if init config enables it.
+                     */
+                    self.trackIDFA()
                 }
 
                 self.afterInit.doActionAfterSendsayInit {
                     SegmentationManager.shared.processTriggeredBy(type: .`init`)
                 }
             } catch {
-                telemetryManager?.report(error: error, stackTrace: Thread.callStackSymbols)
                 // Failing gracefully, if setup failed
                 Sendsay.logger.log(.error, message: """
                     Error while creating dependencies, Sendsay cannot be configured.\n\(error.localizedDescription)
@@ -395,7 +386,6 @@ public class SendsayInternal: SendsayType {
         }
         if let exception = exception {
             nsExceptionRaised = true
-            telemetryManager?.report(exception: exception)
             Sendsay.logger.log(.error, message: """
             Error while creating dependencies, Sendsay cannot be configured.\n
             \(SendsayError.nsExceptionRaised(NonSendableBox(exception)).localizedDescription)
@@ -497,12 +487,10 @@ internal extension SendsayInternal {
                 try closure()
             } catch {
                 Sendsay.logger.log(.error, message: error.localizedDescription)
-                telemetryManager?.report(error: error, stackTrace: Thread.callStackSymbols)
                 errorHandler?(error)
             }
         }
         if let exception = exception {
-            telemetryManager?.report(exception: exception)
             Sendsay.logger.log(.error, message: SendsayError.nsExceptionRaised(NonSendableBox(exception)).localizedDescription)
             if safeModeEnabled {
                 nsExceptionRaised = true
@@ -599,6 +587,13 @@ public extension SendsayInternal {
         afterInit.setStatus(status: .notInitialized)
         afterInit.clean()
         clearUserData(appGroup: repository?.configuration.appGroup)
+    }
+    
+    func getIDFA() -> String? {
+        if let defaults = UserDefaults(suiteName: Constants.General.userDefaultsSuite) {
+            return defaults.string(forKey: "idfa")
+        }
+        return nil
     }
 
     private func clearUserData(appGroup: String?) {

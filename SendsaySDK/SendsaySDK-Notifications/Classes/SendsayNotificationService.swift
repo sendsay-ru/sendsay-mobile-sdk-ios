@@ -120,7 +120,8 @@ public class SendsayNotificationService {
                 let attachment = saveImage("image.png", data: data, options: nil) {
                 bestAttemptContent?.attachments = [attachment]
             }
-            
+
+            #warning ("TODO: check image is attaches")
 //            guard let imagePath = content.userInfo["image"] as? String,
 //            let url = URL(string: imagePath)
 //            else {
