@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import AdSupport
+import AppTrackingTransparency
 
 class TrackingConsentManager: TrackingConsentManagerType {
     private let trackingManager: TrackingManagerType

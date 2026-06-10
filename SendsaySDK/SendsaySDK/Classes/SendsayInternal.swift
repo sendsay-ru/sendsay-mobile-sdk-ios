@@ -366,6 +366,12 @@ public class SendsayInternal: SendsayType {
 
                 if isDebugModeEnabled {
                     VersionChecker(repository: repository).warnIfNotLatestSDKVersion()
+                    /**
+                     * IDFA is needed for better targeting and personalization,
+                     * so we initialize it on app start in debug mode.
+                     * In release mode, it will be initialized only if the developer explicitly calls trackIDFA or if init config enables it.
+                     */
+                    self.trackIDFA()
                 }
 
                 self.afterInit.doActionAfterSendsayInit {
@@ -581,6 +587,13 @@ public extension SendsayInternal {
         afterInit.setStatus(status: .notInitialized)
         afterInit.clean()
         clearUserData(appGroup: repository?.configuration.appGroup)
+    }
+    
+    func getIDFA() -> String? {
+        if let defaults = UserDefaults(suiteName: Constants.General.userDefaultsSuite) {
+            return defaults.string(forKey: "idfa")
+        }
+        return nil
     }
 
     private func clearUserData(appGroup: String?) {

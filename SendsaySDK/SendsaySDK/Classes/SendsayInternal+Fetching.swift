@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import AdSupport
+import AppTrackingTransparency
 
 // MARK: - Fetching -
 
@@ -63,5 +65,28 @@ extension SendsayInternal {
             }
             $0.appInboxManager?.fetchAppInboxItem(messageId, completion: $1)
         }, completion: completion)
+    }
+    
+    public func fetchIDFA(completion: @escaping (String?) -> Void) {
+        if #available(iOS 14.5, *) {
+            // Проверяем текущий статус, чтобы не вызывать окно повторно
+            let status = ATTrackingManager.trackingAuthorizationStatus
+            
+            if status == .notDetermined {
+                ATTrackingManager.requestTrackingAuthorization { _ in
+                    // Внутри замыкания ATT всегда возвращается на фоновом потоке
+                    let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+                    completion(idfa)
+                }
+            } else {
+                // Если разрешено или запрещено - сразу отдаем IDFA
+                let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+                completion(idfa)
+            }
+        } else {
+            // Для iOS меньше 14.4 окно ATT не существует, IDFA доступен напрямую
+            let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+            completion(idfa)
+        }
     }
 }

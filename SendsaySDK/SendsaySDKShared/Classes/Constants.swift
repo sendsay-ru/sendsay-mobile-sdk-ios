@@ -91,7 +91,7 @@ public enum Constants {
         public static let issueLetterDatetimeKey = "SENDSAY_ISSUE_LETTER_DATETIME_DATA_UTC"
         /// iOs 16+
         //    let ISSUE_LETTER_EXPIRE_DURATION = Int64(Duration.hours(24).components.seconds * 1000)
-        public static let issueLetterExpireDuration: Int64 = 4 * 60 * 1000 //24 * 60 * 60 * 1000 /// 24 hours
+        public static let issueLetterExpireDuration: Int64 = 24 * 60 * 60 * 1000 /// 24 hours
     }
 
     /// General constants
