@@ -182,12 +182,17 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
 
         var properties: [String: JSONValue] = [:]
         
-        var dk: [JSONValue] = []
+        var dk: [String: JSONValue] = [:]
         var datakey: [JSONValue] = []
         
         if let key0 = keyFieldDB.text, !key0.isEmpty {
             if let v0 = valueFieldDB.text, !v0.isEmpty {
-                dk.append(.array([ .string(key0), .string(v0) ]))
+                let arrayKeys = key0.split(separator: " ")
+                let arrayVals = v0.split(separator: " ")
+
+                for (key, value) in zip(arrayKeys, arrayVals) {
+                    dk[String(key)] = .string(String(value))
+                }
             }
         }
 
@@ -218,7 +223,7 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
             }
         }
 
-        properties["dk"] = .array(dk)
+        properties["dk"] = .dictionary(dk)
         properties["datakey"] = .array(datakey)
 
 //        print("props_member.set: \(jsonPretty(json: properties))")
