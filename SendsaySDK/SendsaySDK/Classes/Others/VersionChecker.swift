@@ -57,6 +57,14 @@ internal class VersionChecker {
                             "#### https://github.com/sendsay-ru/\(gitProject)/releases\n" +
                             "####"
                         )
+                    } else {
+//                        Sendsay.logger.log(
+//                            LogLevel.error,
+//                            message: "\n####\n" +
+//                            "#### A version of the Sendsay SDK is OK!\n" +
+//                            "#### Your version: \(actualVersion)\n" +
+//                            "####"
+//                        )
                     }
                 }
             })
