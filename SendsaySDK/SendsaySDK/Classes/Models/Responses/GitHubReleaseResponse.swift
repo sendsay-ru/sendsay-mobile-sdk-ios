@@ -16,6 +16,6 @@ public struct GitHubReleaseResponse: Codable {
 
 private extension GitHubReleaseResponse {
     enum CodingKeys: String, CodingKey {
-        case version = "tag_name"
+        case version = "name"
     }
 }

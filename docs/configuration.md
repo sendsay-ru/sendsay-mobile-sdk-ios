@@ -19,7 +19,7 @@ parentDocSlug: ios-sdk-setup
    * Подробнее — в разделах [Управление доступом к API мобильных SDK](https://documentation.bloomreach.com/engagement/docs/mobile-sdks-api-access-management) и [Authentication API](https://documentation.bloomreach.com/engagement/reference/authentication) в документации Engagement.
 
 * `baseUrl`
-  * Базовый URL API. По умолчанию: `https://api.sendsay.com`. 
+  * Базовый URL API. По умолчанию: `https://mobi.sendsay.ru/xnpe/v100`. 
   * Укажите своё значение, если используйте пользовательский базовый URL.
 
 * `projectMapping`
@@ -62,7 +62,7 @@ parentDocSlug: ios-sdk-setup
 
 * `appGroup`
   * **Обязательно** для автоматического отслеживания доставленных push-уведомлений. 
-  * Подробнее — в документации Engagement: [Push-уведомления](https://documentation.bloomreach.com/engagement/docs/ios-sdk-push-notifications).
+  * Подробнее — в документации Engagement: [Push-уведомления](../docs/push-notifications.md#шаг-2-настройка-sdk).
 
 * `requirePushAuthorization`
   * Определяет, должен ли SDK проверять разрешение на push-уведомления перед отправкой push-токена.
@@ -84,12 +84,13 @@ parentDocSlug: ios-sdk-setup
   * По умолчанию: `5`.
 
 * `advancedAuthEnabled`
-  * Включает авторизацию по [токену клиента](https://documentation.bloomreach.com/engagement/docs/customer-token), если установлено в `true`.
+  * Включает авторизацию по [токену клиента](../docs/authorization.md#авторизация-по-токену), если установлено в `true`.
   * По умолчанию: `false`.
-  * Подробнее — в [документации по авторизации](https://documentation.bloomreach.com/engagement/docs/ios-sdk-authorization) Engagement.
+  * Подробнее — в [документации по авторизации](../docs/authorization.md).
 
-* `inAppContentBlocksPlaceholders`
-  * При включении SDK заранее загрузит [блоки контента](https://documentation.bloomreach.com/engagement/docs/ios-sdk-in-app-content-blocks) в приложении.
+[//]: # (* `inAppContentBlocksPlaceholders`)
+
+[//]: # (  * При включении SDK заранее загрузит [блоки контента]&#40;https://documentation.bloomreach.com/engagement/docs/ios-sdk-in-app-content-blocks&#41; в приложении.)
 
 * `manualSessionAutoClose`
   * Определяет, должен ли SDK автоматически отслеживать `session_end` для сессий, которые остаются открытыми, когда `Sendsay.shared.trackSessionStart()` вызывается несколько раз в режиме ручного отслеживания сессий.
@@ -132,7 +133,7 @@ func configure(
 	* `.manual`
 	* `.automatic`
 	* `periodic(period)`
-  * Подробнее — в документации Engagement: [Отправка данных](https://documentation.bloomreach.com/engagement/docs/ios-sdk-data-flushing)
+  * Подробнее — в документации Engagement: [Отправка данных](data-flushing.md)
 
 #### Примеры конфигурации
 Наиболее распространенный случай использования:

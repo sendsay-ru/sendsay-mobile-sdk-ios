@@ -100,7 +100,7 @@ struct SampleInAppMessage {
             "buttons": [{
                 "button_text": "Action",
                 "button_type": "deep-link",
-                "button_link": "https://bloomreach.com",
+                "button_link": "https://sendsay.ru",
                 "button_text_color": "#ffffff",
                 "button_background_color": "#019ACE",
                 "button_width": "fill",
@@ -120,7 +120,7 @@ struct SampleInAppMessage {
             }, {
                 "button_text": "Action",
                 "button_type": "deep-link",
-                "button_link": "https://bloomreach.com",
+                "button_link": "https://sendsay.ru",
                 "button_text_color": "#ffffff",
                 "button_background_color": "#019ACE",
                 "button_width": "hug_text",
@@ -138,7 +138,7 @@ struct SampleInAppMessage {
             }, {
                 "button_text": "Action",
                 "button_type": "deep-link",
-                "button_link": "https://bloomreach.com",
+                "button_link": "https://sendsay.ru",
                 "button_text_color": "#ffffff",
                 "button_background_color": "#019ACE",
                 "button_width": "hug_text",

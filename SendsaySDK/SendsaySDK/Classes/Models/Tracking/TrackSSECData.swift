@@ -12,7 +12,6 @@ public struct TrackSSECData: Codable {
     // product.*
     var productId: String?
     var productName: String?
-    var dateTime: String?
     var picture: [String]?
     var url: String?
     var available: Int64?
@@ -25,6 +24,11 @@ public struct TrackSSECData: Codable {
     var type: String?
     var price: Double?
     var oldPrice: Double?
+    
+    // release notes about CDP Sendsay
+    var issue: Int?
+    var letter: Int?
+    var issueDt: String?
     
     // other
     var email: String?
@@ -49,7 +53,6 @@ public struct TrackSSECData: Codable {
     enum CodingKeys: String, CodingKey {
         case productId = "id"
         case productName = "name"
-        case dateTime = "dt"
         case picture = "picture"
         case url = "url"
         case available = "available"
@@ -62,6 +65,11 @@ public struct TrackSSECData: Codable {
         case type = "type"
         case price = "price"
         case oldPrice = "old_price"
+        
+        // Данные о выпуске CDP Sendsay
+        case issue = "issue"
+        case letter = "letter"
+        case issueDt = "issue_dt"
         
         case email
         case updatePerItem = "update_per_item"

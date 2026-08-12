@@ -15,6 +15,9 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var idKeyField: UITextField!
     @IBOutlet var idValueField: UITextField!
 
+    @IBOutlet var keyFieldDB: UITextView!
+    @IBOutlet var valueFieldDB: UITextView!
+
     @IBOutlet var keyField1: UITextField!
     @IBOutlet var valueField1: UITextView!
     @IBOutlet var ddButton1: UIButton!
@@ -178,8 +181,20 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
         }
 
         var properties: [String: JSONValue] = [:]
-        var memberSet: [String: JSONValue] = [:]
+        
+        var dk: [String: JSONValue] = [:]
         var datakey: [JSONValue] = []
+        
+        if let key0 = keyFieldDB.text, !key0.isEmpty {
+            if let v0 = valueFieldDB.text, !v0.isEmpty {
+                let arrayKeys = key0.split(separator: " ")
+                let arrayVals = v0.split(separator: " ")
+
+                for (key, value) in zip(arrayKeys, arrayVals) {
+                    dk[String(key)] = .string(String(value))
+                }
+            }
+        }
 
         if let key1 = keyField1.text, !key1.isEmpty {
             var mode1 = ddButton1.title(for: .normal) ?? ""
@@ -208,8 +223,8 @@ class IdentifyCustomerViewController: UIViewController, UITextFieldDelegate {
             }
         }
 
-        memberSet["datakey"] = .array(datakey)
-        properties["member_set"] = .dictionary(memberSet)
+        properties["dk"] = .dictionary(dk)
+        properties["datakey"] = .array(datakey)
 
 //        print("props_member.set: \(jsonPretty(json: properties))")
         properties["cce"] = .string("test-iOs")

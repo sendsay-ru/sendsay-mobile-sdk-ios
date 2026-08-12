@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import AdSupport
+import AppTrackingTransparency
 
 // MARK: - Fetching -
 
@@ -21,7 +23,6 @@ extension SendsayInternal {
                 for: $0.trackingManager.customerIds,
                 completion: $1
             )
-            self.telemetryManager?.report(eventWithType: .fetchRecommendation, properties: [:])
         }, completion: completion)
     }
 
@@ -39,8 +40,6 @@ extension SendsayInternal {
             }
 
             $0.repository.fetchConsents(completion: $1)
-
-            self.telemetryManager?.report(eventWithType: .fetchConsents, properties: [:])
         }, completion: completion)
     }
 
@@ -53,7 +52,6 @@ extension SendsayInternal {
                 throw SendsayError.authorizationInsufficient
             }
             $0.appInboxManager?.fetchAppInbox(completion: $1)
-            self.telemetryManager?.report(eventWithType: .fetchAppInbox, properties: [:])
         }, completion: completion)
     }
 
@@ -67,5 +65,38 @@ extension SendsayInternal {
             }
             $0.appInboxManager?.fetchAppInboxItem(messageId, completion: $1)
         }, completion: completion)
+    }
+    
+    public func fetchIDFA(completion: @escaping (String?) -> Void) {
+        if #available(iOS 14.5, *) {
+            // Проверяем текущий статус, чтобы не вызывать окно повторно
+            // Если разрешено или запрещено - сразу отдаем IDFA
+            ATTrackingManager.requestTrackingAuthorization { status in
+                        switch status {
+                        case .authorized:
+                            print("Разрешение к IDFA получено. Доступ открыт.")
+                            let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+                            completion(idfa)
+                        case .denied:
+                            print("Разрешение к IDFA отклонено.")
+                            let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+                            completion(idfa)
+                        case .restricted:
+                            print("Разрешение к IDFA ограничено родительским контролем или настройками устройства.")
+                            completion(nil)
+                        case .notDetermined:
+                            print("Пользователь еще не принял решение по IDFA.")
+                            // Внутри замыкания ATT всегда возвращается на фоновом потоке
+                            let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+                            completion(idfa)
+                        @unknown default:
+                            break
+                        }
+                    }
+        } else {
+            // Для iOS меньше 14.4 окно ATT не существует, IDFA доступен напрямую
+            let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+            completion(idfa)
+        }
     }
 }

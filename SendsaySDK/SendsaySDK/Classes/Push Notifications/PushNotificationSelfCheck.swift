@@ -63,7 +63,7 @@ final class PushNotificationSelfCheck {
                 self.requestSelfCheckPush(pushToken: pushToken) {
                     self.waitForSelfCheckPush(delay: self.timeout / 10, retries: 10) { [weak self] in
                         guard let self = self else { return }
-                        Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "7"])
+//                        Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "7"])
                         self.showResult(
                             step: 7,
                             message: "You are now ready to receive push notifications from Sendsay." +
@@ -78,7 +78,7 @@ final class PushNotificationSelfCheck {
     func checkDelegates(completion: @escaping () -> Void) {
         // querying UIApplication.shared needs to be done on main thread
         DispatchQueue.main.async {
-            Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "0"])
+//            Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "0"])
             guard let appDelegate = UIApplication.shared.delegate else {
                 self.showResult(
                     step: 0,
@@ -86,7 +86,7 @@ final class PushNotificationSelfCheck {
                 )
                 return
             }
-            Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "1"])
+//            Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "1"])
             guard class_getInstanceMethod(type(of: appDelegate), Selectors.pushToken) != nil else {
                 self.showResult(
                     step: 1,
@@ -96,7 +96,7 @@ final class PushNotificationSelfCheck {
                 )
                 return
             }
-            Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "2"])
+//            Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "2"])
             guard class_getInstanceMethod(type(of: appDelegate), Selectors.receive) != nil else {
                 self.showResult(
                     step: 2,
@@ -106,7 +106,7 @@ final class PushNotificationSelfCheck {
                 )
                 return
             }
-            Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "3"])
+//            Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "3"])
             guard UNUserNotificationCenter.current().delegate != nil else {
                 self.showResult(
                     step: 3,
@@ -121,7 +121,7 @@ final class PushNotificationSelfCheck {
     }
 
     func waitForPushToken(delay: TimeInterval, retries: Int, completion: @escaping (String) -> Void) {
-        Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "4"])
+//        Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "4"])
         guard retries > 0 else {
             showResult(
                 step: 4,
@@ -147,7 +147,7 @@ final class PushNotificationSelfCheck {
     }
 
     func requestSelfCheckPush(pushToken: String, completion: @escaping () -> Void) {
-        Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "5"])
+//        Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "5"])
         repository.requestSelfCheckPush(
             for: trackingManager.customerIds,
             pushToken: pushToken,
@@ -166,7 +166,7 @@ final class PushNotificationSelfCheck {
     }
 
     func waitForSelfCheckPush(delay: TimeInterval, retries: Int, completion: @escaping () -> Void) {
-        Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "6"])
+//        Sendsay.shared.telemetryManager?.report(eventWithType: .selfCheck, properties: ["step": "6"])
         guard retries > 0 else {
             self.showResult(
                 step: 6,

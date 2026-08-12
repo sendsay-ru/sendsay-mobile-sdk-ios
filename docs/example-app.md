@@ -6,7 +6,7 @@ categorySlug: integrations
 parentDocSlug: ios-sdk
 ---
 
-iOS SDK Sendsay включает пример приложения, который можно использовать как эталонную реализацию. Вы можете собрать и запустить его, протестировать функции Engagement и сравнить свой код с ожидаемым поведением и кодом в примере.
+iOS SDK Sendsay включает пример приложения, который можно использовать как эталонную реализацию. Вы можете собрать и запустить его, протестировать функции CDP Sendsay и сравнить свой код с ожидаемым поведением и кодом в примере.
 
 ## Требования
 
@@ -36,7 +36,7 @@ iOS SDK Sendsay включает пример приложения, которы
 
 > 📘
 >
-> Чтобы протестировать push-уведомления настройте [интеграцию Apple Push Notification Service](https://documentation.bloomreach.com/engagement/docs/ios-sdk-configure-apns) в веб-приложении Sendsay.
+> Чтобы протестировать push-уведомления настройте [интеграцию Apple Push Notification Service](https://docs.sendsay.ru/other-channels/mobile-push/how-to-connect-mobile-push/#%D0%BA%D0%B0%D0%BA-%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B8%D1%82%D1%8C-%D0%BF%D1%80%D0%B8%D0%BB%D0%BE%D0%B6%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%84%D0%B5%D0%B9%D1%81%D0%B5-sendsay) в веб-приложении Sendsay.
 
 ## Навигация по примеру приложения
 
@@ -65,15 +65,15 @@ iOS SDK Sendsay включает пример приложения, которы
   > [`InAppContentBlocksViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/InAppContentBlocks/InAppContentBlocksViewController.swift)
   > [`InAppContentBlockCarouselViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/InAppContentBlocks/InAppContentBlockCarouselViewController.swift)
 
-Попробуйте разные функции, а затем найдите профиль клиента в веб-приложении Engagement (в разделе **Data & Assets** > **Customers**), чтобы увидеть свойства и события, отслеживаемые SDK.
+Попробуйте разные функции, а затем найдите профиль клиента в веб-приложении CDP Sendsay (в разделе **Data & Assets** > **Customers**), чтобы увидеть свойства и события, отслеживаемые SDK.
 
-До тех пор, пока вы не используете `Identify Customer` в приложении, клиент остаётся анонимным, используя **soft ID** (*cookie*). Значение cookie отображается в логах и позволяет найти соответствующий профиль в веб-приложении Engagement.
+До тех пор, пока вы не используете `Identify Customer` в приложении, клиент остаётся анонимным, используя **soft ID** (*cookie*). Значение cookie отображается в логах и позволяет найти соответствующий профиль в веб-приложении CDP Sendsay.
 
-После использования `Identify Customer` профиль получает **hard ID** (*registered*). Обычно в качестве значения используют email — по нему профиль можно найти в веб-приложении Engagement.
+После использования `Identify Customer` профиль получает **hard ID** (*registered*). Обычно в качестве значения используют email — по нему профиль можно найти в веб-приложении CDP Sendsay.
 
 > 📘
 >
-> Подробнее о soft ID и hard ID — в разделе [Идентификация клиента](https://documentation.bloomreach.com/engagement/docs/customer-identification) документации Engagement.
+> Подробнее о soft ID и hard ID — в разделе [Идентификация клиента](tracking.md#Идентификация) документации CDP Sendsay.
 
 ![Экраны примера приложения: идентификация, отправка данных, логирование, блоки контента](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/sample-app-2.png)
 

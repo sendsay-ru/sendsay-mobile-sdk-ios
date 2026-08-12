@@ -11,20 +11,20 @@ import Foundation
 
 extension ServerRepository: VersionCheckRepository {
 
-    var baseUrl: String { return "https://api.github.com/repos/sendsay/%@/releases/latest" }
+    var baseUrl: String { return "https://api.github.com/repos/sendsay-ru/%@/tags" }
 
     func requestLastSDKVersion(
         completion: @escaping (Result<String>) -> Void
     ) {
         var gitHubProject: String
         if isReactNativeSDK() {
-            gitHubProject = "sendsay-react-native-sdk"
+            gitHubProject = "sendsay-mobile-sdk-react-native"
         } else if isFlutterSDK() {
-            gitHubProject = "sendsay-flutter-sdk"
+            gitHubProject = "sendsay-mobile-sdk-flutter"
         } else if isXamarinSDK() {
-            gitHubProject = "sendsay-xamarin-sdk"
+            gitHubProject = "sendsay-mobile-sdk-xamarin"
         } else {
-            gitHubProject = "sendsay-ios-sdk"
+            gitHubProject = "sendsay-mobile-sdk-ios"
         }
         var request = URLRequest(url: URL(safeString: String(format: baseUrl, gitHubProject))!)
 
@@ -62,8 +62,12 @@ extension ServerRepository: VersionCheckRepository {
             } else if httpResponse.statusCode == 200, let data = data {
                 do {
                     let jsonDecoder = JSONDecoder()
-                    let object = try jsonDecoder.decode(GitHubReleaseResponse.self, from: data)
-                    completion(.success(object.version))
+                    let list = try jsonDecoder.decode(Array<GitHubReleaseResponse>.self, from: data)
+                    if let object = list.first {
+                        completion(
+                            .success(object.version)
+                        )
+                    }
                 } catch {
                     completion(.failure(error))
                 }

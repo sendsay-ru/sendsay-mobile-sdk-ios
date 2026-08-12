@@ -8,6 +8,7 @@ SDK обменивается данными с CDP Sendsay через HTTPS. Д�
 
 Передайте токен в параметре конфигурации `authorization` при инициализации SDK:
 
+`<PROJECT_ID>` - ID вашего аккаунта в Sendsay
 ```swift
 Sendsay.shared.configure(
     projectToken: "ID вашего аккаунта в Sendsay",

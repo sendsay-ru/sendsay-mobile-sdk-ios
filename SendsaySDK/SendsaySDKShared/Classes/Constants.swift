@@ -13,7 +13,7 @@ import UIKit
 public enum Constants {
     /// Network
     public enum Repository {
-        public static let baseUrl = "https://api.sendsay.com"
+        public static let baseUrl = "https://mobi.sendsay.ru/xnpe/v100"
         public static let contentType = "application/json"
         public static let headerContentType = "content-type"
         public static let headerAccept = "accept"
@@ -32,6 +32,8 @@ public enum Constants {
         public static let autoSessionTrack = "automaticSessionTrack"
         public static let appVersion = "CFBundleShortVersionString"
         public static let baseUrl = "sendsayBaseURL"
+        public static let issueId = "sendsay_issue_id"
+        public static let letterId = "sendsay_letter_id"
     }
 
     /// SDK Info
@@ -77,15 +79,26 @@ public enum Constants {
         public static let sessionUpdateThreshold = 3.0
     }
 
+    /// Default values for Tracking functions
     public enum Tracking {
         // To be able to amend session tracking with campaign data, we have to delay immediate event flushing a bit
         public static let immediateFlushDelay = 3.0
+        
+        // Additional keys for local storage properties (part of SSEC feature)
+        public static let sendsayPushNotificationExtraData = "KEY_EXTRA_DATA"
+        public static let issueIdKey = "KEY_ISSUE"
+        public static let letterIdKey = "KEY_LETTER"
+        public static let issueLetterDatetimeKey = "SENDSAY_ISSUE_LETTER_DATETIME_DATA_UTC"
+        /// iOs 16+
+        //    let ISSUE_LETTER_EXPIRE_DURATION = Int64(Duration.hours(24).components.seconds * 1000)
+        public static let issueLetterExpireDuration: Int64 = 24 * 60 * 60 * 1000 /// 24 hours
     }
 
     /// General constants
     public enum General {
         public static let iTunesStore = "iTunes Store"
         public static let userDefaultsSuite = "SendsaySDK"
+        public static let appGroupKey = "group.com.sendsay.SendsaySDK"
         public static let deliveredPushUserDefaultsKey = "SENDSAY_DELIVERED_PUSH_TRACKING"
         public static let deliveredPushEventUserDefaultsKey = "SENDSAY_DELIVERED_PUSH_EVENT_TRACKING"
         public static let openedPushUserDefaultsKey = "SENDSAY_OPENED_PUSH_TRACKING"

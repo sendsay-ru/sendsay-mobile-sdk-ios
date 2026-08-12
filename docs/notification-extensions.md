@@ -96,7 +96,7 @@ pod "SendsaySDK-Notifications", "~> 3.6.0"
 
 > 📘
 >
-> Обратитесь к [ExampleNotificationService](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/tree/main/SendsaySDK/ExampleNotificationService) в [примере приложения](https://documentation.bloomreach.com/engagement/docs/ios-sdk-example-app) для эталонной реализации.
+> Обратитесь к [ExampleNotificationService](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/tree/main/SendsaySDK/ExampleNotificationService) в [примере приложения](example-app.md) для эталонной реализации.
 
 #### Notification Content Extension
 
@@ -143,4 +143,4 @@ pod "SendsaySDK-Notifications", "~> 3.6.0"
 
 > 📘
 >
-> Обратитесь к [ExampleNotificationContent](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/tree/main/SendsaySDK/ExampleNotificationContent) в [примере приложения](https://documentation.bloomreach.com/engagement/docs/ios-sdk-example-app) для эталонной реализации.
+> Обратитесь к [ExampleNotificationContent](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/tree/main/SendsaySDK/ExampleNotificationContent) в [примере приложения](example-app.md) для эталонной реализации.

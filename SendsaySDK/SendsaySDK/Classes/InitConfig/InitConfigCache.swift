@@ -11,7 +11,8 @@ final class InitConfigCache {
     lazy var config: ConfigItem = {
             return getConfig() ?? ConfigItem(isInAppMessagesEnabled: false,
                                              isInAppCBEnabled: false,
-                                             isAppInboxEnabled: false)
+                                             isAppInboxEnabled: false,
+                                             isADTrackEnabled: false)
         }()
     
     static let initConfigFolder = "sendsaysdk_init_config"
@@ -80,7 +81,8 @@ final class InitConfigCache {
     func clear() {
         var resetConf = ConfigItem(isInAppMessagesEnabled: false,
                                          isInAppCBEnabled: false,
-                                         isAppInboxEnabled: false)
+                                         isAppInboxEnabled: false,
+                                   isADTrackEnabled: false)
         saveConfig(config: resetConf)
         self.config = resetConf
     }
