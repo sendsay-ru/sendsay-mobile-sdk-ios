@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./docs/img/sendsay-logo.png?raw=true" alt="Sendsay"/>
+  <img src="https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/docs/img/sendsay-logo.png" alt="Sendsay"/>
 </p>
 
 [![Version](https://img.shields.io/cocoapods/v/SendsaySDK.svg?style=flat)](https://cocoapods.org/pods/SendsaySDK)
@@ -15,19 +15,19 @@ SDK [доступен как открытый исходный код на GitHu
 
 ## Начало работы
 
-- [Первоначальная настройка SDK](docs/setup.md)
-  - [Конфигурация](docs/configuration.md)
-  - [Авторизация](docs/authorization.md)
-  - [Отправка данных](docs/data-flushing.md)
-- [Отслеживание](docs/tracking.md)
-- [Универсальные ссылки](docs/universal-links.md)
-- [Push-уведомления](docs/push-notifications.md)
-  - [Настройка Apple Push Notification Service](docs/configure-apns.md)
-  - [Расширения уведомлений](docs/notification-extensions.md)
+- [Первоначальная настройка SDK](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/docs/setup.md)
+  - [Конфигурация](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/docs/configuration.md)
+  - [Авторизация](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/docs/authorization.md)
+  - [Отправка данных](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/docs/data-flushing.md)
+- [Отслеживание](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/docs/tracking.md)
+- [Универсальные ссылки](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/docs/universal-links.md)
+- [Push-уведомления](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/docs/push-notifications.md)
+  - [Настройка Apple Push Notification Service](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/docs/configure-apns.md)
+  - [Расширения уведомлений](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/docs/notification-extensions.md)
 - Получение данных (в разработке)
 - In-app персонализация (в разработке)
   - In-app сообщения (в разработке)
   - Блоки контента в приложении (в разработке)
 - In-app Inbox (в разработке)
 - Сегментация (в разработке)
-- [Пример приложения](docs/example-app.md)
+- [Пример приложения](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/docs/example-app.md)
