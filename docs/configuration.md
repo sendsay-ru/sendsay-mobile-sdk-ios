@@ -11,12 +11,12 @@ parentDocSlug: ios-sdk-setup
 ## Параметры конфигурации
 
 * `projectToken` **(обязательный)**
-   * Токен проекта. Его можно посмотреть в веб-приложении Engagement в разделе **Project settings** > **Access management** > **API**.
+  * Токен проекта. Его можно посмотреть в веб-приложении CDP Sendsay в разделе **Профиль (верхний угол)** > **Настройки аккаунта** > **Основной логин**.
 
 * `authorization` **(обязательный)**
    * Поддерживает варианты: `.none` или `.token(token)`.
-   * Используйте **публичный** API-ключ Engagement. 
-   * Подробнее — в разделах [Управление доступом к API мобильных SDK](https://documentation.bloomreach.com/engagement/docs/mobile-sdks-api-access-management) и [Authentication API](https://documentation.bloomreach.com/engagement/reference/authentication) в документации Engagement.
+   * Используйте **публичный** API-ключ CDP Sendsay. 
+   * Подробнее — в разделах [Как подключить мобильное приложение](https://docs.sendsay.ru/sources-and-events/mobile-app) и [Интеграция через SDK](https://docs.sendsay.ru/sources-and-events/mobile-app/#%D0%BF%D0%B0%D1%80%D0%B0%D0%BC%D0%B5%D1%82%D1%80%D1%8B-%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D1%8F) в документации CDP Sendsay.
 
 * `baseUrl`
   * Базовый URL API. По умолчанию: `https://mobi.sendsay.ru/xnpe/v100`. 
@@ -41,7 +41,7 @@ parentDocSlug: ios-sdk-setup
   * Время сессии в секундах.
   * По умолчанию — `60.0`, минимум — `5.0`, рекомендуемый максимум — `120.0`, абсолютный максимум — `180.0`.
   * Большее значение приведет к тому, что iOS завершит сессию. 
-  * Подробнее — в разделе [Отслеживание сессий](tracking#session).
+  * Подробнее — в разделе [Отслеживание сессий](tracking#Сессии).
   
   > ❗️ 
   > 
@@ -54,7 +54,7 @@ parentDocSlug: ios-sdk-setup
   
   > ❗️ 
   > 
-  > С функцией `pushNotificationTracking` у вас больше контроля над тем, что происходит внутри вашего приложения и упрощённая отладка. При миграции с `automaticPushNotificationTracking` потребуются допольнительные настройки, подробнее — в документации Engagement: [Push-уведомления](https://documentation.bloomreach.com/engagement/docs/ios-sdk-push-notifications).
+  > С функцией `pushNotificationTracking` у вас больше контроля над тем, что происходит внутри вашего приложения и упрощённая отладка. При миграции с `automaticPushNotificationTracking` потребуются допольнительные настройки, подробнее — в документации CDP Sendsay: [Push-уведомления](push-notifications.md#ручное-отслеживание).
 
 * `pushNotificationTracking`
   * Управляет обработкой push-уведомлений и регистрацией приложения для получения push-уведомлений на основе настройки `requirePushAuthorization`.
@@ -62,7 +62,7 @@ parentDocSlug: ios-sdk-setup
 
 * `appGroup`
   * **Обязательно** для автоматического отслеживания доставленных push-уведомлений. 
-  * Подробнее — в документации Engagement: [Push-уведомления](../docs/push-notifications.md#шаг-2-настройка-sdk).
+  * Подробнее — в документации CDP Sendsay: [Push-уведомления](../docs/push-notifications.md#шаг-2-настройка-sdk).
 
 * `requirePushAuthorization`
   * Определяет, должен ли SDK проверять разрешение на push-уведомления перед отправкой push-токена.
@@ -70,10 +70,10 @@ parentDocSlug: ios-sdk-setup
   
   > ❗️ 
   > 
-  > SDK может проверить, разрешены ли push-уведомления, и отправлять push-токен только при наличии разрешения. Если параметр отключён, SDK автоматически зарегистрируется для получения push-уведомлений при запуске приложения и отправит токен в Engagement — это позволит приложению получать тихие уведомления. Если параметр включён, SDK зарегистрируется для push-уведомлений только после того, как пользователь даст разрешение. Подробнее — в [документации Apple](https://developer.apple.com/documentation/usernotifications/unnotificationsettings/1648391-authorizationstatus).
+  > SDK может проверить, разрешены ли push-уведомления, и отправлять push-токен только при наличии разрешения. Если параметр отключён, SDK автоматически зарегистрируется для получения push-уведомлений при запуске приложения и отправит токен в CDP Sendsay — это позволит приложению получать тихие уведомления. Если параметр включён, SDK зарегистрируется для push-уведомлений только после того, как пользователь даст разрешение. Подробнее — в [документации Apple](https://developer.apple.com/documentation/usernotifications/unnotificationsettings/1648391-authorizationstatus).
 
 * `tokenTrackFrequency`
-  * Частота отслеживания push-токена в Engagement.
+  * Частота отслеживания push-токена в CDP Sendsay.
   * По умолчанию: `onTokenChange` — отслеживает push-токен, если он отличается от ранее отслеженного.
   * Другие возможные значения:
     * `everyLaunch` — всегда отслеживает push-токен.
@@ -133,7 +133,7 @@ func configure(
 	* `.manual`
 	* `.automatic`
 	* `periodic(period)`
-  * Подробнее — в документации Engagement: [Отправка данных](data-flushing.md)
+  * Подробнее — в документации CDP Sendsay: [Отправка данных](data-flushing.md)
 
 #### Примеры конфигурации
 Наиболее распространенный случай использования:
@@ -198,7 +198,7 @@ Sendsay.shared.configure(
 ``` swift
 public func configure(plistName: String)
 ```
-и передайте его имя в метод:
+И передайте его имя в метод:
 ```
 Sendsay.shared.configure(plistName: "ExampleConfig.plist")
 ```
@@ -206,8 +206,7 @@ Sendsay.shared.configure(plistName: "ExampleConfig.plist")
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "https://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
 	<key>projectToken</key>

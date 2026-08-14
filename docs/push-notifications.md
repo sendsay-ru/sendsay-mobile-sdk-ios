@@ -159,7 +159,7 @@ UNUserNotificationCenter.current()
 
 #### Контрольный список для проверки регистрации разрешения пользователя
 
- - [ ] CDP Sendsay теперь должен иметь возможность отправлять push-уведомления на ваше устройство. Подробнее: [Создание нового уведомления](https://documentation.bloomreach.com/engagement/docs/mobile-push-notifications#creating-a-new-notification) в документации Engagement.
+ - [ ] CDP Sendsay теперь должен иметь возможность отправлять push-уведомления на ваше устройство. Подробнее: [Создание нового уведомления](https://docs.sendsay.ru/other-channels/mobile-push/how-to-create-mobile-push-campaign/) в документации CDP Sendsay.
 
 ## Настройки и дополнительные возможности
 
@@ -283,7 +283,7 @@ Push-уведомления, которые проходят через `Sendsay
 
 Чтобы использовать стандартный звук, укажите значение `default` в поле **Media** > **Sound** в сценарии push-уведомления в веб-приложении CDP Sendsay.
 
-![Настройка звука для push-уведомления в CDP Sendsay](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/docs/img/push-sound-config.png)
+![Настройка звука для push-уведомления в CDP Sendsay](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/docs/img/push-sound-config.png)
 
 Чтобы использовать настраиваемый звук:
 1. Создайте звуковой файл в формате, который [поддерживает iOS](https://developer.apple.com/documentation/usernotifications/unnotificationsound#2943048). 

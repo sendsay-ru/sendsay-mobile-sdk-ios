@@ -19,7 +19,7 @@ parentDocSlug: ios-sdk-push-notifications
 
 В Xcode выберите **File** > **New** > **Target** и создайте расширение нужного типа (**Notification Service Extension** или **Notification Content Extension**).
 
-![Создание нового расширения уведомлений в Xcode](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/extension1.png)
+![Создание нового расширения уведомлений в Xcode](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/Documentation/images/extension1.png)
 
 > ❗️
 >
@@ -111,7 +111,7 @@ pod "SendsaySDK-Notifications", "~> 3.6.0"
         - Удалите `NSExtensionMainStoryboard`.
         - Добавьте `NSExtensionPrincipalClass` и установите его значение в класс вашего контроллера представления, например, `TestingPushContentExtension.NotificationViewController`.
 
-    ![Настройка расширения контента уведомлений в Xcode](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/extension3.png)
+    ![Настройка расширения контента уведомлений в Xcode](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/Documentation/images/extension3.png)
 
 
     > ❗️ Параметр высоты контента

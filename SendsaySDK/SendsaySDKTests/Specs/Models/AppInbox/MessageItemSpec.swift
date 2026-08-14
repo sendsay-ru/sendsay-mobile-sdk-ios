@@ -28,9 +28,9 @@ class MessageItemSpec: QuickSpec {
               "pre_header":"Subject",
               "url_params":[
                  {
-                    "utm_source":"bloomreach",
+                    "utm_source":"sendsay",
                     "utm_medium":"app_inbox",
-                    "utm_campaign":"Adam M3 AppInbox"
+                    "utm_campaign":"M3 AppInbox"
                  }
               ],
               "image":"https://www.wildlifetrusts.org/sites/default/files/styles/scaled_default/public/2018-01/Gull%20Herring%20June%202015%20Gillian%20Day.jpg?itok=fWgRlQdW",

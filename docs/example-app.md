@@ -40,9 +40,10 @@ iOS SDK Sendsay включает пример приложения, которы
 
 ## Навигация по примеру приложения
 
-![Экраны примера приложения: конфигурация, получение данных, отслеживание, отслеживание событий](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/sample-app-1.png)
+![Экраны примера приложения: авторизация](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/docs/img/sample-app-1.png)
+![Экраны примера приложения: отслеживание, логирование, отслеживание событий, индентификация пользователя](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/docs/img/sample-app-2.png)
 
-После запуска приложения откроется экран **Authentication**. Введите [токен проекта, API токен и базовый URL API](https://documentation.bloomreach.com/engagement/docs/mobile-sdks-api-access-management), затем нажмите «Start», чтобы [инициализировать SDK](https://documentation.bloomreach.com/engagement/docs/ios-sdk-setup#initialize-the-sdk).
+После запуска приложения откроется экран **Authentication**. Введите [ID проекта, токен авторизации и базовый URL API](configuration#параметры-конфигурации), затем нажмите «Start», чтобы [инициализировать SDK](setup.md#инициализация-sdk).
 > [`AuthenticationViewController.swift`](https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/SendsaySDK/Example/Views/AuthenticationViewController.swift)
 
 Приложение содержит несколько экранов, доступных через нижнюю навигацию:
@@ -75,7 +76,7 @@ iOS SDK Sendsay включает пример приложения, которы
 >
 > Подробнее о soft ID и hard ID — в разделе [Идентификация клиента](tracking.md#Идентификация) документации CDP Sendsay.
 
-![Экраны примера приложения: идентификация, отправка данных, логирование, блоки контента](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/sample-app-2.png)
+![Экраны примера приложения: идентификация, отправка данных, логирование, блоки контента](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/Documentation/images/sample-app-2.png)
 
 ## Устранение неполадок
 

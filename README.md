@@ -2,6 +2,10 @@
   <img src="./docs/img/sendsay-logo.png?raw=true" alt="Sendsay"/>
 </p>
 
+[![Version](https://img.shields.io/cocoapods/v/SendsaySDK.svg?style=flat)](https://cocoapods.org/pods/SendsaySDK)
+[![License](https://img.shields.io/cocoapods/l/SendsaySDK.svg?style=flat)](https://cocoapods.org/pods/SendsaySDK)
+[![Platform](https://img.shields.io/cocoapods/p/SendsaySDK.svg?style=flat)](https://cocoapods.org/pods/SendsaySDK)
+
 ## Что такое Sendsay iOS SDK?
 
 Sendsay iOS SDK позволяет интегрировать ваше мобильное приложение с CDP Sendsay и отслеживать поведение ваших клиентов в приложении. Интеграция SDK в ваше приложение позволит вам отправлять push-уведомления и отслеживать события и свойства клиентов.

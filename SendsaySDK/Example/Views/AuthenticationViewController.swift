@@ -186,7 +186,7 @@ public class TestDefaultInAppDelegate: InAppMessageActionDelegate {
     private func handleGdprUserResponse(button: InAppMessageButton) {
         guard let url = button.url else { return }
         switch url {
-        case "https://bloomreach.com/tracking/allow":
+        case "https://sendsay.ru/tracking/allow":
             Sendsay.shared.trackEvent(
                 properties: [
                     "status": "allowed"
@@ -194,7 +194,7 @@ public class TestDefaultInAppDelegate: InAppMessageActionDelegate {
                 timestamp: nil,
                 eventType: "gdpr"
             )
-        case "https://bloomreach.com/tracking/deny":
+        case "https://sendsay.ru/tracking/deny":
             Sendsay.shared.stopIntegration()
         default:
             break

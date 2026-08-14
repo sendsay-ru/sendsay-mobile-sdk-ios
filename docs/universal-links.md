@@ -31,7 +31,7 @@
         {
           "appID": "ABCDE12345.com.example.ExampleApp",
           "paths": [
-            "/engagement/*",
+            "/deeplink/*",
             "/*"
           ]
         }

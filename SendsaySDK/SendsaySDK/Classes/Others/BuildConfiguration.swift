@@ -29,7 +29,7 @@ func isXamarinSDK() -> Bool {
 }
 
 func isMauiSDK() -> Bool {
-    NSProtocolFromString("IsBloomreachMauiSDK") != nil
+    NSProtocolFromString("IsSendsayMauiSDK") != nil
 }
 
 func isCalledFromExampleApp() -> Bool {
@@ -53,7 +53,7 @@ func getXamarinSDKVersion() -> String? {
 }
 
 func getMauiVersion() -> String? {
-    getVersionFromClass("BloomreachMauiVersion")
+    getVersionFromClass("SendsayMauiVersion")
 }
 
 private func getVersionFromClass(_ className: String) -> String? {

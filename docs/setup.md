@@ -29,7 +29,7 @@ iOS SDK Sendsay можно установить или обновить чере
 
 Чтобы фиксировать только мажорную версию SDK и разрешить обновления внутри минорных:
 ```
-pod "SendsaySDK", "~> 3.6.0"
+pod "SendsaySDK", "~> 0.1.4"
 ```
 Подробнее — в разделе [Указанию версий pod](https://guides.cocoapods.org/using/the-podfile.html#specifying-pod-versions) документации Cocoapods.
 
@@ -43,12 +43,12 @@ pod "SendsaySDK", "~> 3.6.0"
     ``` 
 4. В диалоговом окне **Dependency Rule** выберите нужную версию SDK.
 
-    ![Диалог Add Package Dependencies](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/swift-pm-1.png)
+    ![Диалог Add Package Dependencies](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/docs/img/xcode-pm-1.png)
 
 5. Нажмите «Add Package».
 6. В следующем окне выберите оба пакета: `SendsaySDK`, и `SendsaySDK-Notifications`.
 
-    ![Диалог Choose Packages](https://raw.githubusercontent.com/sendsay/sendsay-ios-sdk/main/Documentation/images/swift-pm-2.png)
+    ![Диалог Choose Packages](https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/main/docs/img/xcode-pm-2.png)
 
 7. Нажмите «Add Package».
 

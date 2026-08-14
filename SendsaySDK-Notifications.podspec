@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "SendsaySDK-Notifications"
-  s.version      = "0.1.4"
+  s.version      = "0.1.3"
   s.summary      = "A completementary extension-safe framework for supporting rich push notifications in Sendsay SDK."
 
   # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/sendsay-ru/sendsay-mobile-sdk-ios"
-  s.readme       = "https://github.com/sendsay-ru/sendsay-mobile-sdk-ios/blob/main/README.md"
+  s.readme       = "https://raw.githubusercontent.com/sendsay-ru/sendsay-mobile-sdk-ios/#{s.version}/README.md"
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
