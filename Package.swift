@@ -1,12 +1,10 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 
 import PackageDescription
 
 let package = Package(
     name: "SendsaySDK",
-    platforms: [
-        .iOS(.v13)
-    ],
+    platforms: [.macOS(.v10_15), .iOS(.v13),],
     products: [
         .library(
             name: "SendsaySDK",
@@ -17,7 +15,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.6.1")
+        .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.7.6")
     ],
     targets: [
         // Main library
