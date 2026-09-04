@@ -5,6 +5,7 @@
 //  Created by Stas ProSky on 23.07.2025.
 //  Copyright © 2025 Sendsay. All rights reserved.
 //
+import Foundation
 
 final class InitConfigCache {
     

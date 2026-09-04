@@ -17,4 +17,4 @@ FOUNDATION_EXPORT const unsigned char SendsaySDKObjCVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <SendsaySDKObjC/PublicHeader.h>
 
-#import <SendsaySDKObjC/objc_tryCatch.h>
+#import <objc_tryCatch.h>

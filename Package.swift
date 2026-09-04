@@ -4,7 +4,9 @@ import PackageDescription
 
 let package = Package(
     name: "SendsaySDK",
-    platforms: [.macOS(.v10_15), .iOS(.v13),],
+    platforms: [
+        .iOS(.v13)
+    ],
     products: [
         .library(
             name: "SendsaySDK",
@@ -21,10 +23,20 @@ let package = Package(
         // Main library
         .target(
             name: "SendsaySDK",
-            dependencies: ["SendsaySDKShared", "SendsaySDKObjC"],
+            dependencies: [
+                "SendsaySDKShared",
+                "SendsaySDKObjC",
+                .product(
+                    name: "SwiftSoup",
+                    package: "SwiftSoup"
+                )
+            ],
             path: "SendsaySDK/SendsaySDK",
             exclude: ["Supporting Files/Info.plist"],
-            resources: [.copy("Supporting Files/PrivacyInfo.xcprivacy")]
+            resources: [
+                .process("Supporting Files/PrivacyInfo.xcprivacy"),
+                .process("Classes/Database/DatabaseModel.xcdatamodeld")
+            ]
         ),
         // Notification extension library
         .target(
@@ -32,12 +44,17 @@ let package = Package(
             dependencies: ["SendsaySDKShared"],
             path: "SendsaySDK/SendsaySDK-Notifications",
             exclude: ["Supporting Files/Info.plist"],
-            resources: [.copy("Supporting Files/PrivacyInfo.xcprivacy")]
+            resources: [.process("Supporting Files/PrivacyInfo.xcprivacy")]
         ),
         // Code shared between SendsaySDK and SendsaySDK-Notifications
         .target(
             name: "SendsaySDKShared",
-            dependencies: ["SwiftSoup"],
+            dependencies: [
+                .product(
+                    name: "SwiftSoup",
+                    package: "SwiftSoup"
+                ),
+            ],
             path: "SendsaySDK/SendsaySDKShared",
             exclude: ["Supporting Files/Info.plist"]
         ),
@@ -47,6 +64,8 @@ let package = Package(
             dependencies: [],
             path: "SendsaySDK/SendsaySDKObjC",
             exclude: ["Info.plist"],
-            publicHeadersPath: ".")
+            sources: ["objc_tryCatch.m"],
+            publicHeadersPath: "."
+        )
     ]
 )
