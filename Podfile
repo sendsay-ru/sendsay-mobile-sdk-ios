@@ -1,40 +1,38 @@
 #!/usr/local/bin/ruby -w
+
 project 'SendsaySDK/SendsaySDK.xcodeproj'
 
-# Uncomment the next line to define a global platform for your project
 platform :ios, '13.0'
 
 use_frameworks!
+inhibit_all_warnings!
 
-target 'SendsaySDK' do
-    pod 'SwiftSoup', '>= 2.7.6', '< 3.0'
-end
+abstract_target 'SendsayDependencies' do
 
-target 'Example' do
-    inherit! :search_paths
+  pod 'SwiftSoup', '>= 2.7.6', '< 3.0'
 
-    inhibit_all_warnings!
-    
-    # Pods for UI
-    pod 'DropDown'
-    pod 'IQKeyboardManagerSwift'
+  target 'SendsaySDK' do
+  end
 
-    # Pods for Firebase
-    pod 'Firebase/AnalyticsWithoutAdIdSupport'
-    pod 'FirebaseCrashlytics'
-    pod 'FirebaseMessaging'
+  target 'Example' do
+      # Pods for UI
+      pod 'DropDown'
+      pod 'IQKeyboardManagerSwift'
+
+      # Pods for Firebase
+      pod 'Firebase/AnalyticsWithoutAdIdSupport'
+      pod 'FirebaseCrashlytics'
+      pod 'FirebaseMessaging'
+  end
 end
 
 target 'SendsaySDKTests' do
-    inherit! :search_paths
-
-    inhibit_all_warnings!
-
     # Pods for testing
     pod 'Quick'
     pod 'Nimble', '~>9.2.0'
-    pod 'SwiftLint'
-    pod 'Mockingjay', :git => 'https://github.com/kylef/Mockingjay.git', :branch => 'master'
+    pod 'Mockingjay',
+        :git => 'https://github.com/kylef/Mockingjay.git',
+        :branch => 'master'
 end
 
 

@@ -174,8 +174,6 @@
 		05D9F62E2387EE6600C47509 /* Sendsay+ConfigurationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D9F62D2387EE6600C47509 /* Sendsay+ConfigurationSpec.swift */; };
 		05E1A3812359B3A500E5EDDE /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 05E1A3802359B3A500E5EDDE /* .swiftlint.yml */; };
 		05E81632247555DD00AA28E3 /* SendsayAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05E81631247555DD00AA28E3 /* SendsayAppDelegate.swift */; };
-		05F33B1B25C16DEF00CFD60A /* SendsaySDKShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0561829725AD959C001E30A3 /* SendsaySDKShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		05F33B1C25C16DEF00CFD60A /* SendsaySDKObjC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0563750C25AF030A00AB68DA /* SendsaySDKObjC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05F3EFE0237E99FE006E83F4 /* FileTelemetryStorageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFDF237E99FE006E83F4 /* FileTelemetryStorageSpec.swift */; };
 		05F3EFE22382A814006E83F4 /* CrashManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFE12382A814006E83F4 /* CrashManagerSpec.swift */; };
 		05F3EFEA2382BC4C006E83F4 /* MockTelemetryStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F3EFE92382BC4C006E83F4 /* MockTelemetryStorage.swift */; };
@@ -187,6 +185,7 @@
 		05FEBDC023A7BA2A007C2372 /* InAppMessageTrackingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FEBDBF23A7BA2A007C2372 /* InAppMessageTrackingDelegate.swift */; };
 		05FEBDC223A7C940007C2372 /* MockInAppMessageTrackingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05FEBDC123A7C940007C2372 /* MockInAppMessageTrackingDelegate.swift */; };
 		23E725E4214AA7A900B552B8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E725E3214AA7A900B552B8 /* Reachability.swift */; };
+		2D6037C3F754C38B926783C8 /* Pods_SendsayDependencies_SendsaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86D08A7F47B48669B6B66578 /* Pods_SendsayDependencies_SendsaySDK.framework */; };
 		311268DB2CD10E9C00C38394 /* InAppButtonContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311268DA2CD10E9C00C38394 /* InAppButtonContainer.swift */; };
 		311268DD2CD1135900C38394 /* InAppButtonConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311268DC2CD1135900C38394 /* InAppButtonConfig.swift */; };
 		311557BF2CE9DEBD0027B481 /* InAppLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 311557BD2CE9DEBD0027B481 /* InAppLabel.swift */; };
@@ -268,10 +267,8 @@
 		33FC6CC829A912CC001F113F /* Extension+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FC6CC729A912CC001F113F /* Extension+UIView.swift */; };
 		33FC6CCA29A9158F001F113F /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FC6CC929A9158F001F113F /* Reusable.swift */; };
 		33FC6CCC29A9195B001F113F /* Typealiases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FC6CCB29A9195B001F113F /* Typealiases.swift */; };
-		40E41B361C8E8E0646AE7885 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B19801282ED79466005A034F /* Pods_Example.framework */; };
 		4C169E3122B6524C00C425DA /* TrackUniversalLinkSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C169E3022B6524C00C425DA /* TrackUniversalLinkSpec.swift */; };
 		4C3F5F2D22DF98C00069E71D /* MockSendsay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3F5F2C22DF98C00069E71D /* MockSendsay.swift */; };
-		4E8CA2184C621EB1984A5137 /* Pods_SendsaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 486299A97905BE77A09EC216 /* Pods_SendsaySDK.framework */; };
 		551301372D072338005C71C8 /* CampaignRepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551301362D072338005C71C8 /* CampaignRepositoryType.swift */; };
 		551301392D07288D005C71C8 /* CampaignRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 551301382D07288D005C71C8 /* CampaignRepository.swift */; };
 		5513013B2D088AC1005C71C8 /* CampaignRepositorySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5513013A2D088AC1005C71C8 /* CampaignRepositorySpec.swift */; };
@@ -340,12 +337,21 @@
 		7F41714B094CAC0DA9B38776 /* HtmlNormalizerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F417FBE26AB2DD5FE31707E /* HtmlNormalizerSpec.swift */; };
 		7F417221332DEC81DB050230 /* HtmlNormalizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F417E0EA9B478FEF72999D9 /* HtmlNormalizer.swift */; };
 		7F41777390316561CE4482DB /* InAppMessageWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F417D6738618D5F30397815 /* InAppMessageWebView.swift */; };
-		7F646D3CA7CCA3D9D2CB8C74 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA74DF46A34FE1BF7B4749BC /* Pods_Example.framework */; };
 		B12D01272E7871A9002804EE /* TrackSSECDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC49022E6AF1B90064C39C /* TrackSSECDataBuilder.swift */; };
 		B12D01282E7871DE002804EE /* TrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB5D9C20B8193A00F1031F /* TrackingViewController.swift */; };
 		B18474B32E1291BF002FEDEF /* objc_tryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05114E68234747BC00201EE6 /* objc_tryCatch.m */; };
 		B18474B42E1291F5002FEDEF /* objc_tryCatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 05114E6A234747DE00201EE6 /* objc_tryCatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B18474BC2E129851002FEDEF /* SendsaySDKObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 0563750E25AF030A00AB68DA /* SendsaySDKObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B19F9EF4304EF6E300E6B525 /* SendsaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F021E859206CF10200788ABC /* SendsaySDK.framework */; };
+		B19F9EF5304EF6E300E6B525 /* SendsaySDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F021E859206CF10200788ABC /* SendsaySDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B19F9F08304EF71200E6B525 /* SendsaySDKNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; };
+		B19F9F09304EF71200E6B525 /* SendsaySDKNotifications.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B19F9F0D304EF71A00E6B525 /* SendsaySDKNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; };
+		B19F9F0E304EF71A00E6B525 /* SendsaySDKNotifications.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B19F9F28304F0A6400E6B525 /* SendsaySDKObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0563750C25AF030A00AB68DA /* SendsaySDKObjC.framework */; };
+		B19F9F29304F0A6400E6B525 /* SendsaySDKObjC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0563750C25AF030A00AB68DA /* SendsaySDKObjC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B19F9F2A304F0A6600E6B525 /* SendsaySDKShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0561829725AD959C001E30A3 /* SendsaySDKShared.framework */; };
+		B19F9F2B304F0A6600E6B525 /* SendsaySDKShared.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0561829725AD959C001E30A3 /* SendsaySDKShared.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B1AB19E12E2FF6AE00554B39 /* InitConfigResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19E02E2FF6A500554B39 /* InitConfigResponse.swift */; };
 		B1AB19E52E2FF7DD00554B39 /* ConfigItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19E42E2FF7D600554B39 /* ConfigItem.swift */; };
 		B1AB19F52E31190800554B39 /* InitConfigCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AB19F32E31080000554B39 /* InitConfigCache.swift */; };
@@ -371,7 +377,6 @@
 		C028C3A22110980600B03ED4 /* JSONValueSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028C3A12110980600B03ED4 /* JSONValueSpec.swift */; };
 		C02C562321C9B4640087A990 /* SendsayNotificationContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C08D53C721B946E700EA2C13 /* SendsayNotificationContentService.swift */; };
 		C02C562421C9B4E20087A990 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08D53CE21B9474E00EA2C13 /* UserNotifications.framework */; };
-		C02C562521C9B4E90087A990 /* SendsaySDKNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; };
 		C030AF48216F4335004413F0 /* PushNotificationReceiver.swift in Sources */ = {isa = PBXBuildFile; fileRef = C030AF47216F4335004413F0 /* PushNotificationReceiver.swift */; };
 		C030AF4A216F4910004413F0 /* PushNotificationManager+UIResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C030AF49216F4910004413F0 /* PushNotificationManager+UIResponder.swift */; };
 		C030AF4C216F96F3004413F0 /* PushNotificationManager+NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = C030AF4B216F96F3004413F0 /* PushNotificationManager+NSObject.swift */; };
@@ -382,8 +387,6 @@
 		C07E41FD20C930C400920809 /* TrackEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E41FC20C930C400920809 /* TrackEventViewController.swift */; };
 		C07E41FF20C930E400920809 /* IdentifyCustomerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E41FE20C930E400920809 /* IdentifyCustomerViewController.swift */; };
 		C07E420F20CA8AF700920809 /* DateFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E420E20CA8AF700920809 /* DateFilter.swift */; };
-		C0843CF120B6E7C900FAF0CB /* SendsaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F021E859206CF10200788ABC /* SendsaySDK.framework */; };
-		C0843CF220B6E7C900FAF0CB /* SendsaySDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F021E859206CF10200788ABC /* SendsaySDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C084D0EB2181C5EA005C0CA8 /* MockUserNotificationCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084D0EA2181C5EA005C0CA8 /* MockUserNotificationCenter.swift */; };
 		C08D53CF21B9474E00EA2C13 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08D53CE21B9474E00EA2C13 /* UserNotifications.framework */; };
 		C08D53D121B9474E00EA2C13 /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C08D53D021B9474E00EA2C13 /* UserNotificationsUI.framework */; };
@@ -408,10 +411,7 @@
 		C0ED33A621A6FA31003649C3 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED33A521A6FA31003649C3 /* NotificationService.swift */; };
 		C0ED33AA21A6FA31003649C3 /* ExampleNotificationService.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = C0ED33A321A6FA31003649C3 /* ExampleNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C0ED33B821A6FB10003649C3 /* SendsaySDKNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = C0ED33B621A6FB10003649C3 /* SendsaySDKNotifications.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C0ED33BB21A6FB10003649C3 /* SendsaySDKNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; };
-		C0ED33BC21A6FB10003649C3 /* SendsaySDKNotifications.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		C0ED33C121A6FB6B003649C3 /* SendsayNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0ED33C021A6FB6B003649C3 /* SendsayNotificationService.swift */; };
-		C0ED33C221A72E40003649C3 /* SendsaySDKNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; };
 		C0F2406A20BC38EC00CAF7CE /* Swizzle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2406920BC38EC00CAF7CE /* Swizzle.swift */; };
 		C0F2406C20BC50A000CAF7CE /* SendsayInternal+Fetching.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2406B20BC50A000CAF7CE /* SendsayInternal+Fetching.swift */; };
 		C0F2407020BD98EB00CAF7CE /* MemoryLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2406F20BD98EB00CAF7CE /* MemoryLogger.swift */; };
@@ -445,6 +445,7 @@
 		F0E757EB207CFA9700FE8C21 /* RepositoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E757EA207CFA9700FE8C21 /* RepositoryType.swift */; };
 		F0E757F3207D02F100FE8C21 /* SendsaySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E757F2207D02F100FE8C21 /* SendsaySpec.swift */; };
 		F0E757F5207D032500FE8C21 /* SendsayConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = F0E757F4207D032500FE8C21 /* SendsayConfig.plist */; };
+		F10440B8659D1AF5491A1394 /* Pods_SendsayDependencies_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0250F0FA3AEE121611FE6C23 /* Pods_SendsayDependencies_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -469,33 +470,19 @@
 			remoteGlobalIDString = 0563750B25AF030A00AB68DA;
 			remoteInfo = SendsaySDKObjC;
 		};
-		0563754F25AF03CA00AB68DA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F021E850206CF10200788ABC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 0563750B25AF030A00AB68DA;
-			remoteInfo = SendsaySDKObjC;
-		};
-		05B97D382417CDFD00FE9309 /* PBXContainerItemProxy */ = {
+		B19F9F0A304EF71200E6B525 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C0ED33B321A6FB0F003649C3;
 			remoteInfo = SendsaySDKNotifications;
 		};
-		C02C562621C9B4F20087A990 /* PBXContainerItemProxy */ = {
+		B19F9F0F304EF71A00E6B525 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = C0ED33B321A6FB0F003649C3;
 			remoteInfo = SendsaySDKNotifications;
-		};
-		C0753E9320A5793200A779FF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F021E850206CF10200788ABC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F021E858206CF10200788ABC;
-			remoteInfo = SendsaySDK;
 		};
 		C0861C0120F919CF00C57997 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -518,20 +505,6 @@
 			remoteGlobalIDString = C0ED33A221A6FA31003649C3;
 			remoteInfo = ExampleNotificationService;
 		};
-		C0ED33B921A6FB10003649C3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F021E850206CF10200788ABC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C0ED33B321A6FB0F003649C3;
-			remoteInfo = "SendsaySDK-Notifications";
-		};
-		C0ED33C321A72E48003649C3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F021E850206CF10200788ABC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C0ED33B321A6FB0F003649C3;
-			remoteInfo = "SendsaySDK-Notifications";
-		};
 		CCB87B75281688EC005DFB8E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
@@ -552,16 +525,37 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C0843CF320B6E7CA00FAF0CB /* Embed Frameworks */ = {
+		B19F9F07304EF6E300E6B525 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				05F33B1B25C16DEF00CFD60A /* SendsaySDKShared.framework in Embed Frameworks */,
-				05F33B1C25C16DEF00CFD60A /* SendsaySDKObjC.framework in Embed Frameworks */,
-				C0843CF220B6E7C900FAF0CB /* SendsaySDK.framework in Embed Frameworks */,
-				C0ED33BC21A6FB10003649C3 /* SendsaySDKNotifications.framework in Embed Frameworks */,
+				B19F9EF5304EF6E300E6B525 /* SendsaySDK.framework in Embed Frameworks */,
+				B19F9F2B304F0A6600E6B525 /* SendsaySDKShared.framework in Embed Frameworks */,
+				B19F9F29304F0A6400E6B525 /* SendsaySDKObjC.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B19F9F0C304EF71200E6B525 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B19F9F09304EF71200E6B525 /* SendsaySDKNotifications.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B19F9F11304EF71A00E6B525 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B19F9F0E304EF71A00E6B525 /* SendsaySDKNotifications.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -597,6 +591,7 @@
 		01EC2DBA207E68BF0031BFEB /* DatabaseManagerType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseManagerType.swift; sourceTree = "<group>"; };
 		01EC2DBC207E68BF0031BFEB /* DatabaseModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DatabaseModel.xcdatamodel; sourceTree = "<group>"; };
 		01EC2DC0207F63970031BFEB /* FlushingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlushingMode.swift; sourceTree = "<group>"; };
+		0250F0FA3AEE121611FE6C23 /* Pods_SendsayDependencies_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SendsayDependencies_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		050805722326510100BDA235 /* MockUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
 		05080C3D23D736C400E4241B /* TelemetryManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelemetryManagerSpec.swift; sourceTree = "<group>"; };
 		050960FF2321566000D59C01 /* TrackingManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingManagerSpec.swift; sourceTree = "<group>"; };
@@ -746,7 +741,8 @@
 		05FD178E2403C4CC003A799B /* BuildConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
 		05FEBDBF23A7BA2A007C2372 /* InAppMessageTrackingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppMessageTrackingDelegate.swift; sourceTree = "<group>"; };
 		05FEBDC123A7C940007C2372 /* MockInAppMessageTrackingDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockInAppMessageTrackingDelegate.swift; sourceTree = "<group>"; };
-		20355A7B550170380CC33DC1 /* Pods-SendsaySDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsaySDK.debug.xcconfig"; path = "Target Support Files/Pods-SendsaySDK/Pods-SendsaySDK.debug.xcconfig"; sourceTree = "<group>"; };
+		0D719707D848007B5BDF44E0 /* Pods-SendsaySDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsaySDK.debug.xcconfig"; path = "Target Support Files/Pods-SendsaySDK/Pods-SendsaySDK.debug.xcconfig"; sourceTree = "<group>"; };
+		18D6BB61A095458773BB05FC /* Pods-SendsaySDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsaySDK.release.xcconfig"; path = "Target Support Files/Pods-SendsaySDK/Pods-SendsaySDK.release.xcconfig"; sourceTree = "<group>"; };
 		23E725E3214AA7A900B552B8 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		311268DA2CD10E9C00C38394 /* InAppButtonContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButtonContainer.swift; sourceTree = "<group>"; };
 		311268DC2CD1135900C38394 /* InAppButtonConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppButtonConfig.swift; sourceTree = "<group>"; };
@@ -829,7 +825,6 @@
 		33FC6CC729A912CC001F113F /* Extension+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIView.swift"; sourceTree = "<group>"; };
 		33FC6CC929A9158F001F113F /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
 		33FC6CCB29A9195B001F113F /* Typealiases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typealiases.swift; sourceTree = "<group>"; };
-		486299A97905BE77A09EC216 /* Pods_SendsaySDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SendsaySDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C169E3022B6524C00C425DA /* TrackUniversalLinkSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackUniversalLinkSpec.swift; sourceTree = "<group>"; };
 		4C3F5F2C22DF98C00069E71D /* MockSendsay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSendsay.swift; sourceTree = "<group>"; };
 		4C6BD13522ABA743004487A8 /* CampaignData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampaignData.swift; sourceTree = "<group>"; };
@@ -896,14 +891,16 @@
 		55F6A41729891F130029D628 /* ExampleAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleAuthProvider.swift; sourceTree = "<group>"; };
 		55F6A41929891F710029D628 /* CustomerTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerTokenStorage.swift; sourceTree = "<group>"; };
 		5C840B3690CAFBEF111AC45B /* Pods-SendsaySDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsaySDKTests.debug.xcconfig"; path = "Target Support Files/Pods-SendsaySDKTests/Pods-SendsaySDKTests.debug.xcconfig"; sourceTree = "<group>"; };
+		637718339EC40EEACAF1900A /* Pods-SendsayDependencies-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsayDependencies-Example.debug.xcconfig"; path = "Target Support Files/Pods-SendsayDependencies-Example/Pods-SendsayDependencies-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		64595E657504909C60233CA4 /* Pods-SendsayDependencies-SendsaySDK.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsayDependencies-SendsaySDK.debug.xcconfig"; path = "Target Support Files/Pods-SendsayDependencies-SendsaySDK/Pods-SendsayDependencies-SendsaySDK.debug.xcconfig"; sourceTree = "<group>"; };
 		6BA73FEC29B6377E009F92DF /* AtomicValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicValue.swift; sourceTree = "<group>"; };
 		6BA73FEF29B63A14009F92DF /* AtomicValueSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicValueSpec.swift; sourceTree = "<group>"; };
 		708D18AA4839AA0535A582B8 /* Pods-SendsaySDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsaySDKTests.release.xcconfig"; path = "Target Support Files/Pods-SendsaySDKTests/Pods-SendsaySDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		7F417D6738618D5F30397815 /* InAppMessageWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppMessageWebView.swift; sourceTree = "<group>"; };
 		7F417E0EA9B478FEF72999D9 /* HtmlNormalizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlNormalizer.swift; sourceTree = "<group>"; };
 		7F417FBE26AB2DD5FE31707E /* HtmlNormalizerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HtmlNormalizerSpec.swift; sourceTree = "<group>"; };
+		86D08A7F47B48669B6B66578 /* Pods_SendsayDependencies_SendsaySDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SendsayDependencies_SendsaySDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64D92FEFD20D8844C3C3BF9 /* Pods_SendsaySDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SendsaySDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B19801282ED79466005A034F /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1AB19E02E2FF6A500554B39 /* InitConfigResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigResponse.swift; sourceTree = "<group>"; };
 		B1AB19E42E2FF7D600554B39 /* ConfigItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigItem.swift; sourceTree = "<group>"; };
 		B1AB19EF2E30DB8500554B39 /* InitConfigManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitConfigManager.swift; sourceTree = "<group>"; };
@@ -927,6 +924,8 @@
 		B42DA69122B05A0100BBA225 /* get-consents.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "get-consents.json"; sourceTree = "<group>"; };
 		B4AF83BA22C6108200061350 /* String+URLValidation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+URLValidation.swift"; sourceTree = "<group>"; };
 		B4C957CA2267800400F8EC19 /* SendsaySDK-Notifications.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; name = "SendsaySDK-Notifications.podspec"; path = "../SendsaySDK-Notifications.podspec"; sourceTree = "<group>"; };
+		B6079EBBA81D54CDEC5CA011 /* Pods-SendsayDependencies-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsayDependencies-Example.release.xcconfig"; path = "Target Support Files/Pods-SendsayDependencies-Example/Pods-SendsayDependencies-Example.release.xcconfig"; sourceTree = "<group>"; };
+		BCBF32FB9F4C12F6A6B790DC /* Pods-SendsayDependencies-SendsaySDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsayDependencies-SendsaySDK.release.xcconfig"; path = "Target Support Files/Pods-SendsayDependencies-SendsaySDK/Pods-SendsayDependencies-SendsaySDK.release.xcconfig"; sourceTree = "<group>"; };
 		C01E19E920C02A4D00DF64F9 /* MultipleErrorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleErrorResponse.swift; sourceTree = "<group>"; };
 		C028C3A12110980600B03ED4 /* JSONValueSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONValueSpec.swift; sourceTree = "<group>"; };
 		C02C562821C9B71D0087A990 /* SendsayNotificationAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendsayNotificationAction.swift; sourceTree = "<group>"; };
@@ -1006,7 +1005,6 @@
 		CCB87B7928169F4B005DFB8E /* VersionCheckRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionCheckRepository.swift; sourceTree = "<group>"; };
 		CCB87B7B28169FF5005DFB8E /* ServerRepository+VersionCheckRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ServerRepository+VersionCheckRepository.swift"; sourceTree = "<group>"; };
 		CCB87B7D2816A6A6005DFB8E /* GitHubReleaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubReleaseResponse.swift; sourceTree = "<group>"; };
-		D2A77F0831DA6FC2F84139AB /* Pods-SendsaySDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendsaySDK.release.xcconfig"; path = "Target Support Files/Pods-SendsaySDK/Pods-SendsaySDK.release.xcconfig"; sourceTree = "<group>"; };
 		DD0C9C5D960517190C44E4C8 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		E4CBEFA68DA6BB67543DB2C3 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		EA74DF46A34FE1BF7B4749BC /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1065,7 +1063,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C02C562521C9B4E90087A990 /* SendsaySDKNotifications.framework in Frameworks */,
+				B19F9F0D304EF71A00E6B525 /* SendsaySDKNotifications.framework in Frameworks */,
 				C08D53D121B9474E00EA2C13 /* UserNotificationsUI.framework in Frameworks */,
 				C08D53CF21B9474E00EA2C13 /* UserNotifications.framework in Frameworks */,
 			);
@@ -1075,8 +1073,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B19F9F08304EF71200E6B525 /* SendsaySDKNotifications.framework in Frameworks */,
 				C02C562421C9B4E20087A990 /* UserNotifications.framework in Frameworks */,
-				C0ED33C221A72E40003649C3 /* SendsaySDKNotifications.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1091,10 +1089,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C0843CF120B6E7C900FAF0CB /* SendsaySDK.framework in Frameworks */,
-				C0ED33BB21A6FB10003649C3 /* SendsaySDKNotifications.framework in Frameworks */,
-				7F646D3CA7CCA3D9D2CB8C74 /* Pods_Example.framework in Frameworks */,
-				40E41B361C8E8E0646AE7885 /* Pods_Example.framework in Frameworks */,
+				B19F9EF4304EF6E300E6B525 /* SendsaySDK.framework in Frameworks */,
+				F10440B8659D1AF5491A1394 /* Pods_SendsayDependencies_Example.framework in Frameworks */,
+				B19F9F2A304F0A6600E6B525 /* SendsaySDKShared.framework in Frameworks */,
+				B19F9F28304F0A6400E6B525 /* SendsaySDKObjC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1102,7 +1100,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4E8CA2184C621EB1984A5137 /* Pods_SendsaySDK.framework in Frameworks */,
+				2D6037C3F754C38B926783C8 /* Pods_SendsayDependencies_SendsaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1861,13 +1859,13 @@
 		A3613BD1E2C1D4616B6A9767 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B19801282ED79466005A034F /* Pods_Example.framework */,
 				551F65192BAAD0F60072B980 /* Build */,
 				C08D53CE21B9474E00EA2C13 /* UserNotifications.framework */,
 				C08D53D021B9474E00EA2C13 /* UserNotificationsUI.framework */,
-				486299A97905BE77A09EC216 /* Pods_SendsaySDK.framework */,
 				A64D92FEFD20D8844C3C3BF9 /* Pods_SendsaySDKTests.framework */,
 				EA74DF46A34FE1BF7B4749BC /* Pods_Example.framework */,
+				0250F0FA3AEE121611FE6C23 /* Pods_SendsayDependencies_Example.framework */,
+				86D08A7F47B48669B6B66578 /* Pods_SendsayDependencies_SendsaySDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1908,8 +1906,12 @@
 				708D18AA4839AA0535A582B8 /* Pods-SendsaySDKTests.release.xcconfig */,
 				E4CBEFA68DA6BB67543DB2C3 /* Pods-Example.debug.xcconfig */,
 				DD0C9C5D960517190C44E4C8 /* Pods-Example.release.xcconfig */,
-				20355A7B550170380CC33DC1 /* Pods-SendsaySDK.debug.xcconfig */,
-				D2A77F0831DA6FC2F84139AB /* Pods-SendsaySDK.release.xcconfig */,
+				0D719707D848007B5BDF44E0 /* Pods-SendsaySDK.debug.xcconfig */,
+				18D6BB61A095458773BB05FC /* Pods-SendsaySDK.release.xcconfig */,
+				637718339EC40EEACAF1900A /* Pods-SendsayDependencies-Example.debug.xcconfig */,
+				B6079EBBA81D54CDEC5CA011 /* Pods-SendsayDependencies-Example.release.xcconfig */,
+				64595E657504909C60233CA4 /* Pods-SendsayDependencies-SendsaySDK.debug.xcconfig */,
+				BCBF32FB9F4C12F6A6B790DC /* Pods-SendsayDependencies-SendsaySDK.release.xcconfig */,
 			);
 			name = Pods;
 			path = ../Pods;
@@ -2516,11 +2518,12 @@
 				C08D53C921B9474E00EA2C13 /* Sources */,
 				C08D53CA21B9474E00EA2C13 /* Frameworks */,
 				C08D53CB21B9474E00EA2C13 /* Resources */,
+				B19F9F11304EF71A00E6B525 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C02C562721C9B4F20087A990 /* PBXTargetDependency */,
+				B19F9F10304EF71A00E6B525 /* PBXTargetDependency */,
 			);
 			name = ExampleNotificationContent;
 			productName = ExampleNotificationContent;
@@ -2534,11 +2537,12 @@
 				C0ED339F21A6FA31003649C3 /* Sources */,
 				C0ED33A021A6FA31003649C3 /* Frameworks */,
 				C0ED33A121A6FA31003649C3 /* Resources */,
+				B19F9F0C304EF71200E6B525 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C0ED33C421A72E48003649C3 /* PBXTargetDependency */,
+				B19F9F0B304EF71200E6B525 /* PBXTargetDependency */,
 			);
 			name = ExampleNotificationService;
 			productName = ExampleNotificationService;
@@ -2572,16 +2576,14 @@
 				C0F6C4DC2098A1AB00834E21 /* Sources */,
 				C0F6C4DD2098A1AB00834E21 /* Frameworks */,
 				C0F6C4DE2098A1AB00834E21 /* Resources */,
-				C0843CF320B6E7CA00FAF0CB /* Embed Frameworks */,
 				C0ED33AE21A6FA31003649C3 /* Embed Foundation Extensions */,
 				2508A3014A278918E374C98C /* [CP] Embed Pods Frameworks */,
+				B19F9F07304EF6E300E6B525 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C0753E9420A5793200A779FF /* PBXTargetDependency */,
 				C0ED33A921A6FA31003649C3 /* PBXTargetDependency */,
-				C0ED33BA21A6FB10003649C3 /* PBXTargetDependency */,
 				C08D53DA21B9474E00EA2C13 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
@@ -2596,7 +2598,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F021E86D206CF10200788ABC /* Build configuration list for PBXNativeTarget "SendsaySDK" */;
 			buildPhases = (
-				CB380C479AC8013363C820CE /* [CP] Check Pods Manifest.lock */,
+				4B8ADA9038396EB498B8825E /* [CP] Check Pods Manifest.lock */,
 				F021E856206CF10200788ABC /* Headers */,
 				F021E854206CF10200788ABC /* Sources */,
 				F021E855206CF10200788ABC /* Frameworks */,
@@ -2628,9 +2630,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				05B97D392417CDFD00FE9309 /* PBXTargetDependency */,
 				C0861C0220F919CF00C57997 /* PBXTargetDependency */,
-				0563755025AF03CA00AB68DA /* PBXTargetDependency */,
 				CCB87B76281688EC005DFB8E /* PBXTargetDependency */,
 			);
 			name = SendsaySDKTests;
@@ -2845,19 +2845,41 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-SendsayDependencies-Example/Pods-SendsayDependencies-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			inputPaths = (
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-SendsayDependencies-Example/Pods-SendsayDependencies-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SendsayDependencies-Example/Pods-SendsayDependencies-Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4B8ADA9038396EB498B8825E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SendsayDependencies-SendsaySDK-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5BB9DB8CC0C28A955A566530 /* [CP] Check Pods Manifest.lock */ = {
@@ -2875,7 +2897,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Example-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SendsayDependencies-Example-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2898,28 +2920,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-SendsaySDKTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CB380C479AC8013363C820CE /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SendsaySDK-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3397,25 +3397,15 @@
 			target = 0563750B25AF030A00AB68DA /* SendsaySDKObjC */;
 			targetProxy = 0563753925AF035700AB68DA /* PBXContainerItemProxy */;
 		};
-		0563755025AF03CA00AB68DA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 0563750B25AF030A00AB68DA /* SendsaySDKObjC */;
-			targetProxy = 0563754F25AF03CA00AB68DA /* PBXContainerItemProxy */;
-		};
-		05B97D392417CDFD00FE9309 /* PBXTargetDependency */ = {
+		B19F9F0B304EF71200E6B525 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C0ED33B321A6FB0F003649C3 /* SendsaySDKNotifications */;
-			targetProxy = 05B97D382417CDFD00FE9309 /* PBXContainerItemProxy */;
+			targetProxy = B19F9F0A304EF71200E6B525 /* PBXContainerItemProxy */;
 		};
-		C02C562721C9B4F20087A990 /* PBXTargetDependency */ = {
+		B19F9F10304EF71A00E6B525 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = C0ED33B321A6FB0F003649C3 /* SendsaySDKNotifications */;
-			targetProxy = C02C562621C9B4F20087A990 /* PBXContainerItemProxy */;
-		};
-		C0753E9420A5793200A779FF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F021E858206CF10200788ABC /* SendsaySDK */;
-			targetProxy = C0753E9320A5793200A779FF /* PBXContainerItemProxy */;
+			targetProxy = B19F9F0F304EF71A00E6B525 /* PBXContainerItemProxy */;
 		};
 		C0861C0220F919CF00C57997 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3431,16 +3421,6 @@
 			isa = PBXTargetDependency;
 			target = C0ED33A221A6FA31003649C3 /* ExampleNotificationService */;
 			targetProxy = C0ED33A821A6FA31003649C3 /* PBXContainerItemProxy */;
-		};
-		C0ED33BA21A6FB10003649C3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C0ED33B321A6FB0F003649C3 /* SendsaySDKNotifications */;
-			targetProxy = C0ED33B921A6FB10003649C3 /* PBXContainerItemProxy */;
-		};
-		C0ED33C421A72E48003649C3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C0ED33B321A6FB0F003649C3 /* SendsaySDKNotifications */;
-			targetProxy = C0ED33C321A72E48003649C3 /* PBXContainerItemProxy */;
 		};
 		CCB87B76281688EC005DFB8E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3616,7 +3596,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationContent";
@@ -3643,7 +3623,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.2.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationContent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3670,7 +3650,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.2.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationService";
@@ -3698,7 +3678,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.2.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3781,7 +3761,7 @@
 		};
 		C0F6C4EF2098A1AC00834E21 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4CBEFA68DA6BB67543DB2C3 /* Pods-Example.debug.xcconfig */;
+			baseConfigurationReference = 637718339EC40EEACAF1900A /* Pods-SendsayDependencies-Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -3799,7 +3779,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3810,7 +3790,7 @@
 		};
 		C0F6C4F02098A1AC00834E21 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD0C9C5D960517190C44E4C8 /* Pods-Example.release.xcconfig */;
+			baseConfigurationReference = B6079EBBA81D54CDEC5CA011 /* Pods-SendsayDependencies-Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -3828,7 +3808,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.2;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3875,7 +3855,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -3964,7 +3944,7 @@
 		};
 		F021E86E206CF10200788ABC /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20355A7B550170380CC33DC1 /* Pods-SendsaySDK.debug.xcconfig */;
+			baseConfigurationReference = 64595E657504909C60233CA4 /* Pods-SendsayDependencies-SendsaySDK.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -3976,6 +3956,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftSoup\"",
@@ -4003,7 +3984,7 @@
 		};
 		F021E86F206CF10200788ABC /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D2A77F0831DA6FC2F84139AB /* Pods-SendsaySDK.release.xcconfig */;
+			baseConfigurationReference = BCBF32FB9F4C12F6A6B790DC /* Pods-SendsayDependencies-SendsaySDK.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
@@ -4015,6 +3996,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftSoup\"",

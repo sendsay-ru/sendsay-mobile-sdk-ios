@@ -13,7 +13,7 @@ let package = Package(
             targets: ["SendsaySDK"]),
         .library(
             name: "SendsaySDK-Notifications",
-            targets: ["SendsaySDK-Notifications"]
+            targets: ["SendsaySDKNotifications"]
         )
     ],
     dependencies: [
@@ -40,7 +40,7 @@ let package = Package(
         ),
         // Notification extension library
         .target(
-            name: "SendsaySDK-Notifications",
+            name: "SendsaySDKNotifications",
             dependencies: ["SendsaySDKShared"],
             path: "SendsaySDK/SendsaySDK-Notifications",
             exclude: ["Supporting Files/Info.plist"],
