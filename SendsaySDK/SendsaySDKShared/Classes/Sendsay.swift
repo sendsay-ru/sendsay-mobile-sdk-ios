@@ -9,7 +9,7 @@
 import Foundation
 
 public class Sendsay {
-    public static let version = "0.1.4"
+    public static let version = "0.2.0"
     /// A logger used to log all messages from the SDK.
     public static var logger: Logger = Logger()
 

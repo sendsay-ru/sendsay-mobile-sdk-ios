@@ -29,7 +29,7 @@ iOS SDK Sendsay можно установить или обновить чере
 
 Чтобы фиксировать только мажорную версию SDK и разрешить обновления внутри минорных:
 ```
-pod "SendsaySDK", "~> 0.1.4"
+pod "SendsaySDK", "~> 0.2.0"
 ```
 Подробнее — в разделе [Указанию версий pod](https://guides.cocoapods.org/using/the-podfile.html#specifying-pod-versions) документации Cocoapods.
 
