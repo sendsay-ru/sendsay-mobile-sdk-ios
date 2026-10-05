@@ -11,7 +11,10 @@ import SendsaySDKNotifications
 
 class NotificationService: UNNotificationServiceExtension {
 
-    let sendsayService = SendsayNotificationService(appGroup: "group.com.sendsay.SendsaySDK")
+    let sendsayService = SendsayNotificationService(
+        appGroup: "group.com.sendsay.SendsaySDK",
+        reportAttachmentErrors: true
+    )
 
     override func didReceive(
         _ request: UNNotificationRequest,

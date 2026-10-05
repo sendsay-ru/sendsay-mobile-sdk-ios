@@ -24,6 +24,14 @@ class AppDelegate: SendsayAppDelegate {
     static let memoryLogger = MemoryLogger()
     var window: UIWindow?
     var alertWindow: UIWindow?
+    private var pendingAlerts: [AlertMessage] = []
+    private var isPresentingAlert = false
+
+    private struct AlertMessage {
+        let title: String
+        let message: String
+    }
+
     let discoverySegmentsCallback = SegmentCallbackData(
         category: .discovery(),
         isIncludeFirstLoad: false
@@ -145,6 +153,10 @@ class AppDelegate: SendsayAppDelegate {
         )
     }
 
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        presentNextAlert()
+    }
+
     override func userNotificationCenter(
         _ center: UNUserNotificationCenter,
         willPresent notification: UNNotification,
@@ -155,21 +167,76 @@ class AppDelegate: SendsayAppDelegate {
 
 extension AppDelegate {
     func showAlert(_ title: String, _ message: String?) {
-        let alert = UIAlertController(title: title, message: message ?? "no body", preferredStyle: .alert)
-        alert.addAction(
-            UIAlertAction(
-                title: "Ok",
-                style: .default,
-                handler: { [weak self] _ in self?.alertWindow?.isHidden = true }
-            )
-        )
-        if alertWindow == nil {
-            alertWindow = UIWindow(frame: UIScreen.main.bounds)
-            alertWindow?.rootViewController = UIViewController()
-            alertWindow?.windowLevel = .alert + 1
+        enqueueAlerts([
+            AlertMessage(title: title, message: message ?? "no body")
+        ])
+    }
+
+    private func enqueueAlerts(_ alerts: [AlertMessage]) {
+        onMain {
+            self.pendingAlerts.append(contentsOf: alerts)
+            self.presentNextAlert()
         }
+    }
+
+    private func presentNextAlert() {
+        guard !isPresentingAlert else {
+            return
+        }
+        guard !pendingAlerts.isEmpty else {
+            if let alertWindow = alertWindow {
+                let wasKeyWindow = alertWindow.isKeyWindow
+                alertWindow.isHidden = true
+                self.alertWindow = nil
+                if wasKeyWindow {
+                    window?.makeKeyAndVisible()
+                }
+            }
+            return
+        }
+        // Defer alerts received during launch or background delivery.
+        guard UIApplication.shared.applicationState == .active else {
+            return
+        }
+
+        if alertWindow == nil {
+            let newWindow: UIWindow
+            if let scene = window?.windowScene {
+                newWindow = UIWindow(windowScene: scene)
+            } else {
+                newWindow = UIWindow(frame: UIScreen.main.bounds)
+            }
+            newWindow.rootViewController = UIViewController()
+            newWindow.windowLevel = .alert + 1
+            alertWindow = newWindow
+        }
+        guard let presenter = alertWindow?.rootViewController else {
+            return
+        }
+
+        let next = pendingAlerts.removeFirst()
+        let alert = UIAlertController(
+            title: next.title,
+            message: next.message,
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(
+            title: "ОК",
+            style: .default,
+            handler: { [weak self, weak alert] _ in
+                guard let self = self, let alert = alert else {
+                    return
+                }
+                // Present the next item only after dismissal has completed.
+                alert.dismiss(animated: true) { [weak self] in
+                    self?.isPresentingAlert = false
+                    self?.presentNextAlert()
+                }
+            }
+        ))
+        isPresentingAlert = true
         alertWindow?.makeKeyAndVisible()
-        alertWindow?.rootViewController?.present(alert, animated: true, completion: nil)
+        presenter.present(alert, animated: true)
     }
 }
 
@@ -179,28 +246,87 @@ extension AppDelegate: PushNotificationManagerDelegate {
         value: String?,
         extraData: [AnyHashable: Any]?
     ) {
-        Sendsay.logger.log(
-            .verbose,
-            message: "Alert push opened, " +
-                "action \(action), value: \(String(describing: value)), extraData \(String(describing: extraData))"
-        )
-        onMain(self.showAlert(
-            "Push notification opened",
-            "action \(action), value: \(String(describing: value)), extraData \(String(describing: extraData))"
-        ))
+        showPushPayload("Push attributes", payload: extraData)
+    }
+
+    func pushNotificationOpened(
+        with action: SendsayNotificationActionType,
+        value: String?,
+        extraData: [AnyHashable: Any]?,
+        payload: [AnyHashable: Any]?
+    ) {
+        showPushPayload("Push notification opened", payload: payload)
     }
 
     func silentPushNotificationReceived(extraData: [AnyHashable: Any]?) {
-        Sendsay.logger.log(
-            .verbose,
-            message: "Silent push received, extraData \(String(describing: extraData))"
-        )
-        onMain {
-            self.showAlert(
-                "Silent push received",
-                "extraData \(String(describing: extraData))"
-            )
+        showPushPayload("Silent push attributes", payload: extraData)
+    }
+
+    func silentPushNotificationReceived(
+        extraData: [AnyHashable: Any]?,
+        payload: [AnyHashable: Any]?
+    ) {
+        showPushPayload("Silent push received", payload: payload)
+    }
+
+    private func showPushPayload(
+        _ title: String,
+        payload: [AnyHashable: Any]?
+    ) {
+        var alerts: [AlertMessage] = []
+        var displayPayload = payload
+        if let diagnostics = payload?["_sendsay_debug"] as? [String: Any],
+           let imageError = diagnostics["image_error"] as? [String: Any] {
+            let stage = imageError["stage"] as? String ?? "unknown"
+            let domain = imageError["domain"] as? String ?? "unknown"
+            let code = (imageError["code"] as? NSNumber)?.stringValue ?? "—"
+            let description = imageError["message"] as? String
+                ?? "Описание ошибки отсутствует."
+            alerts.append(AlertMessage(
+                title: "Ошибка изображения в пуше",
+                message: "Этап: \(stage)\nДомен: \(domain)\n" +
+                    "Код: \(code)\n\n\(description)"
+            ))
+            // Strip diagnostics only from the copy shown to the user.
+            displayPayload?.removeValue(forKey: "_sendsay_debug")
         }
+
+        let message: String
+        if let displayPayload = displayPayload {
+            do {
+                message = try PushPayloadFormatter.string(from: displayPayload)
+            } catch {
+                Sendsay.logger.log(
+                    .error,
+                    message: "Push payload JSON formatting failed: \(error)"
+                )
+                message = "Unable to format push payload as JSON."
+            }
+        } else {
+            message = "Push payload is unavailable."
+        }
+        Sendsay.logger.log(.verbose, message: "\(title): \(message)")
+        alerts.append(AlertMessage(title: title, message: message))
+        // Enqueue the pair together so other pushes cannot separate the alerts.
+        enqueueAlerts(alerts)
+    }
+}
+
+/// Formats the complete payload without changing its JSON value types.
+private enum PushPayloadFormatter {
+    enum FormattingError: Error {
+        case invalidJSONObject
+    }
+
+    static func string(from payload: [AnyHashable: Any]) throws -> String {
+        guard JSONSerialization.isValidJSONObject(payload) else {
+            throw FormattingError.invalidJSONObject
+        }
+        let data = try JSONSerialization.data(
+            withJSONObject: payload,
+            options: [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
+        )
+        return String(decoding: data, as: UTF8.self)
     }
 }
 

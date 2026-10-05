@@ -73,6 +73,65 @@ final class PushNotificationManagerSpec: QuickSpec {
         }
     }
 
+    private final class PayloadDelegate: PushNotificationManagerDelegate {
+        var payloads: [[AnyHashable: Any]] = []
+        var attributes: [[AnyHashable: Any]] = []
+        var silentValues: [Bool] = []
+        var legacyCalls = 0
+
+        func pushNotificationOpened(
+            with action: SendsayNotificationActionType,
+            value: String?,
+            extraData: [AnyHashable: Any]?
+        ) {
+            legacyCalls += 1
+        }
+
+        func silentPushNotificationReceived(extraData: [AnyHashable: Any]?) {
+            legacyCalls += 1
+        }
+
+        func pushNotificationOpened(
+            with action: SendsayNotificationActionType,
+            value: String?,
+            extraData: [AnyHashable: Any]?,
+            payload: [AnyHashable: Any]?
+        ) {
+            payloads.append(payload ?? [:])
+            attributes.append(extraData ?? [:])
+            silentValues.append(false)
+        }
+
+        func silentPushNotificationReceived(
+            extraData: [AnyHashable: Any]?,
+            payload: [AnyHashable: Any]?
+        ) {
+            payloads.append(payload ?? [:])
+            attributes.append(extraData ?? [:])
+            silentValues.append(true)
+        }
+    }
+
+    private final class LegacyDelegate: PushNotificationManagerDelegate {
+        var openedCalls = 0
+        var silentCalls = 0
+        var attributes: [AnyHashable: Any]?
+
+        func pushNotificationOpened(
+            with action: SendsayNotificationActionType,
+            value: String?,
+            extraData: [AnyHashable: Any]?
+        ) {
+            openedCalls += 1
+            attributes = extraData
+        }
+
+        func silentPushNotificationReceived(extraData: [AnyHashable: Any]?) {
+            silentCalls += 1
+            attributes = extraData
+        }
+    }
+
     override func spec() {
         var trackingManager: MockTrackingManager!
         var trackingConsentManager: TrackingConsentManagerType!
@@ -141,6 +200,82 @@ final class PushNotificationManagerSpec: QuickSpec {
                 currentToken: "mock-push-token",
                 tokenTrackFrequency: .daily
             )
+        }
+
+        describe("complete push payload callbacks") {
+            for silent in [false, true] {
+                for deferred in [false, true] {
+                    let scenario = "silent=\(silent), deferred=\(deferred)"
+
+                    it("preserves the complete payload: \(scenario)") {
+                        let delegate = PayloadDelegate()
+                        let attributes: [String: Any] = ["id": 42]
+                        let payload: [String: Any] = [
+                            "aps": ["alert": ["body": "Привет"]],
+                            "attributes": attributes,
+                            "custom": ["items": [1, 2], "enabled": true],
+                            "silent": silent ? 1 : 0
+                        ]
+                        let parsed = PushNotificationParser.parsePushOpened(
+                            userInfoObject: payload as NSDictionary,
+                            actionIdentifier: nil,
+                            timestamp: PushNotificationsTestData.timestamp,
+                            considerConsent: false
+                        )!
+                        // Also exercise the persisted pending-push format.
+                        let restored = PushOpenedData.deserialize(
+                            from: parsed.serialize()!
+                        )!
+                        if !deferred {
+                            pushManager.delegate = delegate
+                        }
+                        pushManager.handlePushOpenedUnsafe(
+                            pushOpenedData: restored
+                        )
+                        if deferred {
+                            expect(delegate.payloads).to(beEmpty())
+                            pushManager.delegate = delegate
+                        }
+                        expect(delegate.payloads.count).to(equal(1))
+                        expect(delegate.silentValues).to(equal([silent]))
+                        expect(delegate.legacyCalls).to(equal(0))
+                        expect(NSDictionary(
+                            dictionary: delegate.payloads[0]
+                        )).to(equal(NSDictionary(dictionary: payload)))
+                        expect(NSDictionary(
+                            dictionary: delegate.attributes[0]
+                        )).to(equal(NSDictionary(dictionary: attributes)))
+                        // Setting the delegate again must not replay the push.
+                        pushManager.delegate = delegate
+                        expect(delegate.payloads.count).to(equal(1))
+                    }
+
+                    it("calls the legacy callback once: \(scenario)") {
+                        let delegate = LegacyDelegate()
+                        let payload: [String: Any] = [
+                            "aps": ["alert": "Hello"],
+                            "attributes": ["id": 42],
+                            "silent": silent ? 1 : 0
+                        ]
+                        if !deferred {
+                            pushManager.delegate = delegate
+                        }
+                        pushManager.handlePushOpenedUnsafe(
+                            userInfoObject: payload as NSDictionary,
+                            actionIdentifier: nil,
+                            timestamp: PushNotificationsTestData.timestamp,
+                            considerConsent: false
+                        )
+                        if deferred {
+                            pushManager.delegate = delegate
+                        }
+                        expect(delegate.openedCalls).to(equal(silent ? 0 : 1))
+                        expect(delegate.silentCalls).to(equal(silent ? 1 : 0))
+                        expect(delegate.attributes?["id"] as? Int).to(equal(42))
+                        expect(delegate.attributes?["aps"]).to(beNil())
+                    }
+                }
+            }
         }
 
         describe("tracking stored delivered push notifications") {

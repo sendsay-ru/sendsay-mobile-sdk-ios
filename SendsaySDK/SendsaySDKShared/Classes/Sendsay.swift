@@ -9,11 +9,11 @@
 import Foundation
 
 public class Sendsay {
-    public static let version = "0.2.0"
+    public static let version = "0.2.1"
     /// A logger used to log all messages from the SDK.
     public static var logger: Logger = Logger()
 
     public static func isSendsayNotification(userInfo: [AnyHashable: Any]) -> Bool {
-        return userInfo["source"] as? String == "xnpe_platform"
+        return userInfo["source"] as? String == "xnpe_platform" || userInfo["source"] as? String == "native"
     }
 }

@@ -15,6 +15,7 @@ import SendsaySDKShared
 public class SendsayNotificationService {
 
     private let appGroup: String?
+    private let reportAttachmentErrors: Bool
     private var isSDKStopped: Bool {
         UserDefaults(suiteName: appGroup ?? "SendsaySDK")?.value(forKey: "isStopped") as? Bool ?? false
     }
@@ -34,8 +35,14 @@ public class SendsayNotificationService {
         }
     }
 
-    public init(appGroup: String? = nil) {
+    /// Creates a service with optional image diagnostics in the push payload.
+    /// Enable `reportAttachmentErrors` only for debugging in the example app.
+    public init(
+        appGroup: String? = nil,
+        reportAttachmentErrors: Bool = false
+    ) {
         self.appGroup = appGroup
+        self.reportAttachmentErrors = reportAttachmentErrors
     }
 
     public func process(request: UNNotificationRequest, contentHandler: @escaping (UNNotificationContent) -> Void) {
@@ -113,13 +120,8 @@ public class SendsayNotificationService {
                 bestAttemptContent?.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: sound))
             }
 
-            // Download and add image
-            if let imagePath = content.userInfo["image"] as? String,
-                let url = imagePath.cleanedURL(),
-                let data = try? Data(contentsOf: url, options: []),
-                let attachment = saveImage("image.png", data: data, options: nil) {
-                bestAttemptContent?.attachments = [attachment]
-            }
+            // Download and add image, preserving diagnostic errors if enabled.
+            attachImage(to: content)
 
             #warning ("TODO: check image is attaches")
 //            guard let imagePath = content.userInfo["image"] as? String,
@@ -138,6 +140,61 @@ public class SendsayNotificationService {
         contentCreated = true
     }
     
+    private func attachImage(to content: UNMutableNotificationContent) {
+        guard let imagePath = content.userInfo["image"] as? String else {
+            return
+        }
+
+        let data: Data
+        do {
+            guard let url = imagePath.cleanedURL() else {
+                throw URLError(.badURL)
+            }
+            data = try Data(contentsOf: url, options: [])
+        } catch {
+            recordImageError(error, stage: "download", in: content)
+            return
+        }
+
+        do {
+            let attachment = try saveImage(
+                "image.png",
+                data: data,
+                options: nil
+            )
+            content.attachments = [attachment]
+        } catch {
+            recordImageError(error, stage: "attachment", in: content)
+        }
+    }
+
+    private func recordImageError(
+        _ error: Error,
+        stage: String,
+        in content: UNMutableNotificationContent
+    ) {
+        let underlyingError = error as NSError
+        Sendsay.logger.log(
+            .error,
+            message: "Push image failed at \(stage): " +
+                "\(underlyingError.domain) (\(underlyingError.code))"
+        )
+        guard reportAttachmentErrors else {
+            return
+        }
+
+        // Only JSON-compatible values can cross into the application's payload.
+        var diagnostics = content.userInfo["_sendsay_debug"]
+            as? [String: Any] ?? [:]
+        diagnostics["image_error"] = [
+            "stage": stage,
+            "domain": underlyingError.domain,
+            "code": underlyingError.code,
+            "message": underlyingError.localizedDescription
+        ]
+        content.userInfo["_sendsay_debug"] = diagnostics
+    }
+
     private func download(url: URL, completion: @escaping (URL?) -> Void) {
             let task = URLSession.shared.downloadTask(with: url) { tempURL, _, _ in
                 guard let tempURL = tempURL else { return completion(nil) }
@@ -242,17 +299,28 @@ public class SendsayNotificationService {
         userDefaults.set(deliveredNotifEvents, forKey: Constants.General.deliveredPushEventUserDefaultsKey)
     }
 
-    func saveImage(_ identifier: String, data: Data, options: [AnyHashable: Any]?) -> UNNotificationAttachment? {
-        let url = URL(fileURLWithPath: NSTemporaryDirectory())
-        let directory = url.appendingPathComponent(ProcessInfo.processInfo.globallyUniqueString, isDirectory: true)
-        do {
-            try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
-            let fileURL = directory.appendingPathComponent(identifier)
-            try data.write(to: fileURL, options: [])
-            return try UNNotificationAttachment.init(identifier: identifier, url: fileURL, options: options)
-        } catch {
-            return nil
-        }
+    func saveImage(
+        _ identifier: String,
+        data: Data,
+        options: [AnyHashable: Any]?
+    ) throws -> UNNotificationAttachment {
+        let temporaryURL = URL(fileURLWithPath: NSTemporaryDirectory())
+        let directory = temporaryURL.appendingPathComponent(
+            ProcessInfo.processInfo.globallyUniqueString,
+            isDirectory: true
+        )
+        try FileManager.default.createDirectory(
+            at: directory,
+            withIntermediateDirectories: true,
+            attributes: nil
+        )
+        let fileURL = directory.appendingPathComponent(identifier)
+        try data.write(to: fileURL, options: [])
+        return try UNNotificationAttachment(
+            identifier: identifier,
+            url: fileURL,
+            options: options
+        )
     }
 
     internal func clean() {

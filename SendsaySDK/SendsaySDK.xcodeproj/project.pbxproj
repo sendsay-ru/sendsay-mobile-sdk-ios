@@ -345,9 +345,7 @@
 		B19F9EF4304EF6E300E6B525 /* SendsaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F021E859206CF10200788ABC /* SendsaySDK.framework */; };
 		B19F9EF5304EF6E300E6B525 /* SendsaySDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F021E859206CF10200788ABC /* SendsaySDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B19F9F08304EF71200E6B525 /* SendsaySDKNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; };
-		B19F9F09304EF71200E6B525 /* SendsaySDKNotifications.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B19F9F0D304EF71A00E6B525 /* SendsaySDKNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; };
-		B19F9F0E304EF71A00E6B525 /* SendsaySDKNotifications.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B19F9F28304F0A6400E6B525 /* SendsaySDKObjC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0563750C25AF030A00AB68DA /* SendsaySDKObjC.framework */; };
 		B19F9F29304F0A6400E6B525 /* SendsaySDKObjC.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0563750C25AF030A00AB68DA /* SendsaySDKObjC.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B19F9F2A304F0A6600E6B525 /* SendsaySDKShared.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0561829725AD959C001E30A3 /* SendsaySDKShared.framework */; };
@@ -534,28 +532,6 @@
 				B19F9EF5304EF6E300E6B525 /* SendsaySDK.framework in Embed Frameworks */,
 				B19F9F2B304F0A6600E6B525 /* SendsaySDKShared.framework in Embed Frameworks */,
 				B19F9F29304F0A6400E6B525 /* SendsaySDKObjC.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B19F9F0C304EF71200E6B525 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B19F9F09304EF71200E6B525 /* SendsaySDKNotifications.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B19F9F11304EF71A00E6B525 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B19F9F0E304EF71A00E6B525 /* SendsaySDKNotifications.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2518,7 +2494,6 @@
 				C08D53C921B9474E00EA2C13 /* Sources */,
 				C08D53CA21B9474E00EA2C13 /* Frameworks */,
 				C08D53CB21B9474E00EA2C13 /* Resources */,
-				B19F9F11304EF71A00E6B525 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -2537,7 +2512,6 @@
 				C0ED339F21A6FA31003649C3 /* Sources */,
 				C0ED33A021A6FA31003649C3 /* Frameworks */,
 				C0ED33A121A6FA31003649C3 /* Resources */,
-				B19F9F0C304EF71200E6B525 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -3596,7 +3570,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.1.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationContent";
@@ -3623,7 +3597,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.1.5;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationContent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3650,7 +3624,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.1.5;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationService";
@@ -3678,7 +3652,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.1.5;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example.ExampleNotificationService";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3779,7 +3753,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3808,7 +3782,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.1.5;
 				PRODUCT_BUNDLE_IDENTIFIER = "ru.sendsay.SendsaySDK-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
