@@ -339,6 +339,8 @@
 		7F41777390316561CE4482DB /* InAppMessageWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F417D6738618D5F30397815 /* InAppMessageWebView.swift */; };
 		B12D01272E7871A9002804EE /* TrackSSECDataBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1AC49022E6AF1B90064C39C /* TrackSSECDataBuilder.swift */; };
 		B12D01282E7871DE002804EE /* TrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0EB5D9C20B8193A00F1031F /* TrackingViewController.swift */; };
+		B15A638E3079039000ABD291 /* SendsaySDKNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; };
+		B15A638F3079039000ABD291 /* SendsaySDKNotifications.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C0ED33B421A6FB0F003649C3 /* SendsaySDKNotifications.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		B18474B32E1291BF002FEDEF /* objc_tryCatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 05114E68234747BC00201EE6 /* objc_tryCatch.m */; };
 		B18474B42E1291F5002FEDEF /* objc_tryCatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 05114E6A234747DE00201EE6 /* objc_tryCatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B18474BC2E129851002FEDEF /* SendsaySDKObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 0563750E25AF030A00AB68DA /* SendsaySDKObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -468,6 +470,13 @@
 			remoteGlobalIDString = 0563750B25AF030A00AB68DA;
 			remoteInfo = SendsaySDKObjC;
 		};
+		B15A63903079039000ABD291 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F021E850206CF10200788ABC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C0ED33B321A6FB0F003649C3;
+			remoteInfo = SendsaySDKNotifications;
+		};
 		B19F9F0A304EF71200E6B525 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F021E850206CF10200788ABC /* Project object */;
@@ -529,6 +538,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				B15A638F3079039000ABD291 /* SendsaySDKNotifications.framework in Embed Frameworks */,
 				B19F9EF5304EF6E300E6B525 /* SendsaySDK.framework in Embed Frameworks */,
 				B19F9F2B304F0A6600E6B525 /* SendsaySDKShared.framework in Embed Frameworks */,
 				B19F9F29304F0A6400E6B525 /* SendsaySDKObjC.framework in Embed Frameworks */,
@@ -538,7 +548,7 @@
 		};
 		C0ED33AE21A6FA31003649C3 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
@@ -546,7 +556,7 @@
 				C0ED33AA21A6FA31003649C3 /* ExampleNotificationService.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -1065,6 +1075,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B15A638E3079039000ABD291 /* SendsaySDKNotifications.framework in Frameworks */,
 				B19F9EF4304EF6E300E6B525 /* SendsaySDK.framework in Frameworks */,
 				F10440B8659D1AF5491A1394 /* Pods_SendsayDependencies_Example.framework in Frameworks */,
 				B19F9F2A304F0A6600E6B525 /* SendsaySDKShared.framework in Frameworks */,
@@ -2559,6 +2570,7 @@
 			dependencies = (
 				C0ED33A921A6FA31003649C3 /* PBXTargetDependency */,
 				C08D53DA21B9474E00EA2C13 /* PBXTargetDependency */,
+				B15A63913079039000ABD291 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				B1BE5AAF2E0C38CC00B425CA /* Extensions */,
@@ -3370,6 +3382,11 @@
 			isa = PBXTargetDependency;
 			target = 0563750B25AF030A00AB68DA /* SendsaySDKObjC */;
 			targetProxy = 0563753925AF035700AB68DA /* PBXContainerItemProxy */;
+		};
+		B15A63913079039000ABD291 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C0ED33B321A6FB0F003649C3 /* SendsaySDKNotifications */;
+			targetProxy = B15A63903079039000ABD291 /* PBXContainerItemProxy */;
 		};
 		B19F9F0B304EF71200E6B525 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

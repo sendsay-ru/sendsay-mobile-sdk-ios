@@ -7,31 +7,90 @@
 //
 
 import Foundation
+import ImageIO
 import UserNotifications
 #if canImport(SendsaySDKShared)
 import SendsaySDKShared
 #endif
 
 public class SendsayNotificationService {
+    /// Root-level keys, in priority order. The first valid HTTP(S) URL wins.
+    private static let imageURLKeys = [
+        "sendsay_issue_image",
+        "image",
+        "image-url",
+        "image_url",
+        "imageUrl"
+    ]
+    private static let imageDownloadTimeout: TimeInterval = 15
+    private static let maximumImageBytes = 10 * 1024 * 1024
 
     private let appGroup: String?
     private let reportAttachmentErrors: Bool
-    private var isSDKStopped: Bool {
-        UserDefaults(suiteName: appGroup ?? "SendsaySDK")?.value(forKey: "isStopped") as? Bool ?? false
-    }
+    private let stateQueue = DispatchQueue(
+        label: "com.sendsay.notification-service.state"
+    )
+    private let stateQueueKey = DispatchSpecificKey<Bool>()
+    private var processing: ProcessingState?
 
-    var request: UNNotificationRequest?
-    var contentHandler: ((UNNotificationContent) -> Void)?
-    var bestAttemptContent: UNMutableNotificationContent?
+    // Keep state changes and delivery completion on one queue. File processing
+    // stays on URLSession's callback queue so expiry never waits for image I/O.
+    private final class ProcessingState {
+        let content: UNMutableNotificationContent
+        let contentHandler: (UNNotificationContent) -> Void
+        let notificationData: NotificationData
+        var notificationTracked = false
+        var contentCreated = false
+        var isFinished = false
+        var downloadTask: URLSessionDownloadTask?
+        var downloadSession: URLSession?
 
-    var notificationTracked: Bool = false {
-        didSet {
-            checkDone()
+        init(
+            content: UNMutableNotificationContent,
+            contentHandler: @escaping (UNNotificationContent) -> Void,
+            notificationData: NotificationData
+        ) {
+            self.content = content
+            self.contentHandler = contentHandler
+            self.notificationData = notificationData
         }
     }
-    var contentCreated: Bool = false {
-        didSet {
-            checkDone()
+
+    private struct DownloadedImage {
+        let attachment: UNNotificationAttachment
+        let temporaryURL: URL
+    }
+
+    private enum ImageError: LocalizedError {
+        case invalidURL
+        case invalidResponse
+        case httpStatus(Int)
+        case missingFile
+        case invalidImage
+        case imageTooLarge
+
+        var errorDescription: String? {
+            switch self {
+            case .invalidURL:
+                return "No supported image key contains a valid HTTP(S) URL."
+            case .invalidResponse:
+                return "The image server did not return an HTTP response."
+            case .httpStatus(let status):
+                return "The image server returned HTTP \(status)."
+            case .missingFile:
+                return "The image download did not produce a file."
+            case .invalidImage:
+                return "The downloaded file is not a recognized image."
+            case .imageTooLarge:
+                return "The image exceeds the 10 MB attachment limit."
+            }
+        }
+    }
+
+    /// A snapshot for internal consumers; mutable processing state stays private.
+    internal var bestAttemptContent: UNMutableNotificationContent? {
+        withState {
+            processing?.content.mutableCopy() as? UNMutableNotificationContent
         }
     }
 
@@ -43,128 +102,230 @@ public class SendsayNotificationService {
     ) {
         self.appGroup = appGroup
         self.reportAttachmentErrors = reportAttachmentErrors
+        stateQueue.setSpecific(key: stateQueueKey, value: true)
     }
 
-    public func process(request: UNNotificationRequest, contentHandler: @escaping (UNNotificationContent) -> Void) {
-        NSLog("=== SendsayNotificationService: process ===")
-        guard Sendsay.isSendsayNotification(userInfo: request.content.userInfo) else {
-            Sendsay.logger.log(.verbose, message: "Skipping non-Sendsay notification")
-            return
-        }
-        guard !isSDKStopped else {
-            NSLog("=== SendsayNotificationService: STOPPED ===")
-            contentHandler(request.content)
-            return
-        }
-        NSLog("=== SendsayNotificationService: TRACKING ===")
-        self.request = request
-        self.contentHandler = contentHandler
-
-        if let notificationData = prepareNotificationData(request: request),
-           let appGroup = appGroup {
-            trackDeliveredNotification(appGroup: appGroup, notificationData: notificationData)
-            createContent(deliveredTimestamp: notificationData.timestamp)
-        }
-    }
-
-    public func serviceExtensionTimeWillExpire() {
-        // Clean, after we are finished
-        defer { clean() }
-
-        // we failed to track notification
-        if !notificationTracked {
-            if let userInfo = (request?.content.mutableCopy() as? UNMutableNotificationContent)?.userInfo {
-            let notification = NotificationData.deserialize(
-                attributes: userInfo["attributes"] as? [String: Any] ?? [:],
-                campaignData: userInfo["url_params"] as? [String: Any] ?? [:],
-                consentCategoryTracking: userInfo["consent_category_tracking"] as? String ?? nil,
-                hasTrackingConsent: GdprTracking.readTrackingConsentFlag(userInfo["has_tracking_consent"])
-            ) ?? NotificationData()
-            saveNotificationForLaterTracking(notification: notification)
-            }
-        }
-
-        // Try to call content handler with current content
-        if let content = bestAttemptContent {
-            contentHandler?(content)
-        }
-    }
-
-    internal func createContent(deliveredTimestamp: Double?) {
-        // Create a mutable content and make sure it works
-        bestAttemptContent = (request?.content.mutableCopy() as? UNMutableNotificationContent)
-
-        if deliveredTimestamp != nil {
-            var additionalInfo = [String: Any]()
-            additionalInfo["delivered_timestamp"] = deliveredTimestamp
-            bestAttemptContent?.userInfo.merge(additionalInfo) { (_, new) in new }
-        }
-
-        if let content = bestAttemptContent {
-            bestAttemptContent?.title = content.userInfo["title"] as? String ?? "NO TITLE"
-            bestAttemptContent?.body = content.userInfo["message"] as? String ?? ""
-
-            if #available(iOSApplicationExtension 12.0, *) {
-                bestAttemptContent?.categoryIdentifier = "SENDSAY_ACTIONABLE"
-            }
-
-            // Assign badge if any
-            if let badgeString = content.userInfo["badge"] as? String, let badge = Int(badgeString) {
-                bestAttemptContent?.badge = badge as NSNumber
-            } else {
-                bestAttemptContent?.badge = nil
-            }
-
-            // Assign sound if any
-            if let sound = content.userInfo["sound"] as? String {
-                bestAttemptContent?.sound = UNNotificationSound.init(named: UNNotificationSoundName(rawValue: sound))
-            }
-
-            // Download and add image, preserving diagnostic errors if enabled.
-            attachImage(to: content)
-
-            #warning ("TODO: check image is attaches")
-//            guard let imagePath = content.userInfo["image"] as? String,
-//            let url = URL(string: imagePath)
-//            else {
-//                contentCreated = true
-//                return
-//            }
-//            download(url: url) { fileURL in
-//                if let fileURL = fileURL,
-//                   let attachment = try? UNNotificationAttachment(identifier: "image", url: fileURL, options: nil) {
-//                    self.bestAttemptContent?.attachments = [attachment]
-//                }
-//            }
-        }
-        contentCreated = true
-    }
-    
-    private func attachImage(to content: UNMutableNotificationContent) {
-        guard let imagePath = content.userInfo["image"] as? String else {
-            return
-        }
-
-        let data: Data
-        do {
-            guard let url = imagePath.cleanedURL() else {
-                throw URLError(.badURL)
-            }
-            data = try Data(contentsOf: url, options: [])
-        } catch {
-            recordImageError(error, stage: "download", in: content)
-            return
-        }
-
-        do {
-            let attachment = try saveImage(
-                "image.png",
-                data: data,
-                options: nil
+    /// Processes a push and invokes its content handler exactly once.
+    public func process(
+        request: UNNotificationRequest,
+        contentHandler: @escaping (UNNotificationContent) -> Void
+    ) {
+        withState {
+            Sendsay.logger.log(
+                .verbose,
+                message: "=== SendsayNotificationService: process ==="
             )
-            content.attachments = [attachment]
+            let userInfo = request.content.userInfo
+            let isSDKStopped = UserDefaults(suiteName: appGroup ?? "SendsaySDK")?
+                .bool(forKey: "isStopped") ?? false
+            guard Sendsay.isSendsayNotification(userInfo: userInfo),
+                  !isSDKStopped,
+                  let content = request.content.mutableCopy()
+                    as? UNMutableNotificationContent else {
+                contentHandler(request.content)
+                return
+            }
+
+            let state = ProcessingState(
+                content: content,
+                contentHandler: contentHandler,
+                notificationData: prepareNotificationData(userInfo: userInfo)
+            )
+            let previous = processing
+            processing = state
+            if let previous = previous {
+                finishBeforeDeadline(previous)
+            }
+            guard !state.isFinished else { return }
+
+            configureContent(state)
+            if let appGroup = appGroup {
+                trackDeliveredNotification(appGroup: appGroup, state: state)
+            } else {
+                // Image processing does not require an App Group.
+                state.notificationTracked = true
+            }
+            attachImage(state)
+        }
+    }
+
+    /// Cancels pending image work and submits the best available content.
+    public func serviceExtensionTimeWillExpire() {
+        withState {
+            guard let state = processing else { return }
+            finishBeforeDeadline(state)
+        }
+    }
+
+    private func withState<T>(_ body: () -> T) -> T {
+        if DispatchQueue.getSpecific(key: stateQueueKey) == true {
+            return body()
+        }
+        return stateQueue.sync(execute: body)
+    }
+
+    private func configureContent(_ state: ProcessingState) {
+        let content = state.content
+        content.userInfo["delivered_timestamp"] = state.notificationData.timestamp
+        // Preserve aps.alert when Sendsay-specific text fields are absent.
+        if let title = content.userInfo["title"] as? String {
+            content.title = title
+        }
+        if let message = content.userInfo["message"] as? String {
+            content.body = message
+        }
+        content.categoryIdentifier = "SENDSAY_ACTIONABLE"
+        if let badge = content.userInfo["badge"] as? String,
+           let value = Int(badge) {
+            content.badge = NSNumber(value: value)
+        }
+        if let sound = content.userInfo["sound"] as? String {
+            content.sound = UNNotificationSound(
+                named: UNNotificationSoundName(rawValue: sound)
+            )
+        }
+    }
+
+    private func imageURL(in userInfo: [AnyHashable: Any]) throws -> URL? {
+        var hasImageField = false
+        for key in Self.imageURLKeys {
+            guard let value = userInfo[key] else { continue }
+            hasImageField = true
+            guard let path = value as? String,
+                  let url = path.trimmingCharacters(in: .whitespacesAndNewlines)
+                    .cleanedURL(),
+                  let scheme = url.scheme?.lowercased(),
+                  ["https", "http"].contains(scheme),
+                  let host = url.host, !host.isEmpty else {
+                continue
+            }
+            return url
+        }
+        if hasImageField { throw ImageError.invalidURL }
+        return nil
+    }
+
+    private func attachImage(_ state: ProcessingState) {
+        let url: URL
+        do {
+            guard let imageURL = try imageURL(in: state.content.userInfo) else {
+                state.contentCreated = true
+                finishIfReady(state)
+                return
+            }
+            url = imageURL
         } catch {
-            recordImageError(error, stage: "attachment", in: content)
+            recordImageError(error, stage: "download", in: state.content)
+            state.contentCreated = true
+            finishIfReady(state)
+            return
+        }
+
+        let configuration = URLSessionConfiguration.ephemeral
+        configuration.timeoutIntervalForRequest = Self.imageDownloadTimeout
+        configuration.timeoutIntervalForResource = Self.imageDownloadTimeout
+        let session = URLSession(configuration: configuration)
+        state.downloadSession = session
+        let task = session.downloadTask(with: url) {
+            [weak self] temporaryURL, response, error in
+            guard let self = self else { return }
+            // Expiry can complete this request while URLSession is calling back.
+            guard self.withState({ !state.isFinished }) else { return }
+
+            var stage = "download"
+            let result: Swift.Result<DownloadedImage, Error>
+            do {
+                if let error = error { throw error }
+                guard let response = response as? HTTPURLResponse else {
+                    throw ImageError.invalidResponse
+                }
+                guard (200...299).contains(response.statusCode) else {
+                    throw ImageError.httpStatus(response.statusCode)
+                }
+                guard let temporaryURL = temporaryURL else {
+                    throw ImageError.missingFile
+                }
+                stage = "attachment"
+                // Move the file before returning from this URLSession callback.
+                result = .success(try Self.makeImageAttachment(temporaryURL))
+            } catch {
+                result = .failure(error)
+            }
+            let failureStage = stage
+            self.stateQueue.async {
+                guard !state.isFinished else {
+                    if case .success(let image) = result {
+                        Self.removeTemporaryFile(image.temporaryURL)
+                    }
+                    return
+                }
+                state.downloadTask = nil
+                state.downloadSession?.finishTasksAndInvalidate()
+                state.downloadSession = nil
+                switch result {
+                case .success(let image):
+                    state.content.attachments = [image.attachment]
+                case .failure(let error):
+                    self.recordImageError(
+                        error,
+                        stage: failureStage,
+                        in: state.content
+                    )
+                }
+                state.contentCreated = true
+                self.finishIfReady(state)
+            }
+        }
+        state.downloadTask = task
+        task.resume()
+    }
+
+    private static func makeImageAttachment(
+        _ temporaryURL: URL
+    ) throws -> DownloadedImage {
+        let values = try temporaryURL.resourceValues(forKeys: [.fileSizeKey])
+        guard let size = values.fileSize, size <= maximumImageBytes else {
+            throw ImageError.imageTooLarge
+        }
+        guard let source = CGImageSourceCreateWithURL(
+            temporaryURL as CFURL,
+            [kCGImageSourceShouldCache: false] as CFDictionary
+        ), CGImageSourceGetCount(source) > 0,
+           let type = CGImageSourceGetType(source) else {
+            throw ImageError.invalidImage
+        }
+        // Use the actual file type, independent of the URL's suffix or MIME type.
+        let targetURL = FileManager.default.temporaryDirectory
+            .appendingPathComponent(UUID().uuidString)
+        try FileManager.default.moveItem(at: temporaryURL, to: targetURL)
+        do {
+            let attachment = try UNNotificationAttachment(
+                identifier: "push-image",
+                url: targetURL,
+                options: [
+                    UNNotificationAttachmentOptionsTypeHintKey: type as String
+                ]
+            )
+            // Keep successful files available for the notification system.
+            return DownloadedImage(
+                attachment: attachment,
+                temporaryURL: targetURL
+            )
+        } catch {
+            removeTemporaryFile(targetURL)
+            throw error
+        }
+    }
+
+    private static func removeTemporaryFile(_ url: URL) {
+        guard FileManager.default.fileExists(atPath: url.path) else { return }
+        do {
+            try FileManager.default.removeItem(at: url)
+        } catch {
+            Sendsay.logger.log(
+                .warning,
+                message: "Unable to remove unused push image: \(error)"
+            )
         }
     }
 
@@ -179,11 +340,7 @@ public class SendsayNotificationService {
             message: "Push image failed at \(stage): " +
                 "\(underlyingError.domain) (\(underlyingError.code))"
         )
-        guard reportAttachmentErrors else {
-            return
-        }
-
-        // Only JSON-compatible values can cross into the application's payload.
+        guard reportAttachmentErrors else { return }
         var diagnostics = content.userInfo["_sendsay_debug"]
             as? [String: Any] ?? [:]
         diagnostics["image_error"] = [
@@ -195,78 +352,99 @@ public class SendsayNotificationService {
         content.userInfo["_sendsay_debug"] = diagnostics
     }
 
-    private func download(url: URL, completion: @escaping (URL?) -> Void) {
-            let task = URLSession.shared.downloadTask(with: url) { tempURL, _, _ in
-                guard let tempURL = tempURL else { return completion(nil) }
-                let fileExt = url.pathExtension.isEmpty ? "jpg" : url.pathExtension
-                let targetURL = URL(fileURLWithPath: NSTemporaryDirectory())
-                    .appendingPathComponent(UUID().uuidString)
-                    .appendingPathExtension(fileExt)
-                do {
-                    try FileManager.default.moveItem(at: tempURL, to: targetURL)
-                    completion(targetURL)
-                } catch {
-                    completion(nil)
-                }
-            }
-            task.resume()
-        }
-
-    func trackDeliveredNotification(appGroup: String, notificationData: NotificationData) {
+    private func trackDeliveredNotification(
+        appGroup: String,
+        state: ProcessingState
+    ) {
         do {
-            let deliveredTracker = try DeliveredNotificationTracker(appGroup: appGroup, notificationData: notificationData)
-            deliveredTracker.track(
-                onSuccess: {
-                    self.notificationTracked = true
+            let tracker = try DeliveredNotificationTracker(
+                appGroup: appGroup,
+                notificationData: state.notificationData
+            )
+            tracker.track(
+                onSuccess: { [weak self] in
+                    self?.stateQueue.async {
+                        guard let self = self, !state.isFinished else { return }
+                        state.notificationTracked = true
+                        self.finishIfReady(state)
+                    }
                 },
-                onFailure: {
-                    self.saveNotificationEventsForLaterTracking(deliveredTracker.events)
-                    self.notificationTracked = true
+                onFailure: { [weak self] in
+                    self?.stateQueue.async {
+                        guard let self = self, !state.isFinished else { return }
+                        self.saveNotificationEventsForLaterTracking(
+                            tracker.events
+                        )
+                        state.notificationTracked = true
+                        self.finishIfReady(state)
+                    }
                 }
             )
         } catch {
             Sendsay.logger.log(
                 .error,
-                message: "Failed to track delivered push notification: \(error.localizedDescription)"
+                message: "Failed to track delivered push: \(error)"
             )
-            self.saveNotificationForLaterTracking(notification: notificationData)
-            self.notificationTracked = true
+            saveNotificationForLaterTracking(
+                notification: state.notificationData
+            )
+            state.notificationTracked = true
         }
     }
 
-    func prepareNotificationData(request: UNNotificationRequest) -> NotificationData? {
-        guard let userInfo = (request.content.mutableCopy() as? UNMutableNotificationContent)?.userInfo else {
-            Sendsay.logger.log(
-                .error,
-                message: "Failed to prepare data for delivered push notification:" +
-                    " Unable to get user info object from notification."
-            )
-            self.notificationTracked = true
-            return nil
-        }
-
-        var notificationData = NotificationData.deserialize(
+    private func prepareNotificationData(
+        userInfo: [AnyHashable: Any]
+    ) -> NotificationData {
+        var data = NotificationData.deserialize(
             attributes: userInfo["attributes"] as? [String: Any] ?? [:],
             campaignData: userInfo["url_params"] as? [String: Any] ?? [:],
-            consentCategoryTracking: userInfo["consent_category_tracking"] as? String ?? nil,
-            hasTrackingConsent: GdprTracking.readTrackingConsentFlag(userInfo["has_tracking_consent"])
+            consentCategoryTracking: userInfo["consent_category_tracking"]
+                as? String,
+            hasTrackingConsent: GdprTracking.readTrackingConsentFlag(
+                userInfo["has_tracking_consent"]
+            )
         ) ?? NotificationData()
-
-        let timestamp = notificationData.timestamp
-        let sentTimestamp = notificationData.sentTimestamp ?? 0
-        let deliveredTimestamp = timestamp <= sentTimestamp ? sentTimestamp + 1 : timestamp
-
-        notificationData.timestamp = deliveredTimestamp
-        return notificationData
+        let sentTimestamp = data.sentTimestamp ?? 0
+        if data.timestamp <= sentTimestamp {
+            data.timestamp = sentTimestamp + 1
+        }
+        return data
     }
 
-    func checkDone() {
-        if notificationTracked && contentCreated {
-            if let content = bestAttemptContent {
-                contentHandler?(content)
-            }
-            clean()
+    private func finishIfReady(_ state: ProcessingState) {
+        guard state.notificationTracked, state.contentCreated else { return }
+        finish(state)
+    }
+
+    private func finishBeforeDeadline(_ state: ProcessingState) {
+        guard !state.isFinished else { return }
+        if !state.notificationTracked {
+            saveNotificationForLaterTracking(
+                notification: state.notificationData
+            )
         }
+        if state.downloadTask != nil {
+            recordImageError(
+                URLError(.timedOut),
+                stage: "download",
+                in: state.content
+            )
+        }
+        finish(state)
+    }
+
+    private func finish(_ state: ProcessingState) {
+        guard !state.isFinished else { return }
+        // Mark complete before cancelling: cancellation also invokes callbacks.
+        state.isFinished = true
+        state.downloadTask?.cancel()
+        state.downloadSession?.invalidateAndCancel()
+        state.downloadTask = nil
+        state.downloadSession = nil
+        if processing === state {
+            processing = nil
+        }
+        state.contentHandler(state.content)
     }
 
     func saveNotificationForLaterTracking(notification: NotificationData?) {
@@ -299,33 +477,4 @@ public class SendsayNotificationService {
         userDefaults.set(deliveredNotifEvents, forKey: Constants.General.deliveredPushEventUserDefaultsKey)
     }
 
-    func saveImage(
-        _ identifier: String,
-        data: Data,
-        options: [AnyHashable: Any]?
-    ) throws -> UNNotificationAttachment {
-        let temporaryURL = URL(fileURLWithPath: NSTemporaryDirectory())
-        let directory = temporaryURL.appendingPathComponent(
-            ProcessInfo.processInfo.globallyUniqueString,
-            isDirectory: true
-        )
-        try FileManager.default.createDirectory(
-            at: directory,
-            withIntermediateDirectories: true,
-            attributes: nil
-        )
-        let fileURL = directory.appendingPathComponent(identifier)
-        try data.write(to: fileURL, options: [])
-        return try UNNotificationAttachment(
-            identifier: identifier,
-            url: fileURL,
-            options: options
-        )
-    }
-
-    internal func clean() {
-        self.request = nil
-        self.contentHandler = nil
-        self.bestAttemptContent = nil
-    }
 }
