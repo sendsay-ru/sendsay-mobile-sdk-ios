@@ -19,11 +19,42 @@ public protocol PushNotificationManagerDelegate: AnyObject {
     )
 
     func silentPushNotificationReceived(extraData: [AnyHashable: Any]?)
+
+    /// Called when a push is opened, including the complete received payload.
+    /// Payload can be nil for notifications stored by older SDK versions.
+    func pushNotificationOpened(
+        with action: SendsayNotificationActionType,
+        value: String?,
+        extraData: [AnyHashable: Any]?,
+        payload: [AnyHashable: Any]?
+    )
+
+    /// Called for a silent push, including the complete received payload.
+    func silentPushNotificationReceived(
+        extraData: [AnyHashable: Any]?,
+        payload: [AnyHashable: Any]?
+    )
 }
 
 public extension PushNotificationManagerDelegate {
     // default implementation is empty for compatibility
     func silentPushNotificationReceived(extraData: [AnyHashable: Any]?) {}
+
+    func pushNotificationOpened(
+        with action: SendsayNotificationActionType,
+        value: String?,
+        extraData: [AnyHashable: Any]?,
+        payload: [AnyHashable: Any]?
+    ) {
+        pushNotificationOpened(with: action, value: value, extraData: extraData)
+    }
+
+    func silentPushNotificationReceived(
+        extraData: [AnyHashable: Any]?,
+        payload: [AnyHashable: Any]?
+    ) {
+        silentPushNotificationReceived(extraData: extraData)
+    }
 }
 
 final class PushNotificationManager: NSObject, PushNotificationManagerType {
@@ -54,12 +85,16 @@ final class PushNotificationManager: NSObject, PushNotificationManagerType {
             }
             pendingOpenedPushes.forEach {
                 if $0.silent {
-                    delegateValue.silentPushNotificationReceived(extraData: $0.extraData)
+                    delegateValue.silentPushNotificationReceived(
+                        extraData: $0.extraData,
+                        payload: $0.origin
+                    )
                 } else {
                     delegateValue.pushNotificationOpened(
                         with: $0.actionType,
                         value: $0.actionValue,
-                        extraData: $0.extraData
+                        extraData: $0.extraData,
+                        payload: $0.origin
                     )
                 }
             }
@@ -199,7 +234,10 @@ final class PushNotificationManager: NSObject, PushNotificationManagerType {
         trackingConsentManager.trackClickedPush(data: pushOpenedData)
         if pushOpenedData.silent {
             if let delegate = delegate {
-                delegate.silentPushNotificationReceived(extraData: pushOpenedData.extraData)
+                delegate.silentPushNotificationReceived(
+                    extraData: pushOpenedData.extraData,
+                    payload: pushOpenedData.origin
+                )
             } else {
                 pendingOpenedPushes.append(pushOpenedData)
             }
@@ -219,7 +257,8 @@ final class PushNotificationManager: NSObject, PushNotificationManagerType {
                 delegate.pushNotificationOpened(
                     with: pushOpenedData.actionType,
                     value: pushOpenedData.actionValue,
-                    extraData: pushOpenedData.extraData
+                    extraData: pushOpenedData.extraData,
+                    payload: pushOpenedData.origin
                 )
             } else {
                 pendingOpenedPushes.append(pushOpenedData)

@@ -22,11 +22,11 @@ public extension URLRequest {
 
         requestLog += "\(httpMethod ?? "NO METHOD") \(urlString)\n"
 
-        let configBuildType = Bundle.main.infoDictionary?["Configuration"]
+        let configBuildType = Bundle.main.infoDictionary?["Configuration"] as? String
 
         for (key, value) in allHTTPHeaderFields ?? [:] {
             // Make sure we don't print out tokens
-            if (configBuildType as! String == "DEBUG" && key == "Authorization") {
+            if configBuildType == "DEBUG" && key == "Authorization" {
                 requestLog += "Authorization: REDACTED\n"
                 continue
             }

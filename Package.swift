@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 
 import PackageDescription
 
@@ -13,33 +13,48 @@ let package = Package(
             targets: ["SendsaySDK"]),
         .library(
             name: "SendsaySDK-Notifications",
-            targets: ["SendsaySDK-Notifications"]
+            targets: ["SendsaySDKNotifications"]
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.6.1")
+        .package(url: "https://github.com/scinfu/SwiftSoup.git", from: "2.7.6")
     ],
     targets: [
         // Main library
         .target(
             name: "SendsaySDK",
-            dependencies: ["SendsaySDKShared", "SendsaySDKObjC"],
+            dependencies: [
+                "SendsaySDKShared",
+                "SendsaySDKObjC",
+                .product(
+                    name: "SwiftSoup",
+                    package: "SwiftSoup"
+                )
+            ],
             path: "SendsaySDK/SendsaySDK",
             exclude: ["Supporting Files/Info.plist"],
-            resources: [.copy("Supporting Files/PrivacyInfo.xcprivacy")]
+            resources: [
+                .process("Supporting Files/PrivacyInfo.xcprivacy"),
+                .process("Classes/Database/DatabaseModel.xcdatamodeld")
+            ]
         ),
         // Notification extension library
         .target(
-            name: "SendsaySDK-Notifications",
+            name: "SendsaySDKNotifications",
             dependencies: ["SendsaySDKShared"],
             path: "SendsaySDK/SendsaySDK-Notifications",
             exclude: ["Supporting Files/Info.plist"],
-            resources: [.copy("Supporting Files/PrivacyInfo.xcprivacy")]
+            resources: [.process("Supporting Files/PrivacyInfo.xcprivacy")]
         ),
         // Code shared between SendsaySDK and SendsaySDK-Notifications
         .target(
             name: "SendsaySDKShared",
-            dependencies: ["SwiftSoup"],
+            dependencies: [
+                .product(
+                    name: "SwiftSoup",
+                    package: "SwiftSoup"
+                ),
+            ],
             path: "SendsaySDK/SendsaySDKShared",
             exclude: ["Supporting Files/Info.plist"]
         ),
@@ -49,6 +64,8 @@ let package = Package(
             dependencies: [],
             path: "SendsaySDK/SendsaySDKObjC",
             exclude: ["Info.plist"],
-            publicHeadersPath: ".")
+            sources: ["objc_tryCatch.m"],
+            publicHeadersPath: "."
+        )
     ]
 )
